@@ -21,11 +21,11 @@ from .compute import compute_event, configure_astropy
 from .data import load_events
 from .refraction import RefractionSettings
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION = "1.1"
 
 
 def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offline=False, only: Optional[Iterable[str]] = None,
-        include_tests=True, profiles=True, refresh_stars=False, settings: Optional[RefractionSettings] = None, log: Callable = print) -> dict:
+        include_tests=True, profiles=True, refresh_stars=False, terrain=True, settings: Optional[RefractionSettings] = None, log: Callable = print) -> dict:
     settings = settings or RefractionSettings()
     configure_astropy(offline)
     events = load_events(csv_path)
@@ -39,7 +39,7 @@ def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offlin
     for i, e in enumerate(events, 1):
         log(f"[{i}/{len(events)}] {e.id}")
         try:
-            results.append(compute_event(e, settings, offline=offline, log=log, profiles=profiles, refresh_stars=refresh_stars))
+            results.append(compute_event(e, settings, offline=offline, log=log, profiles=profiles, refresh_stars=refresh_stars, terrain=terrain))
         except Exception as ex:  # noqa: BLE001 — one bad row never stops the run
             log(f"    FAILED: {ex}")
             results.append({"id": e.id, "row": e.row, "flags": {"warnings": [f"computation failed: {ex}"], "target_type": e.target_type,
@@ -56,6 +56,8 @@ def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offlin
             "true_alt": "geometric (vacuum) altitude above the observer's ellipsoid horizon (astropy, pressure=0)",
             "comparison_sign": "observed-minus-model: positive means the star was truly higher than the model's occlusion angle",
             "seconds": "residual divided by the star's altitude rate; the clock offset that would close the residual",
+            "frame": "peak-anchored: origin at the peak foot, tangent plane at the peak. Planar x=u, z=h; globe x=(R+h)sin(u/R), z=(R+h)cos(u/R)−R, u = s − D",
+            "terrain": "dtm = bare earth (primary; unsuffixed terrain comparisons), dsm = top of canopy (suffix _dsm, plus a canopy flag); per-event arrays in terrain/{id}.json",
         },
         "runtime_s": round(time.time() - t0, 1),
         "events": results,
@@ -77,6 +79,12 @@ FLAT = [
     ("globe_ciddor_seconds", "comparison.globe_ciddor_seconds"), ("planar_geometric_arcsec", "comparison.planar_geometric_arcsec"),
     ("planar_refracted_arcsec", "comparison.planar_refracted_arcsec"), ("sounding_station", "refraction.sounding.station"),
     ("sounding_utc", "refraction.sounding.valid_utc"), ("sounding_source", "refraction.sounding.source"),
+    ("globe_terrain_arcsec", "terrain.comparison.globe_ciddor_arcsec"),
+    ("globe_terrain_seconds", "terrain.comparison.globe_ciddor_seconds"),
+    ("planar_terrain_arcsec", "terrain.comparison.planar_geometric_arcsec"),
+    ("planar_terrain_seconds", "terrain.comparison.planar_geometric_seconds"),
+    ("canopy_flag", "terrain.canopy.star_azimuth.flag"),
+    ("globe_observer_drop_m", "geometry.globe_observer_drop_m"),
     ("warnings", "flags.warnings"),
 ]
 
@@ -92,6 +100,11 @@ def _get(d, path):
 def write(doc: dict, out_dir):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
+    for ev in doc["events"]:  # per-event terrain goes to its own file
+        t = ev.pop("_terrain_doc", None)
+        if t is not None:
+            (out / "terrain").mkdir(exist_ok=True)
+            (out / "terrain" / f"{ev['id']}.json").write_text(json.dumps(t, separators=(",", ":"), ensure_ascii=False))
     (out / "results.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False))
     with open(out / "results.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)

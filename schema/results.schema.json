@@ -4,79 +4,265 @@
   "title": "CelTheo occultation results",
   "description": "Output of `python -m celtheo run`. Angles in degrees unless the key ends in _arcmin or _arcsec. Any number may be null when it could not be computed; check flags.warnings.",
   "type": "object",
-  "required": ["schema_version", "generated_utc", "settings", "conventions", "events"],
+  "required": [
+    "schema_version",
+    "generated_utc",
+    "settings",
+    "conventions",
+    "events"
+  ],
   "properties": {
-    "schema_version": {"const": "1.0"},
-    "generator": {"type": "string"},
-    "generated_utc": {"type": "string", "format": "date-time"},
-    "source_csv": {"type": "string"},
-    "runtime_s": {"type": "number"},
+    "schema_version": {
+      "const": "1.1"
+    },
+    "generator": {
+      "type": "string"
+    },
+    "generated_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_csv": {
+      "type": "string"
+    },
+    "runtime_s": {
+      "type": "number"
+    },
     "settings": {
       "type": "object",
       "description": "Ray-trace settings (wavelength_nm, co2_ppm, segment_m, top_of_atmosphere_m, use_wgs84_ellipsoid, max_total_path_m)."
     },
-    "conventions": {"type": "object", "additionalProperties": {"type": "string"}},
-    "events": {"type": "array", "items": {"$ref": "#/$defs/event"}}
+    "conventions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    }
   },
   "$defs": {
-    "num": {"type": ["number", "null"]},
+    "num": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
     "site": {
       "type": "object",
-      "properties": {"name": {"type": "string"}, "lat": {"$ref": "#/$defs/num"}, "lon": {"$ref": "#/$defs/num"}, "alt_m": {"$ref": "#/$defs/num"}}
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lat": {
+          "$ref": "#/$defs/num"
+        },
+        "lon": {
+          "$ref": "#/$defs/num"
+        },
+        "alt_m": {
+          "$ref": "#/$defs/num"
+        }
+      }
     },
     "event": {
       "type": "object",
-      "required": ["id", "row", "flags", "peak", "observer", "star"],
+      "required": [
+        "id",
+        "row",
+        "flags",
+        "peak",
+        "observer",
+        "star"
+      ],
       "properties": {
-        "id": {"type": "string", "description": "Stable slug: peak-star-UTCdate[-test-kind][-n]. Use as anchor/URL hash."},
-        "row": {"type": "integer", "description": "Spreadsheet row in the source CSV (header = row 1)."},
+        "id": {
+          "type": "string",
+          "description": "Stable slug: peak-star-UTCdate[-test-kind][-n]. Use as anchor/URL hash."
+        },
+        "row": {
+          "type": "integer",
+          "description": "Spreadsheet row in the source CSV (header = row 1)."
+        },
         "flags": {
           "type": "object",
           "properties": {
-            "target_type": {"enum": ["peak", "aircraft"]},
-            "is_test": {"type": "boolean"},
-            "test_kind": {"enum": [null, "epsilon", "aries"], "description": "Rows prefixed ϵ / ♈︎ in the CSV."},
-            "warnings": {"type": "array", "items": {"type": "string"}, "description": "Human-readable data-quality notes. Show them."}
+            "target_type": {
+              "enum": [
+                "peak",
+                "aircraft"
+              ]
+            },
+            "is_test": {
+              "type": "boolean"
+            },
+            "test_kind": {
+              "enum": [
+                null,
+                "epsilon",
+                "aries"
+              ],
+              "description": "Rows prefixed ϵ / ♈︎ in the CSV."
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Human-readable data-quality notes. Show them."
+            }
           }
         },
-        "peak": {"$ref": "#/$defs/site", "description": "Occluding target (mountain peak, or aircraft position)."},
-        "observer": {"$ref": "#/$defs/site"},
+        "peak": {
+          "$ref": "#/$defs/site",
+          "description": "Occluding target (mountain peak, or aircraft position)."
+        },
+        "observer": {
+          "$ref": "#/$defs/site"
+        },
         "time": {
           "type": "object",
           "properties": {
-            "local_date": {"type": "string"}, "local_time": {"type": "string"},
-            "utc_offset_h": {"$ref": "#/$defs/num"}, "utc": {"type": ["string", "null"], "format": "date-time"}
+            "local_date": {
+              "type": "string"
+            },
+            "local_time": {
+              "type": "string"
+            },
+            "utc_offset_h": {
+              "$ref": "#/$defs/num"
+            },
+            "utc": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            }
           }
         },
         "star": {
           "type": "object",
           "description": "name = as written in the CSV; query = catalogue identifier; kind = star | body | unresolved.",
           "properties": {
-            "name": {"type": "string"}, "query": {"type": ["string", "null"]}, "kind": {"enum": ["star", "body", "unresolved"]},
-            "ra_deg": {"$ref": "#/$defs/num"}, "dec_deg": {"$ref": "#/$defs/num"},
-            "pmra_masyr": {"$ref": "#/$defs/num"}, "pmdec_masyr": {"$ref": "#/$defs/num"}, "source": {"type": "string"}
+            "name": {
+              "type": "string"
+            },
+            "query": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "kind": {
+              "enum": [
+                "star",
+                "body",
+                "unresolved"
+              ]
+            },
+            "ra_deg": {
+              "$ref": "#/$defs/num"
+            },
+            "dec_deg": {
+              "$ref": "#/$defs/num"
+            },
+            "pmra_masyr": {
+              "$ref": "#/$defs/num"
+            },
+            "pmdec_masyr": {
+              "$ref": "#/$defs/num"
+            },
+            "source": {
+              "type": "string"
+            }
           }
         },
         "csv": {
           "type": "object",
           "description": "Values as measured/entered in the spreadsheet. true_* = ♈︎ (geometric), app_* = ϵ (apparent); *_peak seen from the peak, *_obs from the observer.",
           "properties": {
-            "true_peak": {"$ref": "#/$defs/num"}, "app_peak": {"$ref": "#/$defs/num"}, "true_obs": {"$ref": "#/$defs/num"}, "app_obs": {"$ref": "#/$defs/num"},
-            "distance": {"$ref": "#/$defs/num"}, "drop_rate": {"$ref": "#/$defs/num"}, "temp_c": {"$ref": "#/$defs/num"}, "azi_peak": {"$ref": "#/$defs/num"},
-            "gp_lat": {"$ref": "#/$defs/num"}, "gp_lon": {"$ref": "#/$defs/num", "description": "West-positive."}, "gp_dist": {"$ref": "#/$defs/num"},
-            "ge_check": {"type": ["string", "null"]}, "canva": {"type": ["string", "null"]}, "star_name": {"type": "string"}
+            "true_peak": {
+              "$ref": "#/$defs/num"
+            },
+            "app_peak": {
+              "$ref": "#/$defs/num"
+            },
+            "true_obs": {
+              "$ref": "#/$defs/num"
+            },
+            "app_obs": {
+              "$ref": "#/$defs/num"
+            },
+            "distance": {
+              "$ref": "#/$defs/num"
+            },
+            "drop_rate": {
+              "$ref": "#/$defs/num"
+            },
+            "temp_c": {
+              "$ref": "#/$defs/num"
+            },
+            "azi_peak": {
+              "$ref": "#/$defs/num"
+            },
+            "gp_lat": {
+              "$ref": "#/$defs/num"
+            },
+            "gp_lon": {
+              "$ref": "#/$defs/num",
+              "description": "West-positive."
+            },
+            "gp_dist": {
+              "$ref": "#/$defs/num"
+            },
+            "ge_check": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "canva": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "star_name": {
+              "type": "string"
+            }
           }
         },
         "astropy": {
           "type": "object",
           "description": "Star position from catalogue coordinates (proper motion applied) at the UTC occlusion time. Empty when the star could not be resolved.",
           "properties": {
-            "true_alt_obs_deg": {"$ref": "#/$defs/num", "description": "Geometric altitude from the observer (no refraction)."},
-            "az_obs_deg": {"$ref": "#/$defs/num"},
-            "true_alt_peak_deg": {"$ref": "#/$defs/num", "description": "Geometric altitude from the peak/target location."},
-            "alt_rate_deg_per_s": {"$ref": "#/$defs/num", "description": "d(altitude)/dt at the observer; negative = setting."},
-            "erfa_apparent_alt_obs_deg": {"$ref": "#/$defs/num", "description": "astropy/ERFA refracted altitude (simple model, for comparison)."},
-            "temp_c_used": {"$ref": "#/$defs/num"}
+            "true_alt_obs_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Geometric altitude from the observer (no refraction)."
+            },
+            "az_obs_deg": {
+              "$ref": "#/$defs/num"
+            },
+            "true_alt_peak_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Geometric altitude from the peak/target location."
+            },
+            "alt_rate_deg_per_s": {
+              "$ref": "#/$defs/num",
+              "description": "d(altitude)/dt at the observer; negative = setting."
+            },
+            "erfa_apparent_alt_obs_deg": {
+              "$ref": "#/$defs/num",
+              "description": "astropy/ERFA refracted altitude (simple model, for comparison)."
+            },
+            "temp_c_used": {
+              "$ref": "#/$defs/num"
+            }
           }
         },
         "refraction": {
@@ -84,57 +270,322 @@
           "description": "Ciddor ray trace through the radiosonde (or standard) atmosphere on the WGS-84 ellipsoid.",
           "properties": {
             "sounding": {
-              "type": ["object", "null"],
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
-                "station": {"type": "string"}, "wmo": {"type": "string"}, "valid_utc": {"type": "string"},
-                "source": {"enum": ["radiosonde", "standard-atmosphere fallback"]}, "distance_km": {"$ref": "#/$defs/num"},
-                "levels": {"type": "integer"}, "ceiling_m": {"$ref": "#/$defs/num"}
+                "station": {
+                  "type": "string"
+                },
+                "wmo": {
+                  "type": "string"
+                },
+                "valid_utc": {
+                  "type": "string"
+                },
+                "source": {
+                  "enum": [
+                    "radiosonde",
+                    "standard-atmosphere fallback"
+                  ]
+                },
+                "distance_km": {
+                  "$ref": "#/$defs/num"
+                },
+                "levels": {
+                  "type": "integer"
+                },
+                "ceiling_m": {
+                  "$ref": "#/$defs/num"
+                }
               }
             },
-            "peak_apparent_deg": {"$ref": "#/$defs/num", "description": "Elevation at which the refracted ray reaches the peak top."},
-            "peak_geometric_deg": {"$ref": "#/$defs/num", "description": "Straight-line (globe) elevation of the peak top."},
-            "peak_uplift_arcmin": {"$ref": "#/$defs/num"},
-            "star_geometric_deg": {"$ref": "#/$defs/num", "description": "Globe+Ciddor prediction: true altitude of a star that appears exactly at the peak top. Normal-section radius."},
-            "star_geometric_gauss_deg": {"$ref": "#/$defs/num", "description": "Same, Gauss radius (original refraction.py behaviour)."},
-            "star_uplift_arcmin": {"$ref": "#/$defs/num"}, "star_uplift_gauss_arcmin": {"$ref": "#/$defs/num"},
-            "bennett_arcmin": {"$ref": "#/$defs/num", "description": "Bennett (1982) at the peak's apparent elevation with observer P/T."},
-            "pressure_hpa_obs": {"$ref": "#/$defs/num"}, "temp_c_obs": {"$ref": "#/$defs/num"}
+            "peak_apparent_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Elevation at which the refracted ray reaches the peak top."
+            },
+            "peak_geometric_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Straight-line (globe) elevation of the peak top."
+            },
+            "peak_uplift_arcmin": {
+              "$ref": "#/$defs/num"
+            },
+            "star_geometric_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Globe+Ciddor prediction: true altitude of a star that appears exactly at the peak top. Normal-section radius."
+            },
+            "star_geometric_gauss_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Same, Gauss radius (original refraction.py behaviour)."
+            },
+            "star_uplift_arcmin": {
+              "$ref": "#/$defs/num"
+            },
+            "star_uplift_gauss_arcmin": {
+              "$ref": "#/$defs/num"
+            },
+            "bennett_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "Bennett (1982) at the peak's apparent elevation with observer P/T."
+            },
+            "pressure_hpa_obs": {
+              "$ref": "#/$defs/num"
+            },
+            "temp_c_obs": {
+              "$ref": "#/$defs/num"
+            }
           }
         },
         "geometry": {
           "type": "object",
           "properties": {
-            "csv_distance_m": {"$ref": "#/$defs/num"}, "geodesic_distance_m": {"$ref": "#/$defs/num"}, "slant_range_m": {"$ref": "#/$defs/num"},
-            "central_angle_deg": {"$ref": "#/$defs/num"}, "azimuth_deg": {"$ref": "#/$defs/num"}, "earth_radius_m": {"$ref": "#/$defs/num"},
-            "planar_angle_deg": {"$ref": "#/$defs/num", "description": "Flat-earth rise over run: atan(Δh / CSV distance)."},
-            "peak_height_above_observer_m": {"$ref": "#/$defs/num"}
+            "csv_distance_m": {
+              "$ref": "#/$defs/num"
+            },
+            "geodesic_distance_m": {
+              "$ref": "#/$defs/num"
+            },
+            "slant_range_m": {
+              "$ref": "#/$defs/num"
+            },
+            "central_angle_deg": {
+              "$ref": "#/$defs/num"
+            },
+            "azimuth_deg": {
+              "$ref": "#/$defs/num"
+            },
+            "earth_radius_m": {
+              "$ref": "#/$defs/num"
+            },
+            "planar_angle_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Flat-earth rise over run: atan(Δh / CSV distance)."
+            },
+            "peak_height_above_observer_m": {
+              "$ref": "#/$defs/num"
+            },
+            "frame": {
+              "type": "string"
+            },
+            "observer_planar_xz_m": {
+              "type": "array",
+              "description": "Planar observer in the peak-anchored frame: [−D, observer alt]."
+            },
+            "observer_globe_xz_m": {
+              "type": "array",
+              "description": "Globe observer in the peak-anchored frame: [(R+h)·sin(−D/R), (R+h)·cos(D/R) − R]."
+            },
+            "globe_observer_drop_m": {
+              "$ref": "#/$defs/num",
+              "description": "How far the globe observer sits below the planar observer (≈ D²/2R)."
+            },
+            "peak_xz_m": {
+              "type": "array",
+              "description": "[0, peak alt]: the peak is at the same place in both models."
+            }
           }
         },
         "comparison": {
           "type": "object",
           "description": "Observed-minus-model. Positive arcsec = the star was truly higher than the model's occlusion angle. *_seconds = clock offset that would close the gap.",
           "properties": {
-            "globe_ciddor_arcsec": {"$ref": "#/$defs/num", "description": "astropy true alt − star_geometric_deg."},
-            "globe_ciddor_seconds": {"$ref": "#/$defs/num"},
-            "planar_geometric_arcsec": {"$ref": "#/$defs/num", "description": "astropy true alt − planar angle (no refraction)."},
-            "planar_geometric_seconds": {"$ref": "#/$defs/num"},
-            "planar_refracted_arcsec": {"$ref": "#/$defs/num", "description": "astropy ERFA apparent alt − planar angle."},
-            "planar_refracted_seconds": {"$ref": "#/$defs/num"},
-            "csv_true_obs_minus_astropy_arcsec": {"$ref": "#/$defs/num"},
-            "csv_true_peak_minus_astropy_arcsec": {"$ref": "#/$defs/num"},
-            "ciddor_minus_bennett_arcmin": {"$ref": "#/$defs/num"}
+            "globe_ciddor_arcsec": {
+              "$ref": "#/$defs/num",
+              "description": "astropy true alt − star_geometric_deg."
+            },
+            "globe_ciddor_seconds": {
+              "$ref": "#/$defs/num"
+            },
+            "planar_geometric_arcsec": {
+              "$ref": "#/$defs/num",
+              "description": "astropy true alt − planar angle (no refraction)."
+            },
+            "planar_geometric_seconds": {
+              "$ref": "#/$defs/num"
+            },
+            "planar_refracted_arcsec": {
+              "$ref": "#/$defs/num",
+              "description": "astropy ERFA apparent alt − planar angle."
+            },
+            "planar_refracted_seconds": {
+              "$ref": "#/$defs/num"
+            },
+            "csv_true_obs_minus_astropy_arcsec": {
+              "$ref": "#/$defs/num"
+            },
+            "csv_true_peak_minus_astropy_arcsec": {
+              "$ref": "#/$defs/num"
+            },
+            "ciddor_minus_bennett_arcmin": {
+              "$ref": "#/$defs/num"
+            }
           }
         },
         "profiles": {
           "type": "object",
           "description": "For figures. Omitted with --no-profiles.",
           "properties": {
-            "ray_to_peak": {"type": "array", "items": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}]},
-                            "description": "[x_m, y_m] along the refracted ray from the observer: x = r·sin φ, y = r·cos φ − R (observer-local frame, Earth curving away below)."},
-            "atmosphere": {"type": "array", "items": {"type": "object", "properties": {
-              "alt_m": {"type": "number"}, "n_minus_1_ppm": {"$ref": "#/$defs/num"}, "T_K": {"$ref": "#/$defs/num"},
-              "P_Pa": {"$ref": "#/$defs/num"}, "RH_pct": {"$ref": "#/$defs/num"}}},
-              "description": "Every 500 m from the observer to 40 km."}
+            "ray_to_peak": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "description": "[x_m, z_m] along the Ciddor-refracted ray, in the peak-anchored frame (globe model): starts at observer_globe_xz_m and passes the peak top."
+            },
+            "atmosphere": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "alt_m": {
+                    "type": "number"
+                  },
+                  "n_minus_1_ppm": {
+                    "$ref": "#/$defs/num"
+                  },
+                  "T_K": {
+                    "$ref": "#/$defs/num"
+                  },
+                  "P_Pa": {
+                    "$ref": "#/$defs/num"
+                  },
+                  "RH_pct": {
+                    "$ref": "#/$defs/num"
+                  }
+                }
+              },
+              "description": "Every 500 m from the observer to 40 km."
+            }
+          }
+        },
+        "terrain": {
+          "type": "object",
+          "description": "Summary of the real terrain along the line of sight. Full arrays in terrain/{id}.json (schema/terrain.schema.json).",
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "peak_azimuth_deg": {
+              "$ref": "#/$defs/num"
+            },
+            "star_minus_peak_azimuth_arcsec": {
+              "$ref": "#/$defs/num"
+            },
+            "lateral_offset_at_peak_m": {
+              "$ref": "#/$defs/num"
+            },
+            "to_peak": {
+              "$ref": "#/$defs/line_summary"
+            },
+            "star_azimuth": {
+              "$ref": "#/$defs/line_summary"
+            },
+            "checks": {
+              "type": "object",
+              "description": "DEM heights at the peak and observer coordinates vs the CSV."
+            },
+            "comparison": {
+              "type": "object",
+              "description": "Observed − model using the actual skyline along the star's azimuth. Unsuffixed = bare earth (DTM, primary); _dsm = top of canopy. globe_ciddor_*: astropy true alt − true alt of a star appearing exactly on the refracted skyline. planar_geometric_*: astropy true alt − flat rise-over-run skyline angle. planar_refracted_*: astropy/ERFA apparent alt − same.",
+              "additionalProperties": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "canopy": {
+              "type": "object",
+              "description": "Per line: DSM − DTM skyline difference; flag=true means canopy could matter (review case by case)."
+            }
+          }
+        }
+      }
+    },
+    "blocker": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "s_m": {
+          "type": "number"
+        },
+        "u_m": {
+          "type": "number",
+          "description": "Distance from the peak along the line (negative = toward the observer)."
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lon": {
+          "type": "number"
+        },
+        "h_m": {
+          "type": "number"
+        },
+        "angle_deg": {
+          "type": "number"
+        },
+        "near_peak": {
+          "type": "boolean",
+          "description": "Within 300 m of the peak: the named peak is what hid the star."
+        },
+        "margin_vs_summit_arcsec": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "candidates_solved": {
+          "type": "integer"
+        }
+      }
+    },
+    "line_summary": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "object"
+        },
+        "obstruction": {
+          "type": "object",
+          "description": "Per surface (dtm, dsm): the highest point on the line by planar angle, globe geometric angle and globe refracted (apparent) angle.",
+          "additionalProperties": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "planar": {
+                "$ref": "#/$defs/blocker"
+              },
+              "globe_geometric": {
+                "$ref": "#/$defs/blocker"
+              },
+              "globe_refracted": {
+                "$ref": "#/$defs/blocker"
+              },
+              "summit_apparent_deg": {
+                "$ref": "#/$defs/num"
+              },
+              "summit_planar_deg": {
+                "$ref": "#/$defs/num"
+              },
+              "summit_globe_geometric_deg": {
+                "$ref": "#/$defs/num"
+              }
+            }
           }
         }
       }

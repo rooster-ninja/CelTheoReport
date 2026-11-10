@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CelTheo terrain profile (one event)",
+  "description": "out/terrain/{id}.json. 2D profiles of real terrain along the line of sight, in a peak-anchored frame shared by both models. Arrays are parallel (same index = same sample). Values may be null where no elevation data covers a sample.",
+  "type": "object",
+  "required": [
+    "id",
+    "frame",
+    "observer",
+    "profiles"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "frame": {
+      "type": "object",
+      "description": "origin at the peak foot, tangent plane at the peak. u = s − D. planar: x = u, z = h. globe: x = (R+h)·sin(u/R), z = (R+h)·cos(u/R) − R. R = WGS-84 normal-section radius along the azimuth; D = geodesic distance to the peak."
+    },
+    "observer": {
+      "type": "object",
+      "properties": {
+        "planar_xz": {
+          "type": "array"
+        },
+        "globe_xz": {
+          "type": "array"
+        },
+        "globe_drop_m": {
+          "type": "number"
+        }
+      }
+    },
+    "peak_azimuth_deg": {
+      "type": "number"
+    },
+    "profiles": {
+      "type": "object",
+      "description": "to_peak: along the geodesic to the peak. star_azimuth: along the star's azimuth at the occlusion time (the skyline that actually hid it). Both continue past the peak (settings.beyond_peak_m).",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "azimuth_deg": {
+            "type": "number"
+          },
+          "sources": {
+            "type": "object",
+            "description": "Elevation datasets used per surface."
+          },
+          "s_m": {
+            "type": "array",
+            "description": "Distance from the observer."
+          },
+          "u_m": {
+            "type": "array",
+            "description": "s − D. Use as planar x."
+          },
+          "lat": {
+            "type": "array"
+          },
+          "lon": {
+            "type": "array"
+          },
+          "dtm": {
+            "$ref": "#/$defs/surface",
+            "description": "Bare earth (primary)."
+          },
+          "dsm": {
+            "$ref": "#/$defs/surface",
+            "description": "Top of canopy/buildings."
+          },
+          "obstruction": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "corridor": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Optional 3D grid; null in this analysis."
+    },
+    "checks": {
+      "type": "object"
+    },
+    "canopy": {
+      "type": "object"
+    },
+    "settings": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "surface": {
+      "type": "object",
+      "properties": {
+        "h_m": {
+          "type": "array",
+          "description": "Elevation (planar z)."
+        },
+        "globe_x_m": {
+          "type": "array"
+        },
+        "globe_z_m": {
+          "type": "array"
+        },
+        "planar_angle_deg": {
+          "type": "array",
+          "description": "Rise-over-run angle from the observer to this sample."
+        },
+        "globe_angle_deg": {
+          "type": "array",
+          "description": "Globe geometric (unrefracted) elevation angle from the observer to this sample."
+        }
+      }
+    }
+  }
+}

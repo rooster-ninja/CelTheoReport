@@ -13,6 +13,7 @@ def main(argv=None):
     r.add_argument("--only", nargs="*", help="substring(s) of event ids to run, e.g. pikes-peak")
     r.add_argument("--no-tests", action="store_true", help="skip the ϵ/♈︎ test rows")
     r.add_argument("--refresh-stars", action="store_true", help="re-query SIMBAD for cached stars that lack proper motion")
+    r.add_argument("--no-terrain", action="store_true", help="skip DEM terrain profiles and obstruction checks")
     r.add_argument("--no-profiles", action="store_true", help="omit ray path / atmosphere profiles from JSON")
     ls = sub.add_parser("list", help="list event ids and warnings from the CSV")
     ls.add_argument("--csv", default="data/occultations.csv")
@@ -24,7 +25,7 @@ def main(argv=None):
             print(f"{e.id:60s} {e.utc:%Y-%m-%d %H:%M:%SZ}" if e.utc else e.id, "|", "; ".join(e.warnings))
         return
     from .api import run
-    doc = run(a.csv, a.out, offline=a.offline, only=a.only, include_tests=not a.no_tests, profiles=not a.no_profiles, refresh_stars=a.refresh_stars)
+    doc = run(a.csv, a.out, offline=a.offline, only=a.only, include_tests=not a.no_tests, profiles=not a.no_profiles, refresh_stars=a.refresh_stars, terrain=not a.no_terrain)
     n = len(doc["events"])
     bad = sum(1 for e in doc["events"] if e.get("flags", {}).get("warnings"))
     print(f"\n{n} events -> {a.out}/results.json, {a.out}/results.csv ({bad} with warnings, {doc['runtime_s']} s)")

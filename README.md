@@ -12,6 +12,21 @@ occultation of a star behind a distant peak (or aircraft), it computes:
 
 and the residuals between them, in arc-seconds and in seconds of time.
 
+It also traces the **real terrain** along the line of sight. Elevation data comes from:
+
+- USGS 3DEP at 10 m for the US, with Copernicus GLO-30 for the canopy surface;
+- NRCan HRDEM at 2 m for Canada, falling back to MRDEM-30.
+
+It draws two profiles: one to the peak, and one along the star's azimuth at the occlusion time.
+Both continue past the peak. With these profiles the pipeline:
+
+- finds what actually hid the star in each model (planar, globe geometric, globe refracted);
+- repeats the comparisons against that skyline.
+
+Everything is expressed in a **peak-anchored 2D frame**: the peak sits at the same place in both
+models, and only the globe observer drops. Bare earth is the primary surface. The canopy surface
+is used only to flag events where trees could matter.
+
 The output is a versioned JSON data contract (`schema/results.schema.json`) built for report
 generators. See **[REPORT_BRIEF.md](REPORT_BRIEF.md)**.
 
@@ -28,7 +43,8 @@ pip install -e .
 python -m celtheo list                    # parsed events + data warnings
 python -m celtheo run                     # all events -> out/results.json, out/results.csv
 python -m celtheo run --only pikes-peak   # subset by event-id substring
-python -m celtheo run --offline           # cached stars/soundings only
+python -m celtheo run --offline           # cached stars/soundings only (no terrain unless DEMs are local)
+python -m celtheo run --no-terrain        # skip the elevation-data profiles
 pytest -q                                 # regression tests (offline)
 ```
 
@@ -48,6 +64,7 @@ Commit both so later runs are reproducible offline.
 | `config/star_names.json` | CSV star name to SIMBAD identifier, where the name isn't resolvable as written. `null` = no identifier. |
 | `config/stations.json` | Radiosonde stations (WMO / IEM ids). The nearest one to the observer is used. |
 | `config/sounding_overrides.json` | Per-event station and launch time. Pikes Peak / 39 Aqr is pinned to Grand Junction 2025-01-28 00Z, as in AL_RefractionAnalysis. |
+| `config/dem_sources.json` | Elevation sources, tried in order per point. A `local` entry is usable offline. |
 | `data/soundings/` | Cached soundings (ships with Grand Junction 72476, 2025-01-28 00Z) and `_availability.json`, the IEM list of which stations launched at each time. |
 
 Soundings come from the Iowa Environmental Mesonet RAOB archive (JSON API). For each event the
@@ -70,6 +87,7 @@ launch, so the North Peak events use Grand Junction.
 
 ## Changes from the original `refraction.py`
 
+- `profiles.ray_to_peak` is in the peak-anchored frame, as of schema 1.1.
 - The atmosphere is a per-event object instead of module globals, so many events can run in one pass.
 - The star (infinite-distance) trace is reported with both the normal-section radius used for
   the peak (`star_geometric_deg`) and the original Gauss radius (`star_geometric_gauss_deg`).

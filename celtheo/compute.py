@@ -11,6 +11,7 @@ from .refraction import (CiddorAtmosphere, RefractionSettings, apparent_geometri
                          geometric_from_apparent_infinite, ray_path_xy, wgs84_gauss_radius)
 from .soundings import sounding_for_event
 from .stars import resolve
+from .terrain import compute_terrain, to_peak_frame_xy
 
 NaN = float("nan")
 
@@ -76,7 +77,8 @@ def star_altitudes(e: Event, star: dict):
                 alt_rate_deg_per_s=rate, erfa_apparent_alt_obs_deg=a_app.alt.deg, temp_c_used=temp)
 
 
-def compute_event(e: Event, settings: RefractionSettings, offline=False, log=print, profiles=True, refresh_stars=False) -> dict:
+def compute_event(e: Event, settings: RefractionSettings, offline=False, log=print, profiles=True, refresh_stars=False,
+                  terrain=True, terrain_settings=None) -> dict:
     warn = list(e.warnings)
     out = {
         "id": e.id, "row": e.row,
@@ -131,7 +133,9 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
         }
         if profiles:
             out["profiles"] = {
-                "ray_to_peak": [[_f(x, 1), _f(y, 2)] for x, y in ray_path_xy(atm, sol.apparent_deg, e.obs_alt, sol.radius_m, sol.slant_m * 1.02, every=max(1, int(sol.ground_m / 50 / 120)))],
+                "ray_to_peak": [[_f(x, 1), _f(y, 2)] for x, y in to_peak_frame_xy(
+                    ray_path_xy(atm, sol.apparent_deg, e.obs_alt, sol.radius_m, sol.slant_m * 1.02, every=max(1, int(sol.ground_m / 50 / 120))),
+                    math.radians(sol.phi_deg), sol.radius_m)],
                 "atmosphere": [
                     {"alt_m": a, "n_minus_1_ppm": _f((atm.n_at(a) - 1) * 1e6, 3),
                      **dict(zip(("T_K", "P_Pa", "RH_pct"), (_f(v, 2) for v in atm.TP_RH(a))))}
@@ -147,7 +151,17 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
         "earth_radius_m": _f(sol.radius_m) if sol else None,
         "planar_angle_deg": _f(planar),
         "peak_height_above_observer_m": _f(e.peak_alt - e.obs_alt),
+        "frame": "peak-anchored: origin at the peak foot, tangent plane at the peak; only the globe observer drops",
     }
+    if sol:
+        R, D = sol.radius_m, sol.ground_m
+        gz = (R + e.obs_alt) * math.cos(D / R) - R
+        out["geometry"].update({
+            "observer_planar_xz_m": [_f(-D, 1), _f(e.obs_alt, 1)],
+            "observer_globe_xz_m": [_f((R + e.obs_alt) * math.sin(-D / R), 1), _f(gz, 2)],
+            "globe_observer_drop_m": _f(e.obs_alt - gz, 2),
+            "peak_xz_m": [0.0, _f(e.peak_alt, 1)],
+        })
     if sol and e.csv["distance"] and math.isfinite(e.csv["distance"]) and abs(sol.ground_m - e.csv["distance"]) > 200:
         warn.append(f"CSV distance differs from geodesic by {sol.ground_m - e.csv['distance']:.0f} m")
 
@@ -178,4 +192,25 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
     if r.get("star_uplift_arcmin") is not None and r.get("bennett_arcmin") is not None:
         c["ciddor_minus_bennett_arcmin"] = _f(r["star_uplift_arcmin"] - r["bennett_arcmin"], 4)
     out["comparison"] = c
+
+    # ---- terrain (real surface along the line of sight)
+    if terrain and sol is not None:
+        try:
+            doc, summ = compute_terrain(out, atm, terrain_settings, offline=offline, log=log)
+            out["terrain"] = summ
+            out["_terrain_doc"] = doc
+            if summ.get("checks", {}).get("dtm_at_peak_m") is not None and abs(summ["checks"]["dtm_at_peak_m"] - e.peak_alt) > 30:
+                warn.append(f"DEM height at the peak coordinate differs from CSV by {summ['checks']['dtm_at_peak_m'] - e.peak_alt:+.0f} m")
+            for nm, cf in (summ.get("canopy") or {}).items():
+                if cf.get("flag"):
+                    warn.append(f"canopy check: DSM skyline is {cf['dsm_minus_dtm_skyline_arcsec']:+.0f}″ vs bare earth on the {nm.replace('_', ' ')} line (review)")
+                    break
+            for nm in ("star_azimuth", "to_peak"):
+                ob = (summ.get(nm) or {}).get("obstruction") or {}
+                gr = ((ob.get("dtm") or ob.get("dsm") or {}).get("globe_refracted")) or {}
+                if gr and not gr.get("near_peak", True):
+                    warn.append(f"terrain {gr['u_m'] / 1000:+.1f} km from the peak rises above the summit on the {nm.replace('_', ' ')} line")
+                    break
+        except Exception as ex:  # noqa: BLE001
+            warn.append(f"terrain failed: {ex}")
     return out
