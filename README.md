@@ -48,11 +48,13 @@ Commit both so later runs are reproducible offline.
 | `config/star_names.json` | CSV star name to SIMBAD identifier, where the name isn't resolvable as written. `null` = no identifier. |
 | `config/stations.json` | Radiosonde stations (WMO / IEM ids). The nearest one to the observer is used. |
 | `config/sounding_overrides.json` | Per-event station and launch time. Pikes Peak / 39 Aqr is pinned to Grand Junction 2025-01-28 00Z, as in AL_RefractionAnalysis. |
-| `data/soundings/` | Cached soundings. Ships with Grand Junction 72476, 2025-01-28 00Z. |
+| `data/soundings/` | Cached soundings (ships with Grand Junction 72476, 2025-01-28 00Z) and `_availability.json`, the IEM list of which stations launched at each time. |
 
-Soundings come from the Iowa Environmental Mesonet RAOB archive, with the University of
-Wyoming archive as a fallback. The nearest 00Z/12Z launch is used. If neither archive has
-data, the event uses the standard atmosphere and is flagged.
+Soundings come from the Iowa Environmental Mesonet RAOB archive (JSON API). For each event the
+pipeline checks which stations IEM has data for at the nearest 00Z/12Z launch. It then uses the
+nearest of those within 600 km, before trying launches 12 h either side. If nothing is found,
+the event uses the standard atmosphere and is flagged. For example, Denver has no 2025-03-24 00Z
+launch, so the North Peak events use Grand Junction.
 
 ## Validation
 

@@ -7,9 +7,14 @@
   {"wmo": "72786", "iem": ["KOTX"], "name": "Spokane, WA", "lat": 47.68, "lon": -117.63},
   {"wmo": "72797", "iem": ["KUIL"], "name": "Quillayute, WA", "lat": 47.93, "lon": -124.56},
   {"wmo": "72694", "iem": ["KSLE"], "name": "Salem, OR", "lat": 44.92, "lon": -123.02},
-  {"wmo": "71109", "iem": ["CYZT", "YZT"], "name": "Port Hardy, BC", "lat": 50.68, "lon": -127.36},
+  {"wmo": "71109", "iem": ["CYZT"], "name": "Port Hardy, BC", "lat": 50.68, "lon": -127.36},
   {"wmo": "72776", "iem": ["KTFX"], "name": "Great Falls, MT", "lat": 47.46, "lon": -111.38},
-  {"wmo": "71119", "iem": ["CWSE", "WSE", "CYED"], "name": "Stony Plain (Edmonton), AB", "lat": 53.53, "lon": -114.1},
+  {"wmo": "71119", "iem": ["CWSE"], "name": "Stony Plain (Edmonton), AB", "lat": 53.53, "lon": -114.1},
   {"wmo": "72210", "iem": ["KTBW"], "name": "Tampa Bay, FL", "lat": 27.7, "lon": -82.4},
-  {"wmo": "72202", "iem": ["KMFL"], "name": "Miami, FL", "lat": 25.75, "lon": -80.38}
+  {"wmo": "72202", "iem": ["KMFL"], "name": "Miami, FL", "lat": 25.75, "lon": -80.38},
+  {"wmo": "72672", "iem": ["KRIW"], "name": "Riverton, WY", "lat": 43.06, "lon": -108.48},
+  {"wmo": "72582", "iem": ["KLKN"], "name": "Elko, NV", "lat": 40.86, "lon": -115.74},
+  {"wmo": "72597", "iem": ["KMFR"], "name": "Medford, OR", "lat": 42.37, "lon": -122.88},
+  {"wmo": "72768", "iem": ["KGGW"], "name": "Glasgow, MT", "lat": 48.21, "lon": -106.63},
+  {"wmo": "71908", "iem": ["CZXS"], "name": "Prince George, BC", "lat": 53.89, "lon": -122.68}
 ]

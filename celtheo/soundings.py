@@ -132,9 +132,34 @@ def _cache_path(wmo, t: datetime):
 
 
 _FAILED = set()
+AVAIL_FILE = SOUNDING_DIR / "_availability.json"
 
 
-def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.DataFrame]:
+def available_ids(t: datetime, offline=False, log=print) -> Optional[set]:
+    """Station ids IEM has a sounding for at launch time t (one cheap query per launch, cached).
+    None = unknown (offline or the query failed), which means 'try anyway'."""
+    key = f"{t:%Y-%m-%dT%H}Z"
+    cache = json.loads(AVAIL_FILE.read_text()) if AVAIL_FILE.exists() else {}
+    if key in cache:
+        return set(cache[key])
+    if offline:
+        return None
+    import requests
+    try:
+        r = requests.get(f"https://mesonet.agron.iastate.edu/json/raob.py?ts={t:%Y-%m-%dT%H:%M:%S}Z&pressure=500",
+                         timeout=60, headers={"User-Agent": "celtheo-pipeline"})
+        r.raise_for_status()
+        ids = sorted({p["station"] for p in r.json().get("profiles", []) if p.get("station")})
+    except Exception as e:  # noqa: BLE001
+        log(f"    IEM availability query failed for {key}: {e}")
+        return None
+    cache[key] = ids
+    SOUNDING_DIR.mkdir(parents=True, exist_ok=True)
+    AVAIL_FILE.write_text(json.dumps(cache, indent=0, sort_keys=True))
+    return set(ids)
+
+
+def fetch(station: dict, t: datetime, offline=False, log=print, avail: Optional[set] = None) -> Optional[pd.DataFrame]:
     path = _cache_path(station["wmo"], t)
     if path.exists():
         return parse_wyoming_csv(path.read_text())
@@ -143,6 +168,11 @@ def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.D
     import requests
     t_end = t + timedelta(minutes=59)
     ids = station["iem"] if isinstance(station["iem"], list) else [station["iem"]]
+    if avail is not None:
+        ids = [i for i in ids if i in avail]
+        if not ids:  # IEM has nothing for this station/launch; skip straight to the next candidate
+            _FAILED.add((station["wmo"], t))
+            return None
     tries = [(f"IEM json {i}", f"https://mesonet.agron.iastate.edu/json/raob.py?station={i}&ts={t:%Y-%m-%dT%H:%M:%S}Z", parse_iem_json)
              for i in ids]
     tries += [
@@ -172,9 +202,9 @@ def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.D
 
 
 def sounding_for_event(event_id: str, obs_lat, obs_lon, utc: datetime, offline=False, log=print,
-                       max_stations=3, max_km=600.0) -> Sounding:
-    """Pinned override if any; otherwise nearest station, trying the nearest launch then ±12 h,
-    then the next-nearest stations (within max_km)."""
+                       max_stations=4, max_km=600.0) -> Sounding:
+    """Pinned override if any. Otherwise, for the nearest launch (then ±12 h), take the nearest station
+    within max_km that IEM actually has data for."""
     ov = OVERRIDES.get(event_id, {})
     if ov.get("wmo"):
         st = next(s for s in STATIONS if s["wmo"] == ov["wmo"])
@@ -185,9 +215,10 @@ def sounding_for_event(event_id: str, obs_lat, obs_lon, utc: datetime, offline=F
     t0 = datetime.fromisoformat(ov["launch_utc"]).replace(tzinfo=timezone.utc) if ov.get("launch_utc") else nearest_launch(utc)
     times = [t0] if ov.get("launch_utc") else sorted({t0, nearest_launch(utc - timedelta(hours=6)), nearest_launch(utc + timedelta(hours=6))},
                                                       key=lambda t: abs((t - utc).total_seconds()))
-    for st, dist in cands:
-        for t in times:
-            df = fetch(st, t, offline=offline, log=log)
+    avail = {t: available_ids(t, offline=offline, log=log) for t in times}
+    for t in times:            # nearest launch first: timing matters more than a few hundred km
+        for st, dist in cands:
+            df = fetch(st, t, offline=offline, log=log, avail=avail[t])
             if df is not None:
                 return _to_sounding(df, dict(station=st["name"], wmo=st["wmo"], valid_utc=f"{t:%Y-%m-%dT%H:%MZ}",
                                              source="radiosonde", distance_km=dist))
