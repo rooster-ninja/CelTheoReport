@@ -25,7 +25,7 @@ SCHEMA_VERSION = "1.0"
 
 
 def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offline=False, only: Optional[Iterable[str]] = None,
-        include_tests=True, profiles=True, settings: Optional[RefractionSettings] = None, log: Callable = print) -> dict:
+        include_tests=True, profiles=True, refresh_stars=False, settings: Optional[RefractionSettings] = None, log: Callable = print) -> dict:
     settings = settings or RefractionSettings()
     configure_astropy(offline)
     events = load_events(csv_path)
@@ -39,7 +39,7 @@ def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offlin
     for i, e in enumerate(events, 1):
         log(f"[{i}/{len(events)}] {e.id}")
         try:
-            results.append(compute_event(e, settings, offline=offline, log=log, profiles=profiles))
+            results.append(compute_event(e, settings, offline=offline, log=log, profiles=profiles, refresh_stars=refresh_stars))
         except Exception as ex:  # noqa: BLE001 — one bad row never stops the run
             log(f"    FAILED: {ex}")
             results.append({"id": e.id, "row": e.row, "flags": {"warnings": [f"computation failed: {ex}"], "target_type": e.target_type,

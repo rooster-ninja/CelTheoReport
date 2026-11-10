@@ -76,7 +76,7 @@ def star_altitudes(e: Event, star: dict):
                 alt_rate_deg_per_s=rate, erfa_apparent_alt_obs_deg=a_app.alt.deg, temp_c_used=temp)
 
 
-def compute_event(e: Event, settings: RefractionSettings, offline=False, log=print, profiles=True) -> dict:
+def compute_event(e: Event, settings: RefractionSettings, offline=False, log=print, profiles=True, refresh_stars=False) -> dict:
     warn = list(e.warnings)
     out = {
         "id": e.id, "row": e.row,
@@ -91,7 +91,7 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
     out["csv"]["star_name"] = e.star
 
     # ---- star
-    star = resolve(e.star, offline=offline, log=log) if e.star else {"kind": "unresolved", "query": None, "source": "blank"}
+    star = resolve(e.star, offline=offline, log=log, refresh_no_pm=refresh_stars) if e.star else {"kind": "unresolved", "query": None, "source": "blank"}
     out["star"] = {"name": e.star, **{k: (_f(v) if isinstance(v, float) else v) for k, v in star.items()}}
     astro = None
     if star["kind"] != "unresolved" and e.utc:

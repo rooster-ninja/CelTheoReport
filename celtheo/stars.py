@@ -30,7 +30,36 @@ def _load():
     return json.loads(CACHE.read_text()) if CACHE.exists() else {}
 
 
-def resolve(csv_name: str, offline=False, log=print) -> dict:
+SIMBAD_SERVERS = ["simbad.cds.unistra.fr", "simbad.harvard.edu"]
+
+
+def _simbad_query(q: str, server: str) -> Optional[dict]:
+    from astroquery.simbad import Simbad, conf
+    import astropy.units as u
+    from astropy.coordinates import SkyCoord
+    conf.server = server
+    s = Simbad()
+    if hasattr(s, "server"):
+        s.server = server
+    s.add_votable_fields("pmra", "pmdec")
+    t = s.query_object(q)
+    if t is None or not len(t):
+        return None
+    cols = {c.lower(): c for c in t.colnames}
+    if "ra" in cols and str(t[cols["ra"]].unit) == "deg":
+        ra, dec = float(t[cols["ra"]][0]), float(t[cols["dec"]][0])
+    else:  # older astroquery: sexagesimal strings
+        c = SkyCoord(str(t[cols["ra"]][0]), str(t[cols["dec"]][0]), unit=(u.hourangle, u.deg))
+        ra, dec = c.ra.deg, c.dec.deg
+    pm = []
+    for k in ("pmra", "pmdec"):
+        v = t[cols[k]][0] if k in cols else 0.0
+        pm.append(0.0 if str(v) in ("--", "nan") else float(v))
+    return {"query": q, "kind": "star", "ra_deg": ra, "dec_deg": dec, "pmra_masyr": pm[0], "pmdec_masyr": pm[1],
+            "source": f"SIMBAD {server} (astroquery)"}
+
+
+def resolve(csv_name: str, offline=False, log=print, refresh_no_pm=False) -> dict:
     """Return {query, kind, ra_deg, dec_deg, pmra_masyr, pmdec_masyr, source} or {kind:'unresolved'}."""
     q = query_name(csv_name)
     if q is None:
@@ -38,33 +67,18 @@ def resolve(csv_name: str, offline=False, log=print) -> dict:
     if q.lower() in BODIES:
         return {"query": q, "kind": "body", "body": BODIES[q.lower()], "source": "astropy ephemeris"}
     cache = _load()
-    if q in cache:
+    if q in cache and not (refresh_no_pm and "no proper motion" in cache[q].get("source", "")):
         return cache[q]
     if offline:
         return {"query": q, "kind": "unresolved", "source": "offline and not in cache"}
     rec = None
-    try:  # SIMBAD via astroquery: gives proper motion
-        from astroquery.simbad import Simbad
-        s = Simbad()
-        s.add_votable_fields("pmra", "pmdec")
-        t = s.query_object(q)
-        if t is not None and len(t):
-            cols = {c.lower(): c for c in t.colnames}
-            from astropy.coordinates import SkyCoord
-            import astropy.units as u
-            if "ra" in cols and t[cols["ra"]].unit is not None and str(t[cols["ra"]].unit) == "deg":
-                ra, dec = float(t[cols["ra"]][0]), float(t[cols["dec"]][0])
-            else:  # older astroquery: sexagesimal strings
-                c = SkyCoord(str(t[cols.get("ra", "RA")][0]), str(t[cols.get("dec", "DEC")][0]), unit=(u.hourangle, u.deg))
-                ra, dec = c.ra.deg, c.dec.deg
-            pmra = t[cols.get("pmra", "PMRA")][0] if cols.get("pmra") else 0.0
-            pmdec = t[cols.get("pmdec", "PMDEC")][0] if cols.get("pmdec") else 0.0
-            pmra = 0.0 if str(pmra) in ("--", "nan") else float(pmra)
-            pmdec = 0.0 if str(pmdec) in ("--", "nan") else float(pmdec)
-            rec = {"query": q, "kind": "star", "ra_deg": ra, "dec_deg": dec, "pmra_masyr": pmra, "pmdec_masyr": pmdec,
-                   "source": "SIMBAD (astroquery)"}
-    except Exception as e:  # noqa: BLE001
-        log(f"    astroquery SIMBAD failed for {q!r}: {e}")
+    for server in SIMBAD_SERVERS:  # SIMBAD via astroquery: gives proper motion; CDS first, then the Harvard mirror
+        try:
+            rec = _simbad_query(q, server)
+            if rec:
+                break
+        except Exception as e:  # noqa: BLE001
+            log(f"    SIMBAD ({server}) failed for {q!r}: {str(e).splitlines()[0]}")
     if rec is None:
         try:  # Sesame name resolver: position only
             from astropy.coordinates import SkyCoord
