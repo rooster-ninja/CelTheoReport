@@ -1,0 +1,18 @@
+{
+ "_comment": "Per-event sounding choice. Keys are event ids from results.json. Omit an event to use the nearest station and nearest 00Z/12Z launch.",
+ "pikes-peak-39-aquarii-2025-01-28": {
+  "wmo": "72476",
+  "launch_utc": "2025-01-28T00:00",
+  "note": "Grand Junction, as used in AL_RefractionAnalysis"
+ },
+ "pikes-peak-39-aquarii-2025-01-28-test-epsilon": {
+  "wmo": "72476",
+  "launch_utc": "2025-01-28T00:00",
+  "note": "same sounding as the main Pikes Peak event"
+ },
+ "pikes-peak-39-aquarii-2025-01-28-test-aries": {
+  "wmo": "72476",
+  "launch_utc": "2025-01-28T00:00",
+  "note": "same sounding as the main Pikes Peak event"
+ }
+}

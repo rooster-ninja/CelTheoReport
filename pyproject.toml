@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "celtheo"
+version = "0.1.0"
+description = "CelTheo occultation pipeline: astropy star positions + Ciddor ray-trace refraction"
+requires-python = ">=3.10"
+dependencies = [
+  "astropy>=6.0",
+  "astroquery>=0.4.8",
+  "ambiance>=1.3",
+  "geographiclib>=2.0",
+  "pandas>=2.0",
+  "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "jsonschema>=4"]
+
+[project.scripts]
+celtheo = "celtheo.cli:main"
+
+[tool.setuptools]
+packages = ["celtheo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
