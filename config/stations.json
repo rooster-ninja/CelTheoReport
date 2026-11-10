@@ -1,15 +1,15 @@
 [
-  {"wmo": "72476", "iem": "KGJT", "name": "Grand Junction, CO", "lat": 39.12, "lon": -108.53},
-  {"wmo": "72469", "iem": "KDNR", "name": "Denver, CO", "lat": 39.77, "lon": -104.87},
-  {"wmo": "72365", "iem": "KABQ", "name": "Albuquerque, NM", "lat": 35.04, "lon": -106.62},
-  {"wmo": "72572", "iem": "KSLC", "name": "Salt Lake City, UT", "lat": 40.77, "lon": -111.95},
-  {"wmo": "72681", "iem": "KBOI", "name": "Boise, ID", "lat": 43.57, "lon": -116.21},
-  {"wmo": "72786", "iem": "KOTX", "name": "Spokane, WA", "lat": 47.68, "lon": -117.63},
-  {"wmo": "72797", "iem": "KUIL", "name": "Quillayute, WA", "lat": 47.93, "lon": -124.56},
-  {"wmo": "72694", "iem": "KSLE", "name": "Salem, OR", "lat": 44.92, "lon": -123.02},
-  {"wmo": "71109", "iem": "CYZT", "name": "Port Hardy, BC", "lat": 50.68, "lon": -127.36},
-  {"wmo": "72776", "iem": "KTFX", "name": "Great Falls, MT", "lat": 47.46, "lon": -111.38},
-  {"wmo": "71119", "iem": "CWSE", "name": "Stony Plain (Edmonton), AB", "lat": 53.53, "lon": -114.10},
-  {"wmo": "72210", "iem": "KTBW", "name": "Tampa Bay, FL", "lat": 27.70, "lon": -82.40},
-  {"wmo": "72202", "iem": "KMFL", "name": "Miami, FL", "lat": 25.75, "lon": -80.38}
+  {"wmo": "72476", "iem": ["KGJT"], "name": "Grand Junction, CO", "lat": 39.12, "lon": -108.53},
+  {"wmo": "72469", "iem": ["KDEN", "KDNR"], "name": "Denver, CO", "lat": 39.77, "lon": -104.87},
+  {"wmo": "72365", "iem": ["KABQ"], "name": "Albuquerque, NM", "lat": 35.04, "lon": -106.62},
+  {"wmo": "72572", "iem": ["KSLC"], "name": "Salt Lake City, UT", "lat": 40.77, "lon": -111.95},
+  {"wmo": "72681", "iem": ["KBOI"], "name": "Boise, ID", "lat": 43.57, "lon": -116.21},
+  {"wmo": "72786", "iem": ["KOTX"], "name": "Spokane, WA", "lat": 47.68, "lon": -117.63},
+  {"wmo": "72797", "iem": ["KUIL"], "name": "Quillayute, WA", "lat": 47.93, "lon": -124.56},
+  {"wmo": "72694", "iem": ["KSLE"], "name": "Salem, OR", "lat": 44.92, "lon": -123.02},
+  {"wmo": "71109", "iem": ["CYZT", "YZT"], "name": "Port Hardy, BC", "lat": 50.68, "lon": -127.36},
+  {"wmo": "72776", "iem": ["KTFX"], "name": "Great Falls, MT", "lat": 47.46, "lon": -111.38},
+  {"wmo": "71119", "iem": ["CWSE", "WSE", "CYED"], "name": "Stony Plain (Edmonton), AB", "lat": 53.53, "lon": -114.1},
+  {"wmo": "72210", "iem": ["KTBW"], "name": "Tampa Bay, FL", "lat": 27.7, "lon": -82.4},
+  {"wmo": "72202", "iem": ["KMFL"], "name": "Miami, FL", "lat": 25.75, "lon": -80.38}
 ]

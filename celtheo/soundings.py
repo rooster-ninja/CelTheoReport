@@ -142,9 +142,11 @@ def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.D
         return None
     import requests
     t_end = t + timedelta(minutes=59)
-    tries = [
-        ("IEM json", f"https://mesonet.agron.iastate.edu/json/raob.py?station={station['iem']}&ts={t:%Y-%m-%dT%H:%M:%S}Z", parse_iem_json),
-        ("IEM csv", f"https://mesonet.agron.iastate.edu/cgi-bin/request/raob.py?station={station['iem']}"
+    ids = station["iem"] if isinstance(station["iem"], list) else [station["iem"]]
+    tries = [(f"IEM json {i}", f"https://mesonet.agron.iastate.edu/json/raob.py?station={i}&ts={t:%Y-%m-%dT%H:%M:%S}Z", parse_iem_json)
+             for i in ids]
+    tries += [
+        ("IEM csv", f"https://mesonet.agron.iastate.edu/cgi-bin/request/raob.py?station={ids[0]}"
                     f"&sts={t:%Y-%m-%dT%H:%M:%S}Z&ets={t_end:%Y-%m-%dT%H:%M:%S}Z", parse_iem_csv),
         ("Wyoming", f"https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST"
                     f"&YEAR={t:%Y}&MONTH={t:%m}&FROM={t:%d%H}&TO={t:%d%H}&STNM={station['wmo']}", parse_wyoming_textlist),
