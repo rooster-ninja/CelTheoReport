@@ -131,11 +131,14 @@ def _cache_path(wmo, t: datetime):
     return SOUNDING_DIR / f"{wmo}_{t:%Y-%m-%dT%H}Z.csv"
 
 
+_FAILED = set()
+
+
 def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.DataFrame]:
     path = _cache_path(station["wmo"], t)
     if path.exists():
         return parse_wyoming_csv(path.read_text())
-    if offline:
+    if offline or (station["wmo"], t) in _FAILED:
         return None
     import requests
     t_end = t + timedelta(minutes=59)
@@ -162,20 +165,30 @@ def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.D
             return df
         except Exception as e:  # noqa: BLE001 — any failure falls through to the next source
             log(f"    {name} sounding fetch failed for {station['wmo']} {t:%Y-%m-%d %HZ}: {e}")
+    _FAILED.add((station["wmo"], t))
     return None
 
 
-def sounding_for_event(event_id: str, obs_lat, obs_lon, utc: datetime, offline=False, log=print) -> Sounding:
+def sounding_for_event(event_id: str, obs_lat, obs_lon, utc: datetime, offline=False, log=print,
+                       max_stations=3, max_km=600.0) -> Sounding:
+    """Pinned override if any; otherwise nearest station, trying the nearest launch then ±12 h,
+    then the next-nearest stations (within max_km)."""
     ov = OVERRIDES.get(event_id, {})
     if ov.get("wmo"):
         st = next(s for s in STATIONS if s["wmo"] == ov["wmo"])
-        dist = _hav_km(obs_lat, obs_lon, st["lat"], st["lon"])
+        cands = [(st, _hav_km(obs_lat, obs_lon, st["lat"], st["lon"]))]
     else:
-        st, dist = nearest_station(obs_lat, obs_lon)
-    t = datetime.fromisoformat(ov["launch_utc"]).replace(tzinfo=timezone.utc) if ov.get("launch_utc") else nearest_launch(utc)
-    df = fetch(st, t, offline=offline, log=log)
-    if df is None:
-        return Sounding([], [], [], [], station=st["name"], wmo=st["wmo"], valid_utc=f"{t:%Y-%m-%dT%H:%MZ}",
-                        source="standard-atmosphere fallback", distance_km=dist)
-    return _to_sounding(df, dict(station=st["name"], wmo=st["wmo"], valid_utc=f"{t:%Y-%m-%dT%H:%MZ}",
-                                 source="radiosonde", distance_km=dist))
+        ranked = sorted(((s, _hav_km(obs_lat, obs_lon, s["lat"], s["lon"])) for s in STATIONS), key=lambda x: x[1])
+        cands = [c for c in ranked if c[1] <= max_km][:max_stations] or ranked[:1]
+    t0 = datetime.fromisoformat(ov["launch_utc"]).replace(tzinfo=timezone.utc) if ov.get("launch_utc") else nearest_launch(utc)
+    times = [t0] if ov.get("launch_utc") else sorted({t0, nearest_launch(utc - timedelta(hours=6)), nearest_launch(utc + timedelta(hours=6))},
+                                                      key=lambda t: abs((t - utc).total_seconds()))
+    for st, dist in cands:
+        for t in times:
+            df = fetch(st, t, offline=offline, log=log)
+            if df is not None:
+                return _to_sounding(df, dict(station=st["name"], wmo=st["wmo"], valid_utc=f"{t:%Y-%m-%dT%H:%MZ}",
+                                             source="radiosonde", distance_km=dist))
+    st, dist = cands[0]
+    return Sounding([], [], [], [], station=st["name"], wmo=st["wmo"], valid_utc=f"{t0:%Y-%m-%dT%H:%MZ}",
+                    source="standard-atmosphere fallback", distance_km=dist)
