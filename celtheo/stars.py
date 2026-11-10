@@ -31,6 +31,7 @@ def _load():
 
 
 SIMBAD_SERVERS = ["simbad.cds.unistra.fr", "simbad.harvard.edu"]
+_DEAD_SERVERS: set = set()  # servers that failed to connect this run; skipped afterwards
 
 
 def _simbad_query(q: str, server: str) -> Optional[dict]:
@@ -73,12 +74,17 @@ def resolve(csv_name: str, offline=False, log=print, refresh_no_pm=False) -> dic
         return {"query": q, "kind": "unresolved", "source": "offline and not in cache"}
     rec = None
     for server in SIMBAD_SERVERS:  # SIMBAD via astroquery: gives proper motion; CDS first, then the Harvard mirror
+        if server in _DEAD_SERVERS:
+            continue
         try:
             rec = _simbad_query(q, server)
             if rec:
                 break
         except Exception as e:  # noqa: BLE001
             log(f"    SIMBAD ({server}) failed for {q!r}: {str(e).splitlines()[0]}")
+            if "capabilities" in str(e) or "Connection" in str(e):
+                _DEAD_SERVERS.add(server)
+                log(f"    skipping {server} for the rest of this run")
     if rec is None:
         try:  # Sesame name resolver: position only
             from astropy.coordinates import SkyCoord
