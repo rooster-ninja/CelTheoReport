@@ -105,6 +105,28 @@ def parse_iem_csv(text: str) -> pd.DataFrame:
     })
 
 
+def parse_iem_json(text: str) -> pd.DataFrame:
+    """IEM /json/raob.py: {"profiles": [{"profile": [{"pres":..,"hght":..,"tmpc":..,"dwpc":..}, ...]}]}"""
+    import json as _json
+    doc = _json.loads(text)
+    profs = doc.get("profiles") or []
+    if not profs or not profs[0].get("profile"):
+        raise ValueError("no profile in IEM JSON response")
+    rows = profs[0]["profile"]
+    def col(*names):
+        for n in names:
+            if n in rows[0]:
+                return [r.get(n) for r in rows]
+        return [None] * len(rows)
+    df = pd.DataFrame({
+        "pres_hpa": col("pres", "pressure_mb", "pressure"),
+        "height_m": col("hght", "height_m", "height"),
+        "temp_c": col("tmpc", "temp", "temperature"),
+        "dwpt_c": col("dwpc", "dwpt", "dewpoint"),
+    })
+    return df.apply(pd.to_numeric, errors="coerce")
+
+
 def _cache_path(wmo, t: datetime):
     return SOUNDING_DIR / f"{wmo}_{t:%Y-%m-%dT%H}Z.csv"
 
@@ -116,16 +138,19 @@ def fetch(station: dict, t: datetime, offline=False, log=print) -> Optional[pd.D
     if offline:
         return None
     import requests
+    t_end = t + timedelta(minutes=59)
     tries = [
-        ("IEM", f"https://mesonet.agron.iastate.edu/cgi-bin/request/raob.py?station={station['iem']}"
-                f"&sts={t:%Y-%m-%dT%H:%M}Z&ets={t:%Y-%m-%dT%H:%M}Z", parse_iem_csv),
+        ("IEM json", f"https://mesonet.agron.iastate.edu/json/raob.py?station={station['iem']}&ts={t:%Y-%m-%dT%H:%M:%S}Z", parse_iem_json),
+        ("IEM csv", f"https://mesonet.agron.iastate.edu/cgi-bin/request/raob.py?station={station['iem']}"
+                    f"&sts={t:%Y-%m-%dT%H:%M:%S}Z&ets={t_end:%Y-%m-%dT%H:%M:%S}Z", parse_iem_csv),
         ("Wyoming", f"https://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST"
                     f"&YEAR={t:%Y}&MONTH={t:%m}&FROM={t:%d%H}&TO={t:%d%H}&STNM={station['wmo']}", parse_wyoming_textlist),
     ]
     for name, url, parser in tries:
         try:
             r = requests.get(url, timeout=40, headers={"User-Agent": "celtheo-pipeline"})
-            r.raise_for_status()
+            if r.status_code >= 400:
+                raise ValueError(f"HTTP {r.status_code}: {r.text.strip()[:200]}")
             df = parser(r.text)
             if len(df.dropna(subset=["height_m", "temp_c"])) < 10:
                 raise ValueError("too few levels")
