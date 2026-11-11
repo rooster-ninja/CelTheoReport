@@ -66,6 +66,7 @@ Commit both so later runs are reproducible offline. `out/` is tracked too, so th
 | `config/sounding_overrides.json` | Per-event station and launch time. Pikes Peak / 39 Aqr is pinned to Grand Junction 2025-01-28 00Z, as in AL_RefractionAnalysis. |
 | `config/dem_sources.json` | Elevation sources, tried in order per point. A `local` entry is usable offline. |
 | `config/time_corrections.json` | Per-event fixes to UTC offset, local time or date, applied on load. Only add an entry once you've confirmed it. |
+| `config/exclusions.json` | Events left out (id → reason). They stay in results.json flagged `excluded`. |
 | `data/soundings/` | Cached soundings (ships with Grand Junction 72476, 2025-01-28 00Z) and `_availability.json`, the IEM list of which stations launched at each time. |
 
 Soundings come from the Iowa Environmental Mesonet RAOB archive (JSON API). For each event the

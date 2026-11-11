@@ -3,5 +3,29 @@
  "_example": {
   "utc_offset_h": -7,
   "note": "Stellarium was run on MST; CSV UTC column said -6"
+ },
+ "cheyenne-mtn-mu-fornacis-2025-03-10": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "blue-mtn-hd-32515-2025-03-13": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "mount-rosa-hd-17320-2025-03-11": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "north-peak-hd55892-i-puppis-2025-03-24": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "north-peak-hd56455-pr-puppis-2025-03-24": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "north-peak-hd56813-2025-03-24": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
  }
 }

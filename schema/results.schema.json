@@ -114,6 +114,13 @@
                 "type": "string"
               },
               "description": "Human-readable data-quality notes. Show them."
+            },
+            "excluded": {
+              "type": "boolean",
+              "description": "Left out of the analysis (config/exclusions.json); nothing else is computed. List in the errata."
+            },
+            "excluded_reason": {
+              "type": "string"
             }
           }
         },
@@ -560,6 +567,10 @@
         },
         "candidates_solved": {
           "type": "integer"
+        },
+        "nearest_named_peak": {
+          "type": "object",
+          "description": "Nearest peak from the CSV within 2 km of this occluder, when it is not the event's named peak."
         }
       }
     },

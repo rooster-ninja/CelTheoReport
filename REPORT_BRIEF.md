@@ -116,6 +116,7 @@ or Bessel's observatory reports.
 - Use only numbers that appear in `results.json`. Format them, but never re-derive them.
   If a value is `null`, print an em dash and the relevant warning.
 - Keep observed − model signs as given, and label units on every axis and column.
+- Leave `flags.excluded` events out entirely, except to list them with `excluded_reason` in the errata.
 - Exclude test rows from summary statistics. Also exclude any event whose warnings include a
   clock-shift or star-identity mismatch, unless it has been corrected via
   `config/time_corrections.json`. Show these in the errata., but show them in the appendix.
