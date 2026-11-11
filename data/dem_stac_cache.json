@@ -1,0 +1,106 @@
+{
+ "hrdem-mosaic-2m|dtm|-123.741,49.549,-123.226,49.642": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/2_4-mosaic-2m-dtm.tif",
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/1_4-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-123.741,49.549,-123.226,49.642": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/2_4-mosaic-2m-dsm.tif",
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/1_4-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-123.471,49.549,-123.226,49.602": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/2_4-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-123.471,49.549,-123.226,49.602": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/2_4-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-115.092,50.314,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-115.092,50.314,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-115.092,50.313,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-115.092,50.313,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.811,50.320,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.811,50.320,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.796,50.150,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.796,50.150,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.801,50.161,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.801,50.161,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.527,50.198,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.527,50.198,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.816,50.272,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.816,50.272,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.816,50.271,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.816,50.271,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.537,50.290,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.537,50.290,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-115.093,50.287,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-115.093,50.287,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-115.093,50.290,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-115.093,50.290,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.813,50.299,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.813,50.299,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.841,50.254,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.841,50.254,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.845,50.283,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.845,50.283,-113.698,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ],
+ "hrdem-mosaic-2m|dtm|-114.562,50.276,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dtm.tif"
+ ],
+ "hrdem-mosaic-2m|dsm|-114.562,50.276,-113.697,50.359": [
+  "https://canelevation-dem.s3.ca-central-1.amazonaws.com/hrdem-mosaic-2m/3_3-mosaic-2m-dsm.tif"
+ ]
+}

@@ -1,0 +1,380 @@
+{
+ "3 Cap": {
+  "dec_deg": -12.337119399460002,
+  "kind": "star",
+  "pmdec_masyr": -17.209,
+  "pmra_masyr": 7.002,
+  "query": "3 Cap",
+  "ra_deg": 304.09502405822,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "39 Aqr": {
+  "dec_deg": -14.193965625529998,
+  "kind": "star",
+  "pmdec_masyr": -47.531,
+  "pmra_masyr": 13.938,
+  "query": "39 Aqr",
+  "ra_deg": 333.10732676064,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "44 Cet": {
+  "dec_deg": -8.007414643529998,
+  "kind": "star",
+  "pmdec_masyr": -66.724,
+  "pmra_masyr": 178.977,
+  "query": "44 Cet",
+  "ra_deg": 21.01057835047,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "48 Ori": {
+  "dec_deg": -2.60007866108,
+  "kind": "star",
+  "pmdec_masyr": -0.4,
+  "pmra_masyr": 4.6,
+  "query": "48 Ori",
+  "ra_deg": 84.68652242855,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "53 Cet": {
+  "dec_deg": -10.6864086109725,
+  "kind": "star",
+  "pmdec_masyr": -93.48,
+  "pmra_masyr": -147.867,
+  "query": "53 Cet",
+  "ra_deg": 27.396261525257913,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "EZ Cet": {
+  "dec_deg": -10.70363440515,
+  "kind": "star",
+  "pmdec_masyr": -70.666,
+  "pmra_masyr": -159.846,
+  "query": "EZ Cet",
+  "ra_deg": 27.3472869299,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 102928": {
+  "dec_deg": -5.333331523350001,
+  "kind": "star",
+  "pmdec_masyr": -1.84,
+  "pmra_masyr": 2.129,
+  "query": "HD 102928",
+  "ra_deg": 177.75928962124,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 17320": {
+  "dec_deg": -25.334642972939996,
+  "kind": "star",
+  "pmdec_masyr": -43.83,
+  "pmra_masyr": 8.404,
+  "query": "HD 17320",
+  "ra_deg": 41.53364621537,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 187663": {
+  "dec_deg": -12.621060566870002,
+  "kind": "star",
+  "pmdec_masyr": 20.349,
+  "pmra_masyr": 25.096,
+  "query": "HD 187663",
+  "ra_deg": 297.89693207221,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 199828": {
+  "dec_deg": -13.0516318009,
+  "kind": "star",
+  "pmdec_masyr": -6.566,
+  "pmra_masyr": -31.787,
+  "query": "HD 199828",
+  "ra_deg": 314.97844372158,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 206088": {
+  "dec_deg": -16.66237119824361,
+  "kind": "star",
+  "pmdec_masyr": -9.578,
+  "pmra_masyr": 200.193,
+  "query": "HD 206088",
+  "ra_deg": 325.0226892543413,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 207098": {
+  "dec_deg": -16.12728708527778,
+  "kind": "star",
+  "pmdec_masyr": -296.7,
+  "pmra_masyr": 261.7,
+  "query": "HD 207098",
+  "ra_deg": 326.76018433125,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 217533": {
+  "dec_deg": -14.271925676679997,
+  "kind": "star",
+  "pmdec_masyr": -59.324,
+  "pmra_masyr": 36.398,
+  "query": "HD 217533",
+  "ra_deg": 345.35355993857,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 28388": {
+  "dec_deg": -29.196665857039996,
+  "kind": "star",
+  "pmdec_masyr": 117.774,
+  "pmra_masyr": 34.517,
+  "query": "HD 28388",
+  "ra_deg": 66.86086757138,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 32515": {
+  "dec_deg": -31.771334112430004,
+  "kind": "star",
+  "pmdec_masyr": 84.982,
+  "pmra_masyr": -6.866,
+  "query": "HD 32515",
+  "ra_deg": 75.59501857598,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 505": {
+  "dec_deg": -10.187541213790002,
+  "kind": "star",
+  "pmdec_masyr": 3.706,
+  "pmra_masyr": 5.184,
+  "query": "HD 505",
+  "ra_deg": 2.37675689354,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 55892": {
+  "dec_deg": -46.75930460719945,
+  "kind": "star",
+  "pmdec_masyr": 107.433,
+  "pmra_masyr": -135.806,
+  "query": "HD 55892",
+  "ra_deg": 108.14010473493543,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 56455": {
+  "dec_deg": -46.84967131698,
+  "kind": "star",
+  "pmdec_masyr": 0.09,
+  "pmra_masyr": -9.38,
+  "query": "HD 56455",
+  "ra_deg": 108.69173976820001,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 56813": {
+  "dec_deg": -46.77453323223,
+  "kind": "star",
+  "pmdec_masyr": 32.459,
+  "pmra_masyr": 1.391,
+  "query": "HD 56813",
+  "ra_deg": 109.06447157274002,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 76525": {
+  "dec_deg": 0.39014435825000005,
+  "kind": "star",
+  "pmdec_masyr": 5.499,
+  "pmra_masyr": -11.538,
+  "query": "HD 76525",
+  "ra_deg": 134.18960140754,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 76600": {
+  "dec_deg": 0.53542992975,
+  "kind": "star",
+  "pmdec_masyr": 3.406,
+  "pmra_masyr": -8.716,
+  "query": "HD 76600",
+  "ra_deg": 134.30796615561,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 77039": {
+  "dec_deg": 0.58463401765,
+  "kind": "star",
+  "pmdec_masyr": -20.213,
+  "pmra_masyr": 1.301,
+  "query": "HD 77039",
+  "ra_deg": 134.99260191683,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 78282": {
+  "dec_deg": 0.60018982316,
+  "kind": "star",
+  "pmdec_masyr": -11.251,
+  "pmra_masyr": -13.55,
+  "query": "HD 78282",
+  "ra_deg": 136.84246354505,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 80537": {
+  "dec_deg": 0.28382647290999996,
+  "kind": "star",
+  "pmdec_masyr": -13.775,
+  "pmra_masyr": 21.165,
+  "query": "HD 80537",
+  "ra_deg": 140.10966160757,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HD 9061": {
+  "dec_deg": -17.93735526593,
+  "kind": "star",
+  "pmdec_masyr": -4.959,
+  "pmra_masyr": 71.082,
+  "query": "HD 9061",
+  "ra_deg": 22.239484770890005,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HIP 23078": {
+  "dec_deg": -50.575804982285284,
+  "kind": "star",
+  "pmdec_masyr": -0.208,
+  "pmra_masyr": -7.05,
+  "query": "HIP 23078",
+  "ra_deg": 74.49195140270707,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HIP 39850": {
+  "dec_deg": -52.61707930654,
+  "kind": "star",
+  "pmdec_masyr": 44.098,
+  "pmra_masyr": -36.432,
+  "query": "HIP 39850",
+  "ra_deg": 122.11846296894,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HIP 44471": {
+  "dec_deg": 47.15652472719766,
+  "kind": "star",
+  "pmdec_masyr": -55.4,
+  "pmra_masyr": -36.19,
+  "query": "HIP 44471",
+  "ra_deg": 135.90636507404153,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HIP 45114": {
+  "dec_deg": 0.29126059162,
+  "kind": "star",
+  "pmdec_masyr": -21.407,
+  "pmra_masyr": 11.18,
+  "query": "HIP 45114",
+  "ra_deg": 137.87191022638,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HIP 45592": {
+  "dec_deg": 0.55488390647,
+  "kind": "star",
+  "pmdec_masyr": -23.73,
+  "pmra_masyr": 18.148,
+  "query": "HIP 45592",
+  "ra_deg": 139.3872147016,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "HIP 47693": {
+  "dec_deg": 2.6275063993299996,
+  "kind": "star",
+  "pmdec_masyr": 6.194,
+  "pmra_masyr": 40.538,
+  "query": "HIP 47693",
+  "ra_deg": 145.86358012737,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "LP Aqr": {
+  "dec_deg": -5.10195343564,
+  "kind": "star",
+  "pmdec_masyr": -49.636,
+  "pmra_masyr": 69.323,
+  "query": "LP Aqr",
+  "ra_deg": 340.52510700190993,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "SAO 117309": {
+  "dec_deg": 0.23012687825,
+  "kind": "star",
+  "pmdec_masyr": 3.613,
+  "pmra_masyr": -2.559,
+  "query": "SAO 117309",
+  "ra_deg": 134.47076868319,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "SAO 117493": {
+  "dec_deg": 0.51791902916,
+  "kind": "star",
+  "pmdec_masyr": 2.986,
+  "pmra_masyr": -7.531,
+  "query": "SAO 117493",
+  "ra_deg": 138.06153658057,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "SAO 117565": {
+  "dec_deg": 0.41969488003999994,
+  "kind": "star",
+  "pmdec_masyr": -12.525,
+  "pmra_masyr": 9.542,
+  "query": "SAO 117565",
+  "ra_deg": 139.32838574082,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "alf Leo": {
+  "dec_deg": 11.967208776100023,
+  "kind": "star",
+  "pmdec_masyr": 5.59,
+  "pmra_masyr": -248.73,
+  "query": "alf Leo",
+  "ra_deg": 152.09296243828146,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "bet Ori": {
+  "dec_deg": -8.201638364722209,
+  "kind": "star",
+  "pmdec_masyr": 0.5,
+  "pmra_masyr": 1.31,
+  "query": "bet Ori",
+  "ra_deg": 78.63446706693006,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "del Ori": {
+  "dec_deg": -0.29909510708333326,
+  "kind": "star",
+  "pmdec_masyr": -0.69,
+  "pmra_masyr": 0.64,
+  "query": "del Ori",
+  "ra_deg": 83.00166705557675,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "eps Ori": {
+  "dec_deg": -1.2019191358333312,
+  "kind": "star",
+  "pmdec_masyr": -0.78,
+  "pmra_masyr": 1.44,
+  "query": "eps Ori",
+  "ra_deg": 84.05338894077023,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "mu. For": {
+  "dec_deg": -30.72382604363,
+  "kind": "star",
+  "pmdec_masyr": 6.616,
+  "pmra_masyr": 14.425,
+  "query": "mu. For",
+  "ra_deg": 33.22695832342,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "zet Cet": {
+  "dec_deg": -10.335031066289998,
+  "kind": "star",
+  "pmdec_masyr": -40.956,
+  "pmra_masyr": 39.752,
+  "query": "zet Cet",
+  "ra_deg": 27.86513061761,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ },
+ "zet Ori": {
+  "dec_deg": -1.9425735859722049,
+  "kind": "star",
+  "pmdec_masyr": 2.03,
+  "pmra_masyr": 3.19,
+  "query": "zet Ori",
+  "ra_deg": 85.18969442793068,
+  "source": "SIMBAD simbad.harvard.edu (astroquery)"
+ }
+}
