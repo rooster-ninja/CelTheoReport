@@ -50,7 +50,10 @@ class TerrainSettings:
     corridor_step_m: float = 100.0
     candidate_window_arcsec: float = 90.0
     max_candidates: int = 8
-    canopy_flag_arcsec: float = 10.0   # DSM vs DTM skyline difference worth a manual look
+    canopy_flag_arcsec: float = 30.0   # DSM vs DTM skyline difference worth a manual look
+    near_field_frac: float = 0.05      # samples closer than this fraction of D (clamped below) are the observer's
+    near_field_min_m: float = 100.0    # foreground: reported separately, excluded from the obstruction search
+    near_field_max_m: float = 1000.0
 
 
 # --------------------------------------------------------------------------- tiles
@@ -325,12 +328,18 @@ def obstruction(prof, obs, D, R, summit, atm, ts: TerrainSettings, solve, log=pr
     _, gs = angles([D], [s_h], h_obs, R)
     globe_summit = float(gs[0])
     out = {}
+    near = min(max(ts.near_field_frac * D, ts.near_field_min_m), ts.near_field_max_m)
+    fg = s < near
     for surf in ("dtm", "dsm"):
         h = prof[surf]
         if not np.isfinite(h).any():
             out[surf] = None
             continue
         pa, ga = angles(s, h, h_obs, R)
+        fg_info = {"near_field_m": near,
+                   "max_planar_angle_deg": float(np.nanmax(pa[fg])) if np.isfinite(pa[fg]).any() else None,
+                   "max_h_above_observer_m": float(np.nanmax(h[fg]) - h_obs) if np.isfinite(h[fg]).any() else None}
+        pa, ga = np.where(fg, np.nan, pa), np.where(fg, np.nan, ga)
         res = {"planar": _blocker(s, u, lats, lons, h, pa, planar_summit),
                "globe_geometric": _blocker(s, u, lats, lons, h, ga, globe_summit)}
         if atm is not None and solve is not None:
@@ -345,6 +354,7 @@ def obstruction(prof, obs, D, R, summit, atm, ts: TerrainSettings, solve, log=pr
             res["globe_refracted"] and res["globe_refracted"].update({"candidates_solved": int(len(cand))})
             res["summit_apparent_deg"] = summit_app
         res["summit_planar_deg"], res["summit_globe_geometric_deg"] = planar_summit, globe_summit
+        res["foreground"] = fg_info
         out[surf] = res
     return out, {"planar": None}
 

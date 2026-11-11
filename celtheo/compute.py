@@ -77,6 +77,38 @@ def star_altitudes(e: Event, star: dict):
                 alt_rate_deg_per_s=rate, erfa_apparent_alt_obs_deg=a_app.alt.deg, temp_c_used=temp)
 
 
+CLOCK_CHECK_ARCSEC = 60.0
+
+
+def implied_clock_offset(e: Event, star: dict, target_alt_deg: float, window_h=6.0, step_s=20.0):
+    """Clock shift (minutes, + = later) at which astropy reproduces the CSV true altitude
+    with the star within 3° of the peak azimuth. None if nothing fits."""
+    import numpy as np
+    import astropy.units as u
+    from astropy.coordinates import AltAz, EarthLocation, SkyCoord
+    from astropy.time import Time
+    from geographiclib.geodesic import Geodesic
+    paz = Geodesic.WGS84.Inverse(e.obs_lat, e.obs_lon, e.peak_lat, e.peak_lon)["azi1"] % 360
+    loc = EarthLocation(lat=e.obs_lat * u.deg, lon=e.obs_lon * u.deg, height=e.obs_alt * u.m)
+    t0 = Time(e.utc)
+    c = SkyCoord(ra=star["ra_deg"] * u.deg, dec=star["dec_deg"] * u.deg, pm_ra_cosdec=star.get("pmra_masyr", 0) * u.mas / u.yr,
+                 pm_dec=star.get("pmdec_masyr", 0) * u.mas / u.yr, distance=1e6 * u.pc, obstime=Time("J2000"), frame="icrs")
+    c = c.apply_space_motion(new_obstime=t0)
+    dts = np.arange(-window_h * 3600, window_h * 3600 + 1, step_s)
+    aa = c.transform_to(AltAz(obstime=t0 + dts * u.s, location=loc, pressure=0 * u.hPa))
+    alt, az = aa.alt.deg, aa.az.deg
+    daz = np.abs(((az - paz + 540) % 360) - 180)
+    cost = np.where(daz < 3.0, np.abs(alt - target_alt_deg), np.inf)
+    if not np.isfinite(cost).any():
+        return None
+    i = int(np.argmin(cost))
+    # refine to 1 s around the best coarse step
+    fine = dts[i] + np.arange(-step_s, step_s + 1, 1.0)
+    aa = c.transform_to(AltAz(obstime=t0 + fine * u.s, location=loc, pressure=0 * u.hPa))
+    j = int(np.argmin(np.abs(aa.alt.deg - target_alt_deg)))
+    return {"minutes": fine[j] / 60.0, "alt_residual_arcsec": (aa.alt.deg[j] - target_alt_deg) * 3600}
+
+
 def compute_event(e: Event, settings: RefractionSettings, offline=False, log=print, profiles=True, refresh_stars=False,
                   terrain=True, terrain_settings=None) -> dict:
     warn = list(e.warnings)
@@ -88,7 +120,7 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
         "observer": {"name": e.observer, "lat": _f(e.obs_lat), "lon": _f(e.obs_lon), "alt_m": _f(e.obs_alt)},
         "time": {"local_date": e.local_date, "local_time": e.local_time, "utc_offset_h": _f(e.utc_offset_h),
                  "utc": e.utc.strftime("%Y-%m-%dT%H:%M:%SZ") if e.utc else None},
-        "csv": {k: (_f(v) if not isinstance(v, str) else v) for k, v in e.csv.items()},
+        "csv": {k: (v if isinstance(v, (str, dict)) else _f(v)) for k, v in e.csv.items()},
     }
     out["csv"]["star_name"] = e.star
 
@@ -187,6 +219,23 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
                 c["planar_refracted_seconds"] = sec(d2)
         if e.csv.get("true_obs") is not None and math.isfinite(e.csv["true_obs"]):
             c["csv_true_obs_minus_astropy_arcsec"] = _f((e.csv["true_obs"] - ta) * 3600, 2)
+            if abs(e.csv["true_obs"] - ta) * 3600 > CLOCK_CHECK_ARCSEC and star["kind"] == "star":
+                try:
+                    k = implied_clock_offset(e, star, e.csv["true_obs"])
+                    if k:
+                        c["csv_implied_clock_offset_min"] = _f(k["minutes"], 1)
+                        c["csv_implied_alt_residual_arcsec"] = _f(k["alt_residual_arcsec"], 1)
+                        if abs(k["alt_residual_arcsec"]) < 30 and abs(round(k["minutes"] / 60) * 60 - k["minutes"]) < 2 and round(k["minutes"] / 60) != 0:
+                            warn.append(f"CSV true altitude matches astropy only if the clock is shifted {k['minutes']:+.0f} min "
+                                        f"(UTC offset {e.utc_offset_h - k['minutes'] / 60:+.0f} instead of {e.utc_offset_h:+.0f}); "
+                                        "check the UTC column (config/time_corrections.json)")
+                        else:
+                            warn.append(f"CSV true altitude differs from astropy by {(e.csv['true_obs'] - ta) * 3600:+.0f}″ and no clean clock shift explains it "
+                                        f"(best {k['minutes']:+.1f} min, residual {k['alt_residual_arcsec']:.0f}″): check the star identity, date and time")
+                    else:
+                        warn.append(f"CSV true altitude differs from astropy by {(e.csv['true_obs'] - ta) * 3600:+.0f}″; no time within ±6 h fits with the star behind the peak")
+                except Exception as ex:  # noqa: BLE001
+                    warn.append(f"clock check failed: {ex}")
         if e.csv.get("true_peak") is not None and math.isfinite(e.csv["true_peak"]) and a.get("true_alt_peak_deg") is not None:
             c["csv_true_peak_minus_astropy_arcsec"] = _f((e.csv["true_peak"] - a["true_alt_peak_deg"]) * 3600, 2)
     if r.get("star_uplift_arcmin") is not None and r.get("bennett_arcmin") is not None:
@@ -194,7 +243,9 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
     out["comparison"] = c
 
     # ---- terrain (real surface along the line of sight)
-    if terrain and sol is not None:
+    if terrain and sol is not None and e.target_type == "aircraft":
+        out["terrain"] = {"skipped": "aircraft target: the occluder is the aircraft, not terrain"}
+    elif terrain and sol is not None:
         try:
             doc, summ = compute_terrain(out, atm, terrain_settings, offline=offline, log=log)
             out["terrain"] = summ

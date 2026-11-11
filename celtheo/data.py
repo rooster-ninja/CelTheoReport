@@ -20,6 +20,7 @@ COLS = {
     "azi_peak": "Azi (Peak)",
 }
 AIRCRAFT_MIN_ALT_M = 8000.0
+CORRECTIONS_FILE = __import__("pathlib").Path(__file__).resolve().parent.parent / "config" / "time_corrections.json"
 
 
 @dataclass
@@ -158,6 +159,7 @@ def load_events(path) -> List[Event]:
                 e.warnings.append(f"GE occlusion check time differs from occlusion time by {diff / 60:.0f} min")
 
     seen = {}
+    ids = []
     for e in events:
         base = slug(f"{e.peak}-{e.star}-{e.utc:%Y-%m-%d}" if e.utc else f"{e.peak}-{e.star}-row{e.row}")
         if e.test_kind:
@@ -165,4 +167,28 @@ def load_events(path) -> List[Event]:
         n = seen.get(base, 0) + 1
         seen[base] = n
         e.id = base if n == 1 else f"{base}-{n}"
+    _apply_corrections(events)
     return events
+
+
+def _apply_corrections(events):
+    """Apply config/time_corrections.json. Event ids stay those of the uncorrected CSV so keys are stable."""
+    import json
+    if not CORRECTIONS_FILE.exists():
+        return
+    corr = {k: v for k, v in json.loads(CORRECTIONS_FILE.read_text()).items() if not k.startswith("_")}
+    for e in events:
+        c = corr.get(e.id)
+        if not c:
+            continue
+        d, t = e._d, e._t
+        if "local_date" in c:
+            d = _parse_date(c["local_date"]); e.local_date = c["local_date"]
+        if "local_time" in c:
+            t = _parse_time(c["local_time"]); e.local_time = c["local_time"]
+        if "utc_offset_h" in c:
+            e.utc_offset_h = float(c["utc_offset_h"])
+        if d and t and e.utc_offset_h is not None:
+            e.utc = (datetime.combine(d, t) - timedelta(hours=e.utc_offset_h)).replace(tzinfo=timezone.utc)
+        e.warnings.append("time corrected via config/time_corrections.json" + (f": {c['note']}" if c.get("note") else ""))
+        e.csv["time_correction"] = c

@@ -65,6 +65,7 @@ Commit both so later runs are reproducible offline. `out/` is tracked too, so th
 | `config/stations.json` | Radiosonde stations (WMO / IEM ids). The nearest one to the observer is used. |
 | `config/sounding_overrides.json` | Per-event station and launch time. Pikes Peak / 39 Aqr is pinned to Grand Junction 2025-01-28 00Z, as in AL_RefractionAnalysis. |
 | `config/dem_sources.json` | Elevation sources, tried in order per point. A `local` entry is usable offline. |
+| `config/time_corrections.json` | Per-event fixes to UTC offset, local time or date, applied on load. Only add an entry once you've confirmed it. |
 | `data/soundings/` | Cached soundings (ships with Grand Junction 72476, 2025-01-28 00Z) and `_availability.json`, the IEM list of which stations launched at each time. |
 
 Soundings come from the Iowa Environmental Mesonet RAOB archive (JSON API). For each event the
@@ -93,6 +94,16 @@ launch, so the North Peak events use Grand Junction.
   the peak (`star_geometric_deg`) and the original Gauss radius (`star_geometric_gauss_deg`).
   For Pikes Peak they differ by 0.3″.
 - Ray-path sampling is added for figures. The numerics are unchanged.
+
+## Data checks
+
+- **Clock check:** when the CSV's true altitude disagrees with astropy by more than 60″, the
+  pipeline searches ±6 h for the clock shift that reproduces it, with the star on the peak's
+  azimuth. A clean whole-hour shift is reported as a UTC-offset problem; anything else points
+  to the star identity, date or time.
+- **Foreground:** terrain closer than 5 % of the distance (100 m to 1 km) is the observer's
+  foreground. It's reported separately and excluded from the obstruction search.
+- **Aircraft:** these events skip terrain, since the occluder is the aircraft.
 
 ## Data notes surfaced by the pipeline
 

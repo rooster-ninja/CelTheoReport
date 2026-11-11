@@ -1,0 +1,7 @@
+{
+ "_comment": "Per-event corrections applied when the CSV is loaded. Keys are event ids. Fields: utc_offset_h (replaces the UTC column), local_time (HH:MM:SS), local_date (M/D/YYYY), note. Fill these only after confirming the correction.",
+ "_example": {
+  "utc_offset_h": -7,
+  "note": "Stellarium was run on MST; CSV UTC column said -6"
+ }
+}

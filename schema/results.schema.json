@@ -420,6 +420,13 @@
             },
             "ciddor_minus_bennett_arcmin": {
               "$ref": "#/$defs/num"
+            },
+            "csv_implied_clock_offset_min": {
+              "$ref": "#/$defs/num",
+              "description": "Clock shift (min) at which astropy reproduces the CSV true altitude with the star on the peak azimuth. Present only when CSV and astropy disagree by > 60″."
+            },
+            "csv_implied_alt_residual_arcsec": {
+              "$ref": "#/$defs/num"
             }
           }
         },
@@ -507,6 +514,10 @@
             "canopy": {
               "type": "object",
               "description": "Per line: DSM − DTM skyline difference; flag=true means canopy could matter (review case by case)."
+            },
+            "skipped": {
+              "type": "string",
+              "description": "Present instead of the terrain block for aircraft events."
             }
           }
         }

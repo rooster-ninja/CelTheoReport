@@ -116,7 +116,9 @@ or Bessel's observatory reports.
 - Use only numbers that appear in `results.json`. Format them, but never re-derive them.
   If a value is `null`, print an em dash and the relevant warning.
 - Keep observed − model signs as given, and label units on every axis and column.
-- Exclude test rows from summary statistics, but show them in the appendix.
+- Exclude test rows from summary statistics. Also exclude any event whose warnings include a
+  clock-shift or star-identity mismatch, unless it has been corrected via
+  `config/time_corrections.json`. Show these in the errata., but show them in the appendix.
 - Always show elevation-data provenance (`terrain.*.sources`) and the DEM vs CSV height check
   (`terrain.checks`).
 - Always show each event's sounding provenance: station, launch time, distance, and
