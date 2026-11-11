@@ -229,6 +229,9 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
                             warn.append(f"CSV true altitude matches astropy only if the clock is shifted {k['minutes']:+.0f} min "
                                         f"(UTC offset {e.utc_offset_h - k['minutes'] / 60:+.0f} instead of {e.utc_offset_h:+.0f}); "
                                         "check the UTC column (config/time_corrections.json)")
+                        elif abs(k["alt_residual_arcsec"]) < 30 and abs(k["minutes"]) < 10:
+                            warn.append(f"CSV true altitude matches astropy {k['minutes'] * 60:+.0f} s from the recorded occlusion time: "
+                                        "the angles and the time were taken at different moments; confirm which is right")
                         else:
                             warn.append(f"CSV true altitude differs from astropy by {(e.csv['true_obs'] - ta) * 3600:+.0f}″ and no clean clock shift explains it "
                                         f"(best {k['minutes']:+.1f} min, residual {k['alt_residual_arcsec']:.0f}″): check the star identity, date and time")

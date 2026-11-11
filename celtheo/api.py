@@ -55,6 +55,11 @@ def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offlin
             results.append({"id": e.id, "row": e.row, "flags": {"warnings": [f"computation failed: {ex}"], "target_type": e.target_type,
                             "is_test": e.test_kind is not None, "test_kind": e.test_kind},
                             "peak": {"name": e.peak}, "observer": {"name": e.observer}, "star": {"name": e.star}})
+    if only and out_dir and (Path(out_dir) / "results.json").exists():
+        prev = load_results(Path(out_dir) / "results.json")
+        fresh = {r["id"]: r for r in results}
+        log(f"merging {len(fresh)} recomputed event(s) into {out_dir}/results.json")
+        results = [fresh.pop(r["id"], r) for r in prev["events"]] + list(fresh.values())
     finalize(results)
     doc = {
         "schema_version": SCHEMA_VERSION,

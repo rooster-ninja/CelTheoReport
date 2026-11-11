@@ -31,5 +31,9 @@
  "hounds-tooth-hd199828-2025-06-28": {
   "utc_offset_h": -7,
   "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "burke-48-ori-2026-03-02": {
+  "local_time": "01:16:58",
+  "note": "recorded 01:16:41; the CSV angles (Stellarium) match astropy only at 01:16:58, 17 s later. Corrected to 01:16:58 pending the observer's check of the recording"
  }
 }

@@ -42,7 +42,7 @@ pip install -e .
 ```bash
 python -m celtheo list                    # parsed events + data warnings
 python -m celtheo run                     # all events -> out/results.json, out/results.csv
-python -m celtheo run --only pikes-peak   # subset by event-id substring
+python -m celtheo run --only burke        # recompute matching events and merge them into out/
 python -m celtheo run --offline           # cached stars/soundings only (no terrain unless DEMs are local)
 python -m celtheo run --no-terrain        # skip the elevation-data profiles
 python -m celtheo finalize                # re-apply warnings and in_summary to out/ without recomputing
