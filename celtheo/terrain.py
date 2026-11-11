@@ -130,17 +130,46 @@ def _to_crs(ds, lats, lons):
     return tr.transform(np.asarray(lons), np.asarray(lats))
 
 
-def _sample_points(ds, lats, lons):
-    """Nearest-pixel values at points (NaN outside / nodata)."""
+def _sample_points(ds, lats, lons, max_px=512):
+    """Nearest-pixel values at points (NaN outside / nodata). Points along a line are read in chunks:
+    one small window per chunk instead of one request per point."""
+    from rasterio.windows import Window
     xs, ys = _to_crs(ds, lats, lons)
     out = np.full(len(xs), np.nan)
     b = ds.bounds
     inside = (xs >= b.left) & (xs <= b.right) & (ys >= b.bottom) & (ys <= b.top)
     idx = np.nonzero(inside)[0]
-    if len(idx):
-        vals = np.array([v[0] for v in ds.sample(zip(xs[idx], ys[idx]), indexes=1, masked=True)], dtype=object)
-        clean = np.array([np.nan if (v is np.ma.masked or (ds.nodata is not None and v == ds.nodata)) else float(v) for v in vals])
-        out[idx] = clean
+    if not len(idx):
+        return out
+    inv = ~ds.transform
+    cols, rows = inv * (xs[idx], ys[idx])
+    cols, rows = np.floor(cols).astype(int), np.floor(rows).astype(int)
+    # greedy chunks of consecutive points whose window stays within max_px on a side (~1 COG block area)
+    bounds, k, n = [], 0, len(idx)
+    while k < n:
+        j, cmin, cmax, rmin, rmax = k, cols[k], cols[k], rows[k], rows[k]
+        while j + 1 < n:
+            c, r = cols[j + 1], rows[j + 1]
+            if max(cmax, c) - min(cmin, c) > max_px or max(rmax, r) - min(rmin, r) > max_px:
+                break
+            j += 1
+            cmin, cmax, rmin, rmax = min(cmin, c), max(cmax, c), min(rmin, r), max(rmax, r)
+        bounds.append((k, j + 1))
+        k = j + 1
+    for k0, k1 in bounds:
+        sl = slice(k0, k1)
+        c0, c1 = max(cols[sl].min(), 0), min(cols[sl].max(), ds.width - 1)
+        r0, r1 = max(rows[sl].min(), 0), min(rows[sl].max(), ds.height - 1)
+        if c1 < c0 or r1 < r0:
+            continue
+        arr = ds.read(1, window=Window(c0, r0, c1 - c0 + 1, r1 - r0 + 1), masked=True).astype(float).filled(np.nan)
+        cc, rr = cols[sl] - c0, rows[sl] - r0
+        ok = (cc >= 0) & (rr >= 0) & (cc < arr.shape[1]) & (rr < arr.shape[0])
+        vals = np.full(len(cc), np.nan)
+        vals[ok] = arr[rr[ok], cc[ok]]
+        if ds.nodata is not None:
+            vals[vals == ds.nodata] = np.nan
+        out[idx[sl]] = vals
     return out
 
 
@@ -192,25 +221,23 @@ def sample_surface(surface: str, lats, lons, grid_step_m: Optional[float] = None
         if src.get("region") and not _in_region(src["region"], lats[todo], lons[todo]):
             continue
         if src["tiling"] == "stac":
-            urls = _stac_items(src, bbox, log=log)
+            groups = [[u] for u in _stac_items(src, bbox, log=log)]
         else:
-            tiles = {u for la, lo in zip(lats[todo], lons[todo]) for u in _tile_urls(src, la, lo)[:1]}
-            urls = sorted(tiles)
+            groups = sorted({tuple(_tile_urls(src, la, lo)) for la, lo in zip(lats[todo], lons[todo])})
         got_any = False
-        for url in urls:
-            ds = Raster.get(url, log=log)
-            if ds is None and src["tiling"] != "stac":
-                alts = [t for t in _alt_urls(src, url)]
-                for a in alts:
-                    ds = Raster.get(a, log=log)
-                    if ds is not None:
-                        break
+        for group in groups:
+            ds = None
+            for url in group:
+                ds = Raster.get(url, log=log)
+                if ds is not None:
+                    break
             if ds is None:
                 continue
             todo = np.isnan(vals)
             idx = np.nonzero(todo)[0]
             if not len(idx):
                 break
+            log(f"      {surface}: {src['name']} ← {group[0].split('/')[-1]} ({len(idx)} pts)")
             v = _sample_grid(ds, lats[idx], lons[idx], grid_step_m) if grid_step_m else _sample_points(ds, lats[idx], lons[idx])
             hit = ~np.isnan(v)
             if hit.any():
@@ -219,18 +246,6 @@ def sample_surface(surface: str, lats, lons, grid_step_m: Optional[float] = None
         if got_any:
             used.append(src["name"])
     return vals, used
-
-
-def _alt_urls(src, url):
-    """Same tile from the source's other URL templates (mirror)."""
-    if len(src.get("url_templates", [])) < 2:
-        return []
-    name = url.split("/")[-1]
-    out = []
-    for t in src["url_templates"][1:]:
-        head = t.rsplit("/", 2)[0]
-        out.append(f"{head}/{url.split('/')[-2]}/{name}")
-    return out
 
 
 def _in_region(region, lats, lons):

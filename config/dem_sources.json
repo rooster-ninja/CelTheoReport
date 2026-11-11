@@ -1,22 +1,72 @@
 {
-  "_comment": "Elevation sources, tried in order per point; the first that covers a point wins. 'local' sources are usable offline.",
-  "dtm": [
-    {"name": "NRCan HRDEM mosaic 2 m (DTM)", "region": "canada", "tiling": "stac", "stac_api": "https://datacube.services.geo.ca/stac/api",
-     "collection": "hrdem-mosaic-2m", "asset": "dtm", "res_m": 2},
-    {"name": "NRCan MRDEM-30 (DTM)", "region": "canada", "tiling": "single", "res_m": 30,
-     "url_templates": ["https://datacube-prod-data-public.s3.ca-central-1.amazonaws.com/store/elevation/mrdem/mrdem-30/mrdem-30-dtm.tif"]},
-    {"name": "USGS 3DEP 1/3 arc-second (~10 m, DTM)", "region": "usa", "tiling": "usgs_1deg", "res_m": 10,
-     "url_templates": ["https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n{n:02d}w{w:03d}/USGS_13_n{n:02d}w{w:03d}.tif",
-                       "https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/13/TIFF/current/n{n:02d}w{w:03d}/USGS_13_n{n:02d}w{w:03d}.tif"]},
-    {"name": "Copernicus GLO-30 (DSM, used as DTM fallback)", "tiling": "copernicus_1deg", "res_m": 30, "is_dsm": true,
-     "url_templates": ["https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM.tif"]}
-  ],
-  "dsm": [
-    {"name": "NRCan HRDEM mosaic 2 m (DSM)", "region": "canada", "tiling": "stac", "stac_api": "https://datacube.services.geo.ca/stac/api",
-     "collection": "hrdem-mosaic-2m", "asset": "dsm", "res_m": 2},
-    {"name": "NRCan MRDEM-30 (DSM)", "region": "canada", "tiling": "single", "res_m": 30,
-     "url_templates": ["https://datacube-prod-data-public.s3.ca-central-1.amazonaws.com/store/elevation/mrdem/mrdem-30/mrdem-30-dsm.tif"]},
-    {"name": "Copernicus GLO-30 (DSM)", "tiling": "copernicus_1deg", "res_m": 30,
-     "url_templates": ["https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM.tif"]}
-  ]
+ "_comment": "Elevation sources, tried in order per point; the first that covers a point wins. 'local' sources are usable offline.",
+ "dtm": [
+  {
+   "name": "NRCan HRDEM mosaic 2 m (DTM)",
+   "region": "canada",
+   "tiling": "stac",
+   "stac_api": "https://datacube.services.geo.ca/stac/api",
+   "collection": "hrdem-mosaic-2m",
+   "asset": "dtm",
+   "res_m": 2
+  },
+  {
+   "name": "NRCan MRDEM-30 (DTM)",
+   "region": "canada",
+   "tiling": "single",
+   "res_m": 30,
+   "url_templates": [
+    "https://canelevation-dem.s3.ca-central-1.amazonaws.com/mrdem-30/mrdem-30-dtm.tif",
+    "https://datacube-prod-data-public.s3.ca-central-1.amazonaws.com/store/elevation/mrdem/mrdem-30/mrdem-30-dtm.tif"
+   ]
+  },
+  {
+   "name": "USGS 3DEP 1/3 arc-second (~10 m, DTM)",
+   "region": "usa",
+   "tiling": "usgs_1deg",
+   "res_m": 10,
+   "url_templates": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n{n:02d}w{w:03d}/USGS_13_n{n:02d}w{w:03d}.tif",
+    "https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/13/TIFF/current/n{n:02d}w{w:03d}/USGS_13_n{n:02d}w{w:03d}.tif"
+   ]
+  },
+  {
+   "name": "Copernicus GLO-30 (DSM, used as DTM fallback)",
+   "tiling": "copernicus_1deg",
+   "res_m": 30,
+   "is_dsm": true,
+   "url_templates": [
+    "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM.tif"
+   ]
+  }
+ ],
+ "dsm": [
+  {
+   "name": "NRCan HRDEM mosaic 2 m (DSM)",
+   "region": "canada",
+   "tiling": "stac",
+   "stac_api": "https://datacube.services.geo.ca/stac/api",
+   "collection": "hrdem-mosaic-2m",
+   "asset": "dsm",
+   "res_m": 2
+  },
+  {
+   "name": "NRCan MRDEM-30 (DSM)",
+   "region": "canada",
+   "tiling": "single",
+   "res_m": 30,
+   "url_templates": [
+    "https://canelevation-dem.s3.ca-central-1.amazonaws.com/mrdem-30/mrdem-30-dsm.tif",
+    "https://datacube-prod-data-public.s3.ca-central-1.amazonaws.com/store/elevation/mrdem/mrdem-30/mrdem-30-dsm.tif"
+   ]
+  },
+  {
+   "name": "Copernicus GLO-30 (DSM)",
+   "tiling": "copernicus_1deg",
+   "res_m": 30,
+   "url_templates": [
+    "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM.tif"
+   ]
+  }
+ ]
 }
