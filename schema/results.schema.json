@@ -121,6 +121,10 @@
             },
             "excluded_reason": {
               "type": "string"
+            },
+            "in_summary": {
+              "type": "boolean",
+              "description": "Use in summary statistics and the summary plate: a real peak event (not test, aircraft or excluded) with no clock, star-identity or Moon caveat."
             }
           }
         },
@@ -571,6 +575,10 @@
         "nearest_named_peak": {
           "type": "object",
           "description": "Nearest peak from the CSV within 2 km of this occluder, when it is not the event's named peak."
+        },
+        "same_peak": {
+          "type": "boolean",
+          "description": "Not within 300 m of the CSV summit coordinate, but the nearest named peak is the event's own peak: same mountain, imprecise coordinate."
         }
       }
     },

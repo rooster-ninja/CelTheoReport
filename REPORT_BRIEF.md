@@ -117,9 +117,9 @@ or Bessel's observatory reports.
   If a value is `null`, print an em dash and the relevant warning.
 - Keep observed − model signs as given, and label units on every axis and column.
 - Leave `flags.excluded` events out entirely, except to list them with `excluded_reason` in the errata.
-- Exclude test rows from summary statistics. Also exclude any event whose warnings include a
-  clock-shift or star-identity mismatch, unless it has been corrected via
-  `config/time_corrections.json`. Show these in the errata., but show them in the appendix.
+- Summary statistics and the summary plate use **only** events with `flags.in_summary == true`.
+  The pipeline decides this, so don't re-derive it. Every other event still gets its plate,
+  with its warnings shown., but show them in the appendix.
 - Always show elevation-data provenance (`terrain.*.sources`) and the DEM vs CSV height check
   (`terrain.checks`).
 - Always show each event's sounding provenance: station, launch time, distance, and

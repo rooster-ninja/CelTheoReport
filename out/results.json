@@ -28,7 +28,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Pikes Peak",
@@ -1436,7 +1437,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is -31″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Blodgett Peak",
@@ -2912,7 +2914,8 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Cheyenne Mtn",
@@ -4304,7 +4307,8 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Blue Mtn",
@@ -5708,7 +5712,8 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Mount Rosa",
@@ -7162,7 +7167,8 @@
      "GE occlusion check time differs from occlusion time by 60 min",
      "canopy check: DSM skyline is -39″ vs bare earth on the star azimuth line (review)",
      "terrain -4.9 km from the peak rises above the summit on the star azimuth line"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Green Mtn",
@@ -8590,9 +8596,9 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10",
-     "DEM height at the peak coordinate differs from CSV by -39 m",
-     "terrain +0.5 km from the peak rises above the summit on the star azimuth line"
-    ]
+     "DEM height at the peak coordinate differs from CSV by -39 m"
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "North Peak",
@@ -9906,7 +9912,8 @@
          "name": "North Peak",
          "distance_m": 1018.0,
          "csv_alt_m": 3765.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 0.21902896791085935,
        "summit_planar_deg": 0.7425114221509669,
@@ -10022,9 +10029,9 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10",
-     "DEM height at the peak coordinate differs from CSV by -39 m",
-     "terrain +1.1 km from the peak rises above the summit on the star azimuth line"
-    ]
+     "DEM height at the peak coordinate differs from CSV by -39 m"
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "North Peak",
@@ -11338,7 +11345,8 @@
          "name": "North Peak",
          "distance_m": 1818.0,
          "csv_alt_m": 3765.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 0.21902896791085935,
        "summit_planar_deg": 0.7425114221509669,
@@ -11454,9 +11462,9 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10",
-     "DEM height at the peak coordinate differs from CSV by -39 m",
-     "terrain +0.5 km from the peak rises above the summit on the star azimuth line"
-    ]
+     "DEM height at the peak coordinate differs from CSV by -39 m"
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "North Peak",
@@ -12770,7 +12778,8 @@
          "name": "North Peak",
          "distance_m": 1147.0,
          "csv_alt_m": 3765.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 0.21902896791085935,
        "summit_planar_deg": 0.7425114221509669,
@@ -12884,7 +12893,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Getaway Mtn",
@@ -14297,7 +14307,8 @@
     "test_kind": null,
     "warnings": [
      "time corrected via config/time_corrections.json: CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Hounds Tooth",
@@ -15939,7 +15950,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is +31″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Old-Blyn Mtn",
@@ -17459,7 +17471,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is +31″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Old-Blyn Mtn",
@@ -18979,7 +18992,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is +55″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Ediz-Blyn Mtn",
@@ -20455,7 +20469,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is +58″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Ediz-Blyn Mtn",
@@ -21929,7 +21944,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Varley SE2 Squamish",
@@ -23535,9 +23551,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": [
-     "terrain -0.5 km from the peak rises above the summit on the star azimuth line"
-    ]
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Puhitempi Kuaikatete",
@@ -24860,7 +24875,8 @@
          "name": "Puhitempi Kuaikatete",
          "distance_m": 587.0,
          "csv_alt_m": 2000.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 0.9733640467887703,
        "summit_planar_deg": 1.1636778691407101,
@@ -24974,9 +24990,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": [
-     "terrain -0.5 km from the peak rises above the summit on the star azimuth line"
-    ]
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Puhitempi Kuaikatete",
@@ -26299,7 +26314,8 @@
          "name": "Puhitempi Kuaikatete",
          "distance_m": 598.0,
          "csv_alt_m": 2000.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 0.9733640467887703,
        "summit_planar_deg": 1.1636778691407101,
@@ -26413,7 +26429,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Puhitempi Kuaikatete",
@@ -27854,7 +27871,8 @@
     "warnings": [],
     "target_type": "peak",
     "is_test": false,
-    "test_kind": null
+    "test_kind": null,
+    "in_summary": false
    },
    "peak": {
     "name": "Getaway Mtn"
@@ -27880,7 +27898,8 @@
     "warnings": [
      "UTC offset missing; assumed -7 from the same observer",
      "terrain -2.5 km from the peak rises above the summit on the star azimuth line"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Getaway Mtn",
@@ -29332,7 +29351,8 @@
     "warnings": [],
     "target_type": "peak",
     "is_test": false,
-    "test_kind": null
+    "test_kind": null,
+    "in_summary": false
    },
    "peak": {
     "name": "Unknown"
@@ -29359,7 +29379,8 @@
      "CSV apparent angle at peak is below the true angle (refraction cannot lower a star)",
      "CSV true altitude differs from astropy by +860″ and no clean clock shift explains it (best +54.7 min, residual -34408″): check the star identity, date and time",
      "terrain +7.3 km from the peak rises above the summit on the star azimuth line"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Unknown",
@@ -30796,7 +30817,8 @@
     "test_kind": "epsilon",
     "warnings": [
      "CSV true altitude differs from astropy by -121″ and no clean clock shift explains it (best +0.2 min, residual 0″): check the star identity, date and time"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Pikes Peak",
@@ -32207,7 +32229,8 @@
     "warnings": [
      "CSV true altitude differs from astropy by -232″ and no clean clock shift explains it (best +0.3 min, residual -0″): check the star identity, date and time",
      "canopy check: DSM skyline is -31″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Blodgett Peak",
@@ -33683,7 +33706,8 @@
     "target_type": "peak",
     "is_test": true,
     "test_kind": "aries",
-    "warnings": []
+    "warnings": [],
+    "in_summary": false
    },
    "peak": {
     "name": "Pikes Peak",
@@ -35092,7 +35116,8 @@
     "warnings": [
      "CSV true altitude differs from astropy by +893″ and no clean clock shift explains it (best -1.3 min, residual -0″): check the star identity, date and time",
      "canopy check: DSM skyline is -31″ vs bare earth on the to peak line (review)"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Blodgett Peak",
@@ -36570,8 +36595,9 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is +1552″ vs bare earth on the to peak line (review)",
-     "terrain -0.4 km from the peak rises above the summit on the star azimuth line"
-    ]
+     "Moon: astropy gives the centre; the occultation was timed on a limb (about ±15′), so residuals are not comparable with stars"
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Lucky Ridge",
@@ -37393,7 +37419,8 @@
          "name": "Lucky Ridge",
          "distance_m": 380.0,
          "csv_alt_m": 965.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 5.232988433931647,
        "summit_planar_deg": 5.237587024216,
@@ -37517,7 +37544,8 @@
          "name": "Lucky Ridge",
          "distance_m": 400.0,
          "csv_alt_m": 965.0
-        }
+        },
+        "same_peak": true
        },
        "summit_apparent_deg": 5.232988433931647,
        "summit_planar_deg": 5.237587024216,
@@ -37633,7 +37661,8 @@
     "warnings": [],
     "target_type": "peak",
     "is_test": false,
-    "test_kind": null
+    "test_kind": null,
+    "in_summary": false
    },
    "peak": {
     "name": "Lucky Ridge"
@@ -37656,7 +37685,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Pikes Peak",
@@ -39062,7 +39092,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Pikes Peak",
@@ -40468,7 +40499,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Pikes Peak",
@@ -41874,7 +41906,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -43249,7 +43282,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -44624,7 +44658,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -46001,7 +46036,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is -67″ vs bare earth on the star azimuth line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -47378,7 +47414,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is -125″ vs bare earth on the star azimuth line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -48755,7 +48792,8 @@
     "test_kind": null,
     "warnings": [
      "canopy check: DSM skyline is -31″ vs bare earth on the star azimuth line (review)"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -50130,7 +50168,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -51505,7 +51544,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -52880,7 +52920,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -54255,7 +54296,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Lucky Peak",
@@ -55632,7 +55674,8 @@
     "test_kind": null,
     "warnings": [
      "GE occlusion check time differs from occlusion time by 16 min"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Pikes Peak",
@@ -57040,7 +57083,8 @@
     "test_kind": null,
     "warnings": [
      "CSV true altitude matches astropy only if the clock is shifted +120 min (UTC offset -7 instead of -5); check the UTC column (config/time_corrections.json)"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Spirit Airlines",
@@ -58342,7 +58386,8 @@
     "test_kind": null,
     "warnings": [
      "CSV true altitude matches astropy only if the clock is shifted +120 min (UTC offset -7 instead of -5); check the UTC column (config/time_corrections.json)"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Allegiant 453",
@@ -59565,7 +59610,8 @@
     "test_kind": null,
     "warnings": [
      "CSV true altitude matches astropy only if the clock is shifted +120 min (UTC offset -7 instead of -5); check the UTC column (config/time_corrections.json)"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Jet Speed 691",
@@ -60781,7 +60827,8 @@
     "warnings": [
      "CSV distance differs from geodesic by -272 m",
      "CSV true altitude matches astropy only if the clock is shifted +120 min (UTC offset -7 instead of -5); check the UTC column (config/time_corrections.json)"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "American Airlines 1517",
@@ -62000,7 +62047,8 @@
     "test_kind": null,
     "warnings": [
      "CSV distance differs from geodesic by 242 m"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Mount Bolton",
@@ -63436,7 +63484,8 @@
     "target_type": "peak",
     "is_test": false,
     "test_kind": null,
-    "warnings": []
+    "warnings": [],
+    "in_summary": true
    },
    "peak": {
     "name": "Plateau Mountain",
@@ -64886,7 +64935,8 @@
     "test_kind": null,
     "warnings": [
      "CSV true altitude differs from astropy by -166″ and no clean clock shift explains it (best +0.3 min, residual 4″): check the star identity, date and time"
-    ]
+    ],
+    "in_summary": false
    },
    "peak": {
     "name": "Burke",
@@ -66331,7 +66381,8 @@
     "warnings": [
      "CSV distance differs from geodesic by 241 m",
      "terrain -4.4 km from the peak rises above the summit on the star azimuth line"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Mount Aldridge North Peak",
@@ -67730,7 +67781,8 @@
     "warnings": [
      "DEM height at the peak coordinate differs from CSV by -483 m",
      "terrain +14.3 km from the peak rises above the summit on the star azimuth line"
-    ]
+    ],
+    "in_summary": true
    },
    "peak": {
     "name": "Baril Peak",
@@ -69162,7 +69214,8 @@
     "warnings": [],
     "target_type": "peak",
     "is_test": false,
-    "test_kind": null
+    "test_kind": null,
+    "in_summary": false
    },
    "peak": {
     "name": "Lucky Dam"

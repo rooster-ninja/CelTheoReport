@@ -256,12 +256,6 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
                 if cf.get("flag"):
                     warn.append(f"canopy check: DSM skyline is {cf['dsm_minus_dtm_skyline_arcsec']:+.0f}″ vs bare earth on the {nm.replace('_', ' ')} line (review)")
                     break
-            for nm in ("star_azimuth", "to_peak"):
-                ob = (summ.get(nm) or {}).get("obstruction") or {}
-                gr = ((ob.get("dtm") or ob.get("dsm") or {}).get("globe_refracted")) or {}
-                if gr and not gr.get("near_peak", True):
-                    warn.append(f"terrain {gr['u_m'] / 1000:+.1f} km from the peak rises above the summit on the {nm.replace('_', ' ')} line")
-                    break
         except Exception as ex:  # noqa: BLE001
             warn.append(f"terrain failed: {ex}")
     return out

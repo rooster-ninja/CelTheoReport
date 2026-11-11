@@ -45,6 +45,7 @@ python -m celtheo run                     # all events -> out/results.json, out/
 python -m celtheo run --only pikes-peak   # subset by event-id substring
 python -m celtheo run --offline           # cached stars/soundings only (no terrain unless DEMs are local)
 python -m celtheo run --no-terrain        # skip the elevation-data profiles
+python -m celtheo finalize                # re-apply warnings and in_summary to out/ without recomputing
 pytest -q                                 # regression tests (offline)
 ```
 

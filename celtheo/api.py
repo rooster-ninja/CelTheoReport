@@ -55,7 +55,7 @@ def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offlin
             results.append({"id": e.id, "row": e.row, "flags": {"warnings": [f"computation failed: {ex}"], "target_type": e.target_type,
                             "is_test": e.test_kind is not None, "test_kind": e.test_kind},
                             "peak": {"name": e.peak}, "observer": {"name": e.observer}, "star": {"name": e.star}})
-    name_occluders(results)
+    finalize(results)
     doc = {
         "schema_version": SCHEMA_VERSION,
         "generator": f"celtheo {__version__}",
@@ -78,6 +78,42 @@ def run(csv_path="data/occultations.csv", out_dir: Optional[str] = "out", offlin
     return doc
 
 
+SUMMARY_BLOCKERS = ("CSV true altitude", "star not resolved", "CSV apparent angle at peak is below", "computation failed",
+                    "astropy failed", "could not parse", "Moon:")
+
+
+def finalize(results):
+    """Post-processing that needs the whole set: occluder naming, terrain warnings, notes, in_summary.
+    Safe to re-run on an existing results.json (celtheo finalize)."""
+    for ev in results:
+        ev.setdefault("flags", {}).setdefault("warnings", [])
+        ev["flags"]["warnings"] = [w for w in ev["flags"]["warnings"]
+                                   if not (w.startswith("terrain ") and "rises above the summit" in w) and not w.startswith("along the star's azimuth")
+                                   and not w.startswith("Moon:")]
+    name_occluders(results)
+    for ev in results:
+        f = ev["flags"]
+        t = ev.get("terrain") or {}
+        for line in ("star_azimuth", "to_peak"):
+            b = ((((t.get(line) or {}).get("obstruction") or {}).get("dtm") or {}).get("globe_refracted")) or {}
+            if not b or b.get("near_peak", True):
+                continue
+            n = b.get("nearest_named_peak") or {}
+            if n.get("name") == (ev.get("peak") or {}).get("name"):
+                b["same_peak"] = True  # same mountain: the CSV summit coordinate is just imprecise
+                continue
+            if n:
+                f["warnings"].append(f"along the star's azimuth the skyline is {b['u_m'] / 1000:+.1f} km from {ev['peak']['name']}, "
+                                     f"{n['distance_m'] / 1000:.1f} km from {n['name']}: likely the actual occluder")
+            else:
+                f["warnings"].append(f"terrain {b['u_m'] / 1000:+.1f} km from the peak rises above the summit on the {line.replace('_', ' ')} line")
+            break
+        if (ev.get("star") or {}).get("kind") == "body":
+            f["warnings"].append("Moon: astropy gives the centre; the occultation was timed on a limb (about ±15′), so residuals are not comparable with stars")
+        f["in_summary"] = bool(not f.get("excluded") and not f.get("is_test") and f.get("target_type") == "peak"
+                               and not any(w.startswith(SUMMARY_BLOCKERS) for w in f["warnings"]))
+
+
 def name_occluders(results, radius_m=2000.0):
     """Where terrain other than the named peak hid the star, name the nearest peak from the CSV (if within radius)."""
     from geographiclib.geodesic import Geodesic
@@ -98,11 +134,6 @@ def name_occluders(results, radius_m=2000.0):
                     best = min(((Geodesic.WGS84.Inverse(b["lat"], b["lon"], la, lo)["s12"], nm, h) for nm, (la, lo, h) in peaks.items()), default=None)
                     if best and best[0] <= radius_m:
                         b["nearest_named_peak"] = {"name": best[1], "distance_m": round(best[0], 0), "csv_alt_m": best[2]}
-        b = ((((t.get("star_azimuth") or {}).get("obstruction") or {}).get("dtm") or {}).get("globe_refracted")) or {}
-        if b.get("nearest_named_peak") and b["nearest_named_peak"]["name"] != ev["peak"]["name"]:
-            n = b["nearest_named_peak"]
-            ev["flags"]["warnings"].append(f"along the star's azimuth the skyline is {b['u_m'] / 1000:+.1f} km from {ev['peak']['name']}, "
-                                           f"{n['distance_m'] / 1000:.1f} km from {n['name']}: likely the actual occluder")
 
 
 FLAT = [
@@ -124,6 +155,7 @@ FLAT = [
     ("canopy_flag", "terrain.canopy.star_azimuth.flag"),
     ("globe_observer_drop_m", "geometry.globe_observer_drop_m"),
     ("excluded", "flags.excluded"),
+    ("in_summary", "flags.in_summary"),
     ("warnings", "flags.warnings"),
 ]
 
@@ -150,6 +182,14 @@ def write(doc: dict, out_dir):
         w.writerow([k for k, _ in FLAT])
         for ev in doc["events"]:
             w.writerow([_get(ev, p) for _, p in FLAT])
+
+
+def refinalize(out_dir="out"):
+    """Re-apply finalize() to an existing run and rewrite results.json/.csv (no recomputation)."""
+    doc = load_results(Path(out_dir) / "results.json")
+    finalize(doc["events"])
+    write(doc, out_dir)
+    return doc
 
 
 def load_results(path="out/results.json") -> dict:
