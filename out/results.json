@@ -1,7 +1,7 @@
 {
  "schema_version": "1.1",
  "generator": "celtheo 0.1.0",
- "generated_utc": "2026-11-11T00:43:38Z",
+ "generated_utc": "2026-11-11T01:24:32Z",
  "source_csv": "data/occultations.csv",
  "settings": {
   "use_wgs84_ellipsoid": true,
@@ -19,7 +19,7 @@
   "frame": "peak-anchored: origin at the peak foot, tangent plane at the peak. Planar x=u, z=h; globe x=(R+h)sin(u/R), z=(R+h)cos(u/R)−R, u = s − D",
   "terrain": "dtm = bare earth (primary; unsuffixed terrain comparisons), dsm = top of canopy (suffix _dsm, plus a canopy flag); per-event arrays in terrain/{id}.json"
  },
- "runtime_s": 1054.3,
+ "runtime_s": 167.6,
  "events": [
   {
    "id": "pikes-peak-39-aquarii-2025-01-28",
@@ -64934,9 +64934,9 @@
     "is_test": false,
     "test_kind": null,
     "warnings": [
-     "CSV true altitude differs from astropy by -166″ and no clean clock shift explains it (best +0.3 min, residual 4″): check the star identity, date and time"
+     "time corrected via config/time_corrections.json: recorded 01:16:41; the CSV angles (Stellarium) match astropy only at 01:16:58, 17 s later. Corrected to 01:16:58 pending the observer's check of the recording"
     ],
-    "in_summary": false
+    "in_summary": true
    },
    "peak": {
     "name": "Burke",
@@ -64952,9 +64952,9 @@
    },
    "time": {
     "local_date": "3/2/2026",
-    "local_time": "01:16:41",
+    "local_time": "01:16:58",
     "utc_offset_h": -7.0,
-    "utc": "2026-03-02T08:16:41Z"
+    "utc": "2026-03-02T08:16:58Z"
    },
    "csv": {
     "true_peak": 1.299028,
@@ -64970,6 +64970,10 @@
     "azi_peak": null,
     "ge_check": "nan",
     "canva": "nan",
+    "time_correction": {
+     "local_time": "01:16:58",
+     "note": "recorded 01:16:41; the CSV angles (Stellarium) match astropy only at 01:16:58, 17 s later. Corrected to 01:16:58 pending the observer's check of the recording"
+    },
     "star_name": "48 Ori"
    },
    "star": {
@@ -64983,11 +64987,11 @@
     "source": "SIMBAD simbad.harvard.edu (astroquery)"
    },
    "astropy": {
-    "true_alt_obs_deg": 0.8196348490600545,
-    "az_obs_deg": 264.9516400040108,
-    "true_alt_peak_deg": 1.3452627781776731,
-    "alt_rate_deg_per_s": -0.0026557453850278062,
-    "erfa_apparent_alt_obs_deg": 0.9979009983606245,
+    "true_alt_obs_deg": 0.7744852575142988,
+    "az_obs_deg": 265.00638214893127,
+    "true_alt_peak_deg": 1.3001136721466307,
+    "alt_rate_deg_per_s": -0.002655968328468683,
+    "erfa_apparent_alt_obs_deg": 0.9527483196529136,
     "temp_c_used": -4.0
    },
    "refraction": {
@@ -66124,32 +66128,30 @@
     ]
    },
    "comparison": {
-    "globe_ciddor_arcsec": 374.79,
-    "globe_ciddor_seconds": -39.20130443483541,
-    "planar_geometric_arcsec": -1773.94,
-    "planar_geometric_seconds": 185.54547022905453,
-    "planar_refracted_arcsec": -1132.18,
-    "planar_refracted_seconds": 118.42075627658971,
-    "csv_true_obs_minus_astropy_arcsec": -166.49,
-    "csv_implied_clock_offset_min": 0.3,
-    "csv_implied_alt_residual_arcsec": 3.9,
-    "csv_true_peak_minus_astropy_arcsec": -166.45,
+    "globe_ciddor_arcsec": 212.25,
+    "globe_ciddor_seconds": -22.198717944849054,
+    "planar_geometric_arcsec": -1936.48,
+    "planar_geometric_seconds": 202.52919135128312,
+    "planar_refracted_arcsec": -1294.73,
+    "planar_refracted_seconds": 135.4112742331247,
+    "csv_true_obs_minus_astropy_arcsec": -3.95,
+    "csv_true_peak_minus_astropy_arcsec": -3.91,
     "ciddor_minus_bennett_arcmin": -1.2453
    },
    "terrain": {
     "file": "terrain/burke-48-ori-2026-03-02.json",
     "peak_azimuth_deg": -94.951220831535,
-    "star_minus_peak_azimuth_arcsec": -349.7,
-    "lateral_offset_at_peak_m": -99.4,
+    "star_minus_peak_azimuth_arcsec": -152.6,
+    "lateral_offset_at_peak_m": -43.4,
     "to_peak": {
      "sources": {
       "dtm": [
        "NRCan HRDEM mosaic 2 m (DTM)",
-       "Copernicus GLO-30 (DSM, used as DTM fallback)"
+       "NRCan MRDEM-30 (DTM)"
       ],
       "dsm": [
        "NRCan HRDEM mosaic 2 m (DSM)",
-       "Copernicus GLO-30 (DSM)"
+       "NRCan MRDEM-30 (DSM)"
       ]
      },
      "obstruction": {
@@ -66165,24 +66167,24 @@
         "margin_vs_summit_arcsec": 130.89
        },
        "globe_geometric": {
-        "s_m": 58660.0,
-        "u_m": 32.4,
-        "lat": 50.300202,
-        "lon": -114.527762,
-        "h_m": 2370.5,
-        "angle_deg": 1.0653313906043862,
+        "s_m": 58650.0,
+        "u_m": 22.4,
+        "lat": 50.30021,
+        "lon": -114.527622,
+        "h_m": 2368.2,
+        "angle_deg": 1.0632945845246657,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 72.52
+        "margin_vs_summit_arcsec": 65.18
        },
        "globe_refracted": {
-        "s_m": 58660.0,
-        "u_m": 32.4,
-        "lat": 50.300202,
-        "lon": -114.527762,
-        "h_m": 2370.5,
-        "angle_deg": 1.0865535559244566,
+        "s_m": 58650.0,
+        "u_m": 22.4,
+        "lat": 50.30021,
+        "lon": -114.527622,
+        "h_m": 2368.2,
+        "angle_deg": 1.0844701995484916,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 73.94,
+        "margin_vs_summit_arcsec": 66.44,
         "candidates_solved": 8
        },
        "summit_apparent_deg": 1.0660138307622935,
@@ -66206,24 +66208,24 @@
         "margin_vs_summit_arcsec": 132.04
        },
        "globe_geometric": {
-        "s_m": 58660.0,
-        "u_m": 32.4,
-        "lat": 50.300202,
-        "lon": -114.527762,
-        "h_m": 2370.5,
-        "angle_deg": 1.0653313906043862,
+        "s_m": 58650.0,
+        "u_m": 22.4,
+        "lat": 50.30021,
+        "lon": -114.527622,
+        "h_m": 2372.5,
+        "angle_deg": 1.0675405889503298,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 72.52
+        "margin_vs_summit_arcsec": 80.47
        },
        "globe_refracted": {
-        "s_m": 58660.0,
-        "u_m": 32.4,
-        "lat": 50.300202,
-        "lon": -114.527762,
-        "h_m": 2370.5,
-        "angle_deg": 1.0865535559244566,
+        "s_m": 58650.0,
+        "u_m": 22.4,
+        "lat": 50.30021,
+        "lon": -114.527622,
+        "h_m": 2372.5,
+        "angle_deg": 1.0887867241851668,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 73.94,
+        "margin_vs_summit_arcsec": 81.98,
         "candidates_solved": 8
        },
        "summit_apparent_deg": 1.0660138307622935,
@@ -66241,44 +66243,44 @@
      "sources": {
       "dtm": [
        "NRCan HRDEM mosaic 2 m (DTM)",
-       "Copernicus GLO-30 (DSM, used as DTM fallback)"
+       "NRCan MRDEM-30 (DTM)"
       ],
       "dsm": [
        "NRCan HRDEM mosaic 2 m (DSM)",
-       "Copernicus GLO-30 (DSM)"
+       "NRCan MRDEM-30 (DSM)"
       ]
      },
      "obstruction": {
       "dtm": {
        "planar": {
-        "s_m": 58610.0,
-        "u_m": -17.6,
-        "lat": 50.299356,
-        "lon": -114.526927,
-        "h_m": 2387.5,
-        "angle_deg": 1.3463890602238353,
-        "near_peak": true,
-        "margin_vs_summit_arcsec": 136.93
+        "s_m": 78400.0,
+        "u_m": 19772.4,
+        "lat": 50.282092,
+        "lon": -114.803324,
+        "h_m": 2841.3,
+        "angle_deg": 1.3381140433381076,
+        "near_peak": false,
+        "margin_vs_summit_arcsec": 107.14
        },
        "globe_geometric": {
-        "s_m": 58610.0,
-        "u_m": -17.6,
-        "lat": 50.299356,
-        "lon": -114.526927,
-        "h_m": 2387.5,
-        "angle_deg": 1.08328817143062,
+        "s_m": 58640.0,
+        "u_m": 12.4,
+        "lat": 50.299831,
+        "lon": -114.527423,
+        "h_m": 2373.5,
+        "angle_deg": 1.0687900713886123,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 137.16
+        "margin_vs_summit_arcsec": 84.97
        },
        "globe_refracted": {
-        "s_m": 58610.0,
-        "u_m": -17.6,
-        "lat": 50.299356,
-        "lon": -114.526927,
-        "h_m": 2387.5,
-        "angle_deg": 1.104806828896412,
+        "s_m": 58640.0,
+        "u_m": 12.4,
+        "lat": 50.299831,
+        "lon": -114.527423,
+        "h_m": 2373.5,
+        "angle_deg": 1.0900663846205496,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 139.65,
+        "margin_vs_summit_arcsec": 86.59,
         "candidates_solved": 8
        },
        "summit_apparent_deg": 1.0660138307622935,
@@ -66287,39 +66289,39 @@
        "foreground": {
         "near_field_m": 1000.0,
         "max_planar_angle_deg": 19.155037610825968,
-        "max_h_above_observer_m": 11.11285400390625
+        "max_h_above_observer_m": 10.15704345703125
        }
       },
       "dsm": {
        "planar": {
-        "s_m": 58610.0,
-        "u_m": -17.6,
-        "lat": 50.299356,
-        "lon": -114.526927,
-        "h_m": 2387.5,
-        "angle_deg": 1.3463890602238353,
-        "near_peak": true,
-        "margin_vs_summit_arcsec": 136.93
+        "s_m": 74870.0,
+        "u_m": 16242.4,
+        "lat": 50.285309,
+        "lon": -114.754051,
+        "h_m": 2761.2,
+        "angle_deg": 1.3399265079798,
+        "near_peak": false,
+        "margin_vs_summit_arcsec": 113.66
        },
        "globe_geometric": {
         "s_m": 58610.0,
         "u_m": -17.6,
-        "lat": 50.299356,
-        "lon": -114.526927,
-        "h_m": 2387.5,
-        "angle_deg": 1.08328817143062,
+        "lat": 50.299857,
+        "lon": -114.527004,
+        "h_m": 2376.9,
+        "angle_deg": 1.0729327443394594,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 137.16
+        "margin_vs_summit_arcsec": 99.88
        },
        "globe_refracted": {
         "s_m": 58610.0,
         "u_m": -17.6,
-        "lat": 50.299356,
-        "lon": -114.526927,
-        "h_m": 2387.5,
-        "angle_deg": 1.104806828896412,
+        "lat": 50.299857,
+        "lon": -114.527004,
+        "h_m": 2376.9,
+        "angle_deg": 1.0942521585286853,
         "near_peak": true,
-        "margin_vs_summit_arcsec": 139.65,
+        "margin_vs_summit_arcsec": 101.66,
         "candidates_solved": 8
        },
        "summit_apparent_deg": 1.0660138307622935,
@@ -66328,44 +66330,44 @@
        "foreground": {
         "near_field_m": 1000.0,
         "max_planar_angle_deg": 19.512494806960262,
-        "max_h_above_observer_m": 11.31805419921875
+        "max_h_above_observer_m": 10.45654296875
        }
       }
      }
     },
     "checks": {
-     "dtm_at_peak_m": 2351.9,
+     "dtm_at_peak_m": 2359.1,
      "dtm_at_observer_m": 1013.6,
-     "dsm_at_peak_m": 2351.9,
+     "dsm_at_peak_m": 2363.7,
      "dsm_at_observer_m": 1013.7,
      "csv_peak_alt_m": 2349.0,
      "csv_observer_alt_m": 1010.0
     },
     "comparison": {
-     "globe_ciddor_arcsec": 221.97,
-     "globe_ciddor_seconds": -23.22,
-     "globe_skyline_star_true_deg": 0.7579765646781861,
-     "planar_geometric_arcsec": -1896.32,
-     "planar_geometric_seconds": 198.35,
-     "planar_refracted_arcsec": -1254.56,
-     "planar_refracted_seconds": 131.22,
-     "globe_ciddor_dsm_arcsec": 221.97,
-     "globe_ciddor_dsm_seconds": -23.22,
-     "globe_skyline_dsm_star_true_deg": 0.7579765646781861,
-     "planar_geometric_dsm_arcsec": -1896.32,
-     "planar_geometric_dsm_seconds": 198.35,
-     "planar_refracted_dsm_arcsec": -1254.56,
-     "planar_refracted_dsm_seconds": 131.22
+     "globe_ciddor_arcsec": 117.51,
+     "globe_ciddor_seconds": -12.29,
+     "globe_skyline_star_true_deg": 0.7418440150589735,
+     "planar_geometric_arcsec": -2029.06,
+     "planar_geometric_seconds": 212.21,
+     "planar_refracted_arcsec": -1387.32,
+     "planar_refracted_seconds": 145.09,
+     "globe_ciddor_dsm_arcsec": 101.0,
+     "globe_ciddor_dsm_seconds": -10.56,
+     "globe_skyline_dsm_star_true_deg": 0.7464285441792262,
+     "planar_geometric_dsm_arcsec": -2035.59,
+     "planar_geometric_dsm_seconds": 212.89,
+     "planar_refracted_dsm_arcsec": -1393.84,
+     "planar_refracted_dsm_seconds": 145.78
     },
     "canopy": {
      "to_peak": {
-      "dsm_minus_dtm_skyline_arcsec": 0.0,
-      "dsm_minus_dtm_h_at_blocker_m": 0.0,
+      "dsm_minus_dtm_skyline_arcsec": 15.54,
+      "dsm_minus_dtm_h_at_blocker_m": 4.3,
       "flag": false
      },
      "star_azimuth": {
-      "dsm_minus_dtm_skyline_arcsec": 0.0,
-      "dsm_minus_dtm_h_at_blocker_m": 0.0,
+      "dsm_minus_dtm_skyline_arcsec": 15.07,
+      "dsm_minus_dtm_h_at_blocker_m": 3.4,
       "flag": false
      }
     }
