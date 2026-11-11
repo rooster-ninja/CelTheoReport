@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CelTheo Occultation Memoir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<style>
+/* One visual world: a nineteenth-century memoir. Single theme by choice.
+   Layout: a 46rem text column; plates break out to 76rem and follow the author's sketch grid. */
+:root {
+  color-scheme: light;
+  --paper: #f3ecd9;        /* laid paper */
+  --paper-deep: #e9dfc6;   /* plate ground */
+  --ink: #2b2118;          /* iron-gall */
+  --ink-soft: #5d4f3f;
+  --rule: #8a7a63;
+  --globe: #1f4e6b;        /* Prussian blue: globe model */
+  --planar: #7c2a25;       /* oxblood: planar model */
+  --display: "IM Fell English", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --caps: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  --body: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1.16rem/1.5 var(--body);
+  font-variant-numeric: oldstyle-nums; hanging-punctuation: first; }
+main { padding: 0 18px 80px; }
+.col { max-width: 46rem; margin: 0 auto; }
+.wide { max-width: 76rem; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, select:focus-visible, tr:focus-visible { outline: 2px solid var(--globe); outline-offset: 2px; }
+p { margin: 0 0 .9em; }
+.sc { font-family: var(--caps); letter-spacing: .04em; }
+.fleuron { text-align: center; font-size: 1.5rem; color: var(--ink-soft); margin: 2.6rem 0 2rem; }
+.fleuron::before, .fleuron::after { content: ""; display: inline-block; width: 5rem; border-top: 1px solid var(--rule); vertical-align: middle; margin: 0 1rem; }
+
+/* Title page */
+.title { text-align: center; padding: 4.5rem 0 1rem; }
+.title .a { font-family: var(--caps); letter-spacing: .3em; font-size: .95rem; }
+.title h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.12; margin: 1.2rem 0 .6rem; }
+.title .sub { font-family: var(--display); font-style: italic; font-size: 1.3rem; }
+.title .rule { width: 9rem; border-top: 3px double var(--ink); margin: 1.6rem auto; }
+.title .by { font-size: 1rem; color: var(--ink-soft); }
+
+section > h2 { font-size: 1.75rem; text-align: center; margin: 0 0 .3rem; }
+section > .lead { text-align: center; font-style: italic; color: var(--ink-soft); margin-bottom: 1.4rem; }
+.dropcap::first-letter { font-family: var(--display); float: left; font-size: 3.9rem; line-height: .82; padding: .32rem .5rem 0 0; }
+
+/* Tables */
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 1rem; font-variant-numeric: oldstyle-nums tabular-nums; }
+table { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+thead th { font-family: var(--caps); font-weight: 400; letter-spacing: .03em; border-bottom: 1px solid var(--ink); padding: .35rem .6rem; text-align: right; white-space: nowrap; vertical-align: bottom; }
+td { padding: .16rem .6rem; text-align: right; white-space: nowrap; }
+th.l, td.l { text-align: left; }
+td.wrap { white-space: normal; min-width: 14rem; }
+tbody tr.go { cursor: pointer; }
+tbody tr.go:hover td { background: var(--paper-deep); }
+.unit { font-family: var(--body); font-style: italic; letter-spacing: 0; font-size: .9em; color: var(--ink-soft); }
+caption { caption-side: bottom; text-align: left; font-style: italic; color: var(--ink-soft); padding-top: .5rem; font-size: .98rem; }
+
+/* Plates */
+.plate { border: 4px double var(--ink); background: var(--paper-deep); padding: 1.1rem 1.2rem 1.3rem; position: relative; }
+.plate .pn { display: flex; justify-content: space-between; font-family: var(--caps); font-size: .95rem; letter-spacing: .08em; margin-bottom: .4rem; }
+.plate h3 { text-align: center; font-size: 1.7rem; margin: .1rem 0 .1rem; }
+.plate .when { text-align: center; font-style: italic; color: var(--ink-soft); margin-bottom: 1rem; }
+figure { margin: 0; }
+figure svg { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: var(--paper); }
+figcaption { font-style: italic; font-size: .98rem; color: var(--ink-soft); padding-top: .35rem; text-wrap: pretty; }
+figcaption b { font-style: normal; font-weight: 400; font-family: var(--caps); color: var(--ink); }
+.grid { display: grid; gap: 1rem; grid-template-columns: 15rem minmax(0, 1.55fr) minmax(0, 1fr);
+  grid-template-areas: "data peak side" "data topo topo" "desc nav nav"; align-items: start; }
+.g-data { grid-area: data; } .g-peak { grid-area: peak; } .g-side { grid-area: side; display: grid; gap: 1rem; }
+.g-topo { grid-area: topo; } .g-desc { grid-area: desc; } .g-nav { grid-area: nav; display: grid; gap: 1rem; }
+@media (max-width: 980px) { .grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); grid-template-areas: "data data" "peak peak" "side side" "topo topo" "desc desc" "nav nav"; }
+  .g-side { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .g-side { grid-template-columns: 1fr; } .plate { padding: .8rem .7rem 1rem; } }
+.panel { border: 1px solid var(--rule); background: var(--paper); padding: .7rem .8rem; }
+.panel h4 { font-family: var(--caps); font-weight: 400; letter-spacing: .08em; font-size: .95rem; margin: 0 0 .5rem; text-align: center; border-bottom: 1px solid var(--rule); padding-bottom: .3rem; }
+.panel label { display: block; font-style: italic; font-size: .95rem; color: var(--ink-soft); margin-top: .5rem; }
+select { width: 100%; font: inherit; font-size: 1rem; color: var(--ink); background: var(--paper); border: 1px solid var(--ink); border-radius: 0; padding: .2rem .3rem; }
+.tog { display: flex; margin-top: .25rem; border: 1px solid var(--ink); }
+.tog button { flex: 1; font: inherit; font-size: .95rem; background: var(--paper); color: var(--ink); border: 0; padding: .2rem .3rem; cursor: pointer; border-radius: 0; }
+.tog button + button { border-left: 1px solid var(--ink); }
+.tog button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+dl { margin: .7rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: .1rem .6rem; font-size: .98rem; font-variant-numeric: oldstyle-nums tabular-nums; }
+dt { font-style: italic; color: var(--ink-soft); } dd { margin: 0; text-align: right; }
+dl .h { grid-column: 1 / -1; font-family: var(--caps); font-style: normal; color: var(--ink); letter-spacing: .05em; margin-top: .45rem; border-bottom: 1px solid var(--rule); }
+.desc p { font-size: 1.02rem; line-height: 1.42; }
+.below { display: grid; gap: 1.2rem 1.6rem; grid-template-columns: minmax(0,1fr) minmax(0,1fr); margin-top: 1.2rem; }
+@media (max-width: 860px) { .below { grid-template-columns: minmax(0,1fr); } }
+.below h4 { font-family: var(--caps); font-weight: 400; letter-spacing: .08em; font-size: 1rem; margin: 0 0 .4rem; }
+.notes { margin: 1.1rem 0 0; padding: .7rem 0 0; border-top: 1px solid var(--ink); font-size: 1rem; }
+.notes ol { margin: .2rem 0 0; padding-left: 1.4rem; } .notes li { margin-bottom: .25rem; }
+.foot { font-size: .95rem; color: var(--ink-soft); font-style: italic; margin-top: .6rem; }
+.keyline { display: flex; flex-wrap: wrap; gap: .2rem 1.3rem; font-size: .98rem; font-style: italic; color: var(--ink-soft); margin: .5rem 0 0; }
+.keyline svg { width: 30px; height: 10px; vertical-align: middle; border: 0; background: none; display: inline-block; }
+#tip { position: fixed; pointer-events: none; background: var(--paper); border: 1px solid var(--ink); padding: .3rem .55rem; font-size: .95rem; max-width: 19rem; display: none; z-index: 5; font-variant-numeric: oldstyle-nums tabular-nums; }
+ul.err { list-style: none; padding: 0; margin: 0; } ul.err > li { margin-bottom: .7rem; } ul.err ul { margin: .1rem 0 0; padding-left: 1.3rem; font-size: 1.02rem; }
+.colophon { text-align: center; font-size: 1.02rem; color: var(--ink-soft); }
+svg text { font-family: var(--body); fill: var(--ink); font-variant-numeric: lining-nums; }
+svg .cap { font-family: var(--caps); letter-spacing: .06em; }
+svg .it { font-style: italic; }
+</style>
+</head>
+<body>
+<main>
+  <header class="title col">
+    <div class="a">A Memoir</div>
+    <h1>Upon the Occultation of Fixed Stars by Distant Summits</h1>
+    <div class="sub">with Determinations of Terrestrial Refraction, and a Comparison of the Globular and Planar Hypotheses</div>
+    <div class="rule"></div>
+    <div class="by" id="byline"></div>
+  </header>
+
+  <section class="col" id="introduction">
+    <div class="fleuron">❦</div>
+    <h2>§ I. The Question</h2>
+    <p class="dropcap" id="intro1"></p>
+    <p>Three predictions are set beside the star's place. The first supposes a globe, and traces the ray by Ciddor's index of refraction through the air as the weather balloon found it that night. The second supposes a plane, and takes the angle of the summit by rise over run, without refraction. The third supposes a plane, and allows the star the refraction of the common tables. Each residual is <em>observed less computed</em>: a positive figure means the star stood higher than the hypothesis allows at the instant it vanished. Beside each residual in arc stands its equivalent in seconds of time, being the error of the clock that would close it.</p>
+    <p>Where the form of the ground along the star's own azimuth is known from survey, the skyline that truly hid the star is used, and not the summit alone. No figure in these pages has been altered or computed afresh; all are transcribed from the reductions.</p>
+  </section>
+
+  <section id="summary">
+    <div class="fleuron">❦</div>
+    <h2>§ II. Summary of the Residuals</h2>
+    <p class="lead col" id="sumlead"></p>
+    <div class="plate wide">
+      <div class="pn"><span>Plate A.</span><span>Residuals, observed − computed</span></div>
+      <figure><div class="tw"><div id="sumchart" style="min-width:640px"></div></div>
+        <figcaption><b>Fig. A.</b> Each row is one occultation. The rule at nought marks perfect agreement. Touch a mark for its figures; touch a row to open its plate.</figcaption></figure>
+      <div class="keyline" id="sumkey"></div>
+    </div>
+    <div class="col" style="margin-top:1.4rem"><div class="tw"><table id="stats"></table></div></div>
+  </section>
+
+  <section id="catalogue">
+    <div class="fleuron">❦</div>
+    <h2>§ III. Catalogue of the Observations</h2>
+    <p class="lead col">Touch a row to open its plate. A dagger marks an observation that carries notes.</p>
+    <div class="wide tw"><table id="cat"></table></div>
+  </section>
+
+  <section id="plates">
+    <div class="fleuron">❦</div>
+    <h2>§ IV. The Plates</h2>
+    <p class="lead col">Choose a summit and a star. Every figure redraws from the reductions for that occultation.</p>
+    <div class="plate wide" id="plate"></div>
+  </section>
+
+  <section class="col" id="aircraft">
+    <div class="fleuron">❦</div>
+    <h2>§ V. Occultations by Aircraft</h2>
+    <p>Four stars were observed to pass behind aircraft in flight. The occulting body is the aircraft at its reported place and height, so no profile of the ground is drawn for them, and they take no part in the summary. Their notes are given as the reductions state them.</p>
+    <div class="tw"><table id="air"></table></div>
+    <ul class="err" id="airnotes" style="margin-top:1rem"></ul>
+  </section>
+
+  <section class="col" id="method">
+    <div class="fleuron">❦</div>
+    <h2>Appendix. Of the Method</h2>
+    <p><span class="sc">The place of the star.</span> Each star's catalogue position, with its proper motion, is carried to the instant of the observation, and its altitude and azimuth are found for the observer and for the summit. The altitude called <em>true</em> is geometric, as it would be seen through a vacuum, reckoned above the observer's horizon on the ellipsoid.</p>
+    <p><span class="sc">The ray.</span> For a spherically layered atmosphere the ray obeys Bouguer's law, <em>b = n · r · cos α</em>, in which <em>n</em> is the index of the air, <em>r</em> the distance from the Earth's centre, and <em>α</em> the inclination of the ray to the local level. The quantity <em>b</em> is constant along the ray. The index is Ciddor's of 1996, computed from the temperature, pressure and moisture of each layer. The ray is stepped in segments of <span id="segm"></span> metres, at a wavelength of <span id="wl"></span> nanometres, to a height of <span id="toa"></span> metres, above which the air is taken as void.</p>
+    <p><span class="sc">The figure of the Earth.</span> The radius used for each line is the radius of curvature of the WGS-84 ellipsoid in the normal section along the azimuth from observer to summit. Distances are geodesics upon the same ellipsoid.</p>
+    <p><span class="sc">The frame of the drawings.</span> Every profile is drawn from the foot of the summit, upon the plane tangent there. Both hypotheses place the summit alike. Under the globe the ground and the observer fall away below that plane; under the plane they do not. The fall of the observer is written on each plate.</p>
+    <p><span class="sc">The ground.</span> Heights along each line are taken from bare-earth surveys: the 3DEP of the United States at one-third of an arc-second, and the HRDEM of Canada at two metres, with coarser models where these fail. A second surface, which includes the forest, serves only to warn where trees might alter the skyline.</p>
+    <h3 style="font-size:1.3rem;margin:1.4rem 0 .5rem">The soundings</h3>
+    <div class="tw"><table id="snd"></table></div>
+    <h3 style="font-size:1.3rem;margin:1.6rem 0 .5rem">The trial rows</h3>
+    <p>Four rows of the spreadsheet are marked ϵ or ♈︎. They repeat the Pikes Peak and Blodgett Peak observations with other angles, and in one case another time. The reductions do not record their purpose. They are shown here and have plates of their own, and they take no part in the summary.</p>
+    <div class="tw"><table id="tests"></table></div>
+  </section>
+
+  <section class="col" id="errata">
+    <div class="fleuron">❦</div>
+    <h2>Errata and Notes</h2>
+    <p class="lead">Every note attached to an observation, as the reductions give it.</p>
+    <ul class="err" id="errlist"></ul>
+    <h3 style="font-size:1.3rem;margin:1.4rem 0 .5rem">Observations set aside</h3>
+    <ul class="err" id="exlist"></ul>
+  </section>
+
+  <footer class="col colophon">
+    <div class="fleuron">❦</div>
+    <p id="colophon"></p>
+  </footer>
+</main>
+<div id="tip"></div>
+
+<script src="data.js"></script>
+<script>
+"use strict";
+const DOC = window.CELTHEO.doc, TER = window.CELTHEO.terrain, EV = DOC.events;
+const PLATES = EV.filter(e => !e.flags.excluded);
+const BYID = Object.fromEntries(EV.map(e => [e.id, e]));
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---------- formatting only (no value is derived) ----------
+const DASH = "—";
+const ok = x => x !== null && x !== undefined && Number.isFinite(+x);
+function num(x, dp = 0, sign = false) {
+  if (!ok(x)) return DASH;
+  const v = +x, a = Math.abs(v).toFixed(dp).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return (v < 0 ? "−" : sign ? "+" : "") + a;
+}
+function dms(x) {
+  if (!ok(x)) return DASH;
+  const neg = x < 0; let t = Math.round(Math.abs(x) * 36000) / 10;
+  const d = Math.floor(t / 3600); t -= d * 3600; const m = Math.floor(t / 60); const s = t - m * 60;
+  return (neg ? "−" : "") + d + "° " + String(m).padStart(2, "0") + "′ " + s.toFixed(1).padStart(4, "0") + "″";
+}
+const asec = x => ok(x) ? num(x, 1, true) + "″" : DASH;
+const tsec = x => ok(x) ? num(x, 1, true) + " s" : DASH;
+function roman(n) { const r = [[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],[50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]]; let s = ""; for (const [v, c] of r) while (n >= v) { s += c; n -= v; } return s; }
+const plateNo = e => roman(PLATES.indexOf(e) + 1);
+const utc = e => e.time && e.time.utc ? e.time.utc.replace("T", " ").replace("Z", "") : DASH;
+// The brief: prefer the skyline (terrain) residual where it exists, else the summit-only one.
+const pref = (e, k) => { const t = e.terrain && e.terrain.comparison; return t && ok(t[k]) ? t[k] : (e.comparison || {})[k]; };
+const usesSkyline = e => !!(e.terrain && e.terrain.comparison && ok(e.terrain.comparison.globe_ciddor_arcsec));
+const testMark = e => e.flags.test_kind === "epsilon" ? " (trial ϵ)" : e.flags.test_kind === "aries" ? " (trial ♈︎)" : "";
+
+// ---------- SVG helpers ----------
+const DEFS = `<defs>
+<pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#2b2118" stroke-width=".55" opacity=".55"/></pattern>
+<pattern id="stip" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".5" fill="#2b2118" opacity=".35"/><circle cx="4.5" cy="4.5" r=".5" fill="#2b2118" opacity=".35"/></pattern></defs>`;
+let CLIP = 0;
+function nice(lo, hi, n) { const raw = (hi - lo) / n, p = Math.pow(10, Math.floor(Math.log10(raw))); const f = raw / p; const st = (f < 1.5 ? 1 : f < 3.5 ? 2 : f < 7.5 ? 5 : 10) * p; const out = []; for (let v = Math.ceil(lo / st) * st; v <= hi + st * 1e-6; v += st) out.push(Math.abs(v) < st * 1e-6 ? 0 : v); return out; }
+// A plot frame with x/z domains. equal: one scale for both axes times ve.
+function frame(W, H, m, xd, zd, ve) {
+  const pw = W - m.l - m.r, ph = H - m.t - m.b; let sx, sz, x0 = xd[0], z0 = zd[0];
+  if (ve) { sx = Math.min(pw / (xd[1] - xd[0]), ph / ((zd[1] - zd[0]) * ve)); sz = sx * ve;
+    x0 = (xd[0] + xd[1]) / 2 - pw / sx / 2; z0 = (zd[0] + zd[1]) / 2 - ph / sz / 2; }
+  else { sx = pw / (xd[1] - xd[0]); sz = ph / (zd[1] - zd[0]); }
+  const id = "c" + (++CLIP);
+  return { W, H, m, pw, ph, id, sx, sz, X: x => m.l + (x - x0) * sx, Z: z => m.t + ph - (z - z0) * sz,
+    xlo: x0, xhi: x0 + pw / sx, zlo: z0, zhi: z0 + ph / sz,
+    clip: `<clipPath id="${id}"><rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}"/></clipPath>` };
+}
+const P = (F, pts) => pts.map((p, i) => (i ? "L" : "M") + F.X(p[0]).toFixed(1) + " " + F.Z(p[1]).toFixed(1)).join("");
+function axes(F, xl, zl, nx = 5, nz = 4) {
+  let s = `<rect x="${F.m.l}" y="${F.m.t}" width="${F.pw}" height="${F.ph}" fill="none" stroke="#2b2118" stroke-width=".8"/>`;
+  for (const v of nice(F.xlo, F.xhi, nx)) { const x = F.X(v); s += `<line x1="${x}" x2="${x}" y1="${F.m.t + F.ph}" y2="${F.m.t + F.ph + 4}" stroke="#2b2118" stroke-width=".7"/><text x="${x}" y="${F.m.t + F.ph + 15}" font-size="10.5" text-anchor="middle">${num(v)}</text>`; }
+  for (const v of nice(F.zlo, F.zhi, nz)) { const y = F.Z(v); s += `<line x1="${F.m.l - 4}" x2="${F.m.l}" y1="${y}" y2="${y}" stroke="#2b2118" stroke-width=".7"/><text x="${F.m.l - 6}" y="${y + 3.5}" font-size="10.5" text-anchor="end">${num(v)}</text>`; }
+  s += `<text x="${F.m.l + F.pw / 2}" y="${F.H - 4}" font-size="11" text-anchor="middle" class="it">${xl}</text>`;
+  s += `<text transform="translate(11 ${F.m.t + F.ph / 2}) rotate(-90)" font-size="11" text-anchor="middle" class="it">${zl}</text>`;
+  return s;
+}
+// straight line through two points, drawn across the frame
+function through(F, a, b) { const k = (b[1] - a[1]) / (b[0] - a[0]); return [[F.xlo, a[1] + k * (F.xlo - a[0])], [F.xhi, a[1] + k * (F.xhi - a[0])]]; }
+const svg = (F, inner) => `<svg viewBox="0 0 ${F.W} ${F.H}" role="img">${DEFS}${F.clip}${inner}</svg>`;
+const G = "#1f4e6b", PL = "#7c2a25", INK = "#2b2118";
+function lineFor(e, which) { const t = TER[e.id]; if (!t) return null; return t[which] || t.star_azimuth || t.to_peak || null; }
+function obst(e, which) { const t = e.terrain || {}; const L = t[which] || t.star_azimuth || t.to_peak; return (L && L.obstruction && L.obstruction.dtm) || null; }
+const pts = (T, a, b, lo, hi) => { const o = []; for (let i = 0; i < T.u.length; i++) if (T.u[i] >= lo && T.u[i] <= hi) o.push([T[a][i], T[b][i]]); return o; };
+function ground(F, p, stroke, fill, dash) { if (p.length < 2) return ""; const base = F.zlo - 10;
+  return (fill ? `<path d="${P(F, p)}L${F.X(p[p.length - 1][0])} ${F.Z(base)}L${F.X(p[0][0])} ${F.Z(base)}Z" fill="url(#hatch)" stroke="none"/>` : "") +
+    `<path d="${P(F, p)}" fill="none" stroke="${stroke}" stroke-width="${fill ? 1.1 : .9}" ${dash ? `stroke-dasharray="${dash}"` : ""} stroke-linejoin="round"/>`; }
+function nearestG(T, u) { let bi = 0, bd = 1e18; for (let i = 0; i < T.u.length; i++) { const d = Math.abs(T.u[i] - u); if (d < bd) { bd = d; bi = i; } } return [T.gx[bi], T.gz[bi]]; }
+
+// ---------- Fig. 1: at the summit (true scale) ----------
+function figPeak(e, S) {
+  const g = e.geometry, pk = g.peak_xz_m, op = g.observer_planar_xz_m, og = g.observer_globe_xz_m;
+  if (!pk || !op) return "<p><em>No geometry was computed for this observation.</em></p>";
+  const T = lineFor(e, S.line), O = obst(e, S.line); let half = 1500;
+  if (O) for (const k of ["planar", "globe_refracted"]) if (O[k] && Math.abs(O[k].u_m) < 5000) half = Math.max(half, Math.abs(O[k].u_m) * 1.35);
+  let zlo = pk[1] - 600, zhi = pk[1] + 260, tp = [];
+  if (T) { tp = pts(T, "gx", "gz", -half, half); if (tp.length) { zlo = Math.min(...tp.map(p => p[1])); zhi = Math.max(pk[1], ...tp.map(p => p[1])); const r = zhi - zlo; zhi += r * .3 + 40; zlo -= r * .04; } }
+  const F = frame(620, 440, { l: 52, r: 10, t: 10, b: 34 }, [-half, half], [zlo, zhi], 1);
+  let s = axes(F, "distance from the summit along the line, metres", "elevation, metres") + `<g clip-path="url(#${F.id})">`;
+  s += `<line x1="${F.X(0)}" x2="${F.X(0)}" y1="${F.m.t}" y2="${F.m.t + F.ph}" stroke="${INK}" stroke-width=".5" stroke-dasharray="1 4"/>`;
+  s += ground(F, tp, INK, true);
+  s += `<path d="${P(F, through(F, op, pk))}" stroke="${PL}" stroke-width="1.2" stroke-dasharray="7 4" fill="none"/>`;
+  if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
+  else if (og) s += `<path d="${P(F, through(F, og, pk))}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
+  if (O && T) { if (O.globe_refracted) { const q = nearestG(T, O.globe_refracted.u_m); s += `<circle cx="${F.X(q[0])}" cy="${F.Z(q[1])}" r="5" fill="none" stroke="${G}" stroke-width="1.3"/>`; }
+    if (O.planar) { const x = F.X(O.planar.u_m), y = F.Z(O.planar.h_m); s += `<path d="M${x - 5} ${y - 5}L${x + 5} ${y + 5}M${x - 5} ${y + 5}L${x + 5} ${y - 5}" stroke="${PL}" stroke-width="1.3"/>`; } }
+  const px = F.X(pk[0]), py = F.Z(pk[1]);
+  s += `<path d="M${px} ${py - 2}l-4 -9h8z" fill="${INK}"/></g>`;
+  s += `<text x="${px}" y="${Math.max(F.m.t + 12, py - 16)}" font-size="12" text-anchor="middle" class="cap">${esc(e.peak.name)}, ${num(e.peak.alt_m)} m</text>`;
+  const cap = `<b>Fig. 1.</b> At the summit, drawn to true scale. The broken line is the planar sight line, at ${dms(g.planar_angle_deg)}. The solid line is the globe ray, ` +
+    (S.ho ? `refracted, leaving the observer at ${dms((e.refraction || {}).peak_apparent_deg)}.` : `unrefracted, at ${dms((e.refraction || {}).peak_geometric_deg)}.`) +
+    (T ? ` Ground along ${S.line === "to_peak" ? "the line to the summit" : "the star's azimuth"}; a ring marks what hid the star under the globe, a cross under the plane.` : ` The mark is the aircraft; no ground is drawn.`);
+  return `<figure>${svg(F, s)}<figcaption>${cap}</figcaption></figure>`;
+}
+
+// ---------- Fig. 2: at the observer ----------
+function figObserver(e, S) {
+  const g = e.geometry, op = g.observer_planar_xz_m, og = g.observer_globe_xz_m, pk = g.peak_xz_m;
+  if (!op || !og) return "";
+  const drop = g.globe_observer_drop_m, half = Math.max(40, 2.4 * Math.abs(drop));
+  const xd = [Math.min(op[0], og[0]) - half * .55, op[0] + half * 1.45], zd = [Math.min(op[1], og[1]) - half * .3, Math.max(op[1], og[1]) + half * .55];
+  const F = frame(380, 280, { l: 50, r: 8, t: 8, b: 32 }, xd, zd, 1), T = lineFor(e, S.line);
+  let s = axes(F, "distance from the summit, metres", "elevation, metres", 3, 4) + `<g clip-path="url(#${F.id})">`;
+  if (T) { s += ground(F, pts(T, "gx", "gz", F.xlo - 2000, F.xhi + 2000).filter(p => p[0] >= F.xlo - 500 && p[0] <= F.xhi + 500), INK, true);
+    s += ground(F, pts(T, "u", "h", F.xlo - 500, F.xhi + 500), PL, false, "5 3"); }
+  s += `<path d="${P(F, through(F, op, pk))}" stroke="${PL}" stroke-width="1.1" stroke-dasharray="7 4" fill="none"/>`;
+  if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
+  else s += `<path d="${P(F, through(F, og, pk))}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
+  s += `<path d="${P(F, [op, og])}" stroke="${INK}" stroke-width=".9" stroke-dasharray="2 3"/>`;
+  s += `<rect x="${F.X(op[0]) - 4}" y="${F.Z(op[1]) - 4}" width="8" height="8" fill="${PL}"/><circle cx="${F.X(og[0])}" cy="${F.Z(og[1])}" r="4.5" fill="${G}"/></g>`;
+  const mx = F.X((op[0] + og[0]) / 2) + 9, my = F.Z((op[1] + og[1]) / 2) + 4;
+  s += `<text x="${mx}" y="${my}" font-size="12.5" class="cap">Drop ${num(drop, 1)} m</text>`;
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 2.</b> At the observer, true scale. The square is the planar observer; the disc is the globe observer, ${num(drop, 1)} m lower.</figcaption></figure>`;
+}
+
+// ---------- Fig. 3: on the celestial sphere (altitudes at the observer) ----------
+function figSphere(e, S) {
+  const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, O = obst(e, "star_azimuth"), tc = (e.terrain || {}).comparison || {};
+  const L = [], R = [];
+  if (ok(a.true_alt_obs_deg)) L.push([a.true_alt_obs_deg, "★ true place", INK]);
+  if (S.ho && ok(a.erfa_apparent_alt_obs_deg)) L.push([a.erfa_apparent_alt_obs_deg, "★ apparent, by the tables", INK]);
+  if (ok(c.true_obs)) L.push([c.true_obs, "spreadsheet, true", "#5d4f3f"]);
+  if (S.ho && ok(c.app_obs)) L.push([c.app_obs, "spreadsheet, apparent", "#5d4f3f"]);
+  const gTrue = ok(tc.globe_skyline_star_true_deg) ? tc.globe_skyline_star_true_deg : r.star_geometric_deg;
+  if (ok(gTrue)) R.push([gTrue, "globe: star vanishes", G]);
+  const gApp = O && O.globe_refracted && ok(O.globe_refracted.angle_deg) ? O.globe_refracted.angle_deg : r.peak_apparent_deg;
+  if (S.ho && ok(gApp)) R.push([gApp, "globe: skyline as seen", G]);
+  const pA = O && O.planar && ok(O.planar.angle_deg) ? O.planar.angle_deg : (e.geometry || {}).planar_angle_deg;
+  if (ok(pA)) R.push([pA, "plane: skyline", PL]);
+  const all = L.concat(R).map(x => x[0]); if (!all.length) return "";
+  let lo = Math.min(...all), hi = Math.max(...all); const pad = Math.max((hi - lo) * .12, 0.01); lo -= pad; hi += pad;
+  const W = 380, H = 330, t = 26, b = 14, cx = W / 2, Y = v => t + (H - t - b) * (1 - (v - lo) / (hi - lo));
+  let s = `<line x1="${cx}" x2="${cx}" y1="${t - 6}" y2="${H - b + 4}" stroke="${INK}" stroke-width="1"/>`;
+  for (const v of nice(lo, hi, 6)) s += `<line x1="${cx - 3}" x2="${cx + 3}" y1="${Y(v)}" y2="${Y(v)}" stroke="${INK}" stroke-width=".7"/>`;
+  s += `<text x="${cx - 12}" y="14" font-size="11.5" text-anchor="end" class="cap">The star</text><text x="${cx + 12}" y="14" font-size="11.5" class="cap">The hypotheses</text>`;
+  function side(items, dir) { items.sort((p, q) => q[0] - p[0]); const ys = items.map(i => Y(i[0])); const ly = ys.slice();
+    for (let i = 1; i < ly.length; i++) if (ly[i] < ly[i - 1] + 27) ly[i] = ly[i - 1] + 27;
+    const over = ly.length ? ly[ly.length - 1] - (H - 16) : 0; if (over > 0) for (let i = 0; i < ly.length; i++) ly[i] -= over;
+    for (let i = ly.length - 2; i >= 0; i--) if (ly[i] > ly[i + 1] - 27) ly[i] = ly[i + 1] - 27;
+    items.forEach((it, i) => { const x1 = cx + dir * 4, x2 = cx + dir * 22, tx = cx + dir * 26, an = dir < 0 ? "end" : "start";
+      s += `<path d="M${cx - 6} ${ys[i]}H${cx + 6}" stroke="${it[2]}" stroke-width="1.6"/><path d="M${x1} ${ys[i]}L${x2} ${ly[i]}" stroke="${it[2]}" stroke-width=".6" fill="none"/>`;
+      s += `<text x="${tx}" y="${ly[i] - 1}" font-size="11.5" text-anchor="${an}" fill="${it[2]}" class="it">${it[1]}</text><text x="${tx}" y="${ly[i] + 11}" font-size="11.5" text-anchor="${an}">${dms(it[0])}</text>`; }); }
+  side(L, -1); side(R, 1);
+  const F = { W, H, clip: "" };
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere: altitudes at the observer at the recorded instant. Globe residual ${asec(pref(e, "globe_ciddor_arcsec"))}; plane ${asec(pref(e, "planar_geometric_arcsec"))}; plane with refraction ${asec(pref(e, "planar_refracted_arcsec"))}.</figcaption></figure>`;
+}
+
+// ---------- Fig. 4: topographical side view ----------
+function figTopo(e, S) {
+  const g = e.geometry, pk = g.peak_xz_m, op = g.observer_planar_xz_m, og = g.observer_globe_xz_m; if (!pk || !op || !og) return "";
+  const T = lineFor(e, S.line), O = obst(e, S.line); let xhi = Math.max(2500, -op[0] * .06);
+  if (O) for (const k of ["planar", "globe_refracted"]) if (O[k] && O[k].u_m > 0) xhi = Math.max(xhi, O[k].u_m * 1.12 + 800);
+  const xlo = Math.min(op[0], og[0]) * 1.03; let zlo = Math.min(og[1], op[1]), zhi = pk[1], tpP = [], tpG = [];
+  if (T) { tpP = pts(T, "u", "h", xlo, xhi); tpG = pts(T, "gx", "gz", xlo, xhi); for (const p of tpP.concat(tpG)) { if (p[1] < zlo) zlo = p[1]; if (p[1] > zhi) zhi = p[1]; } }
+  const r = zhi - zlo; zhi += r * .18; zlo -= r * .1;
+  const W = 1000, H = 300, m = { l: 56, r: 10, t: 10, b: 34 }, sx0 = (W - m.l - m.r) / (xhi - xlo), fit = (H - m.t - m.b) / (zhi - zlo) / sx0;
+  const ve = [1, 2, 3, 5, 10, 15, 20, 30, 50, 100, 200].filter(v => v <= fit).pop() || 1;
+  const F = frame(W, H, m, [xlo, xhi], [zlo, zhi], ve);
+  let s = axes(F, "distance from the summit, metres", "elevation, metres", 8, 4) + `<g clip-path="url(#${F.id})">`;
+  s += ground(F, tpG, INK, true) + ground(F, tpP, PL, false, "5 3");
+  s += `<path d="${P(F, [op, [xhi, pk[1] + (pk[1] - op[1]) / (pk[0] - op[0]) * (xhi - pk[0])]])}" stroke="${PL}" stroke-width="1.1" stroke-dasharray="7 4" fill="none"/>`;
+  if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
+  else s += `<path d="${P(F, [og, pk])}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
+  s += `<path d="${P(F, [op, og])}" stroke="${INK}" stroke-width=".9" stroke-dasharray="2 3"/>`;
+  if (O && T) { if (O.globe_refracted) { const q = nearestG(T, O.globe_refracted.u_m); s += `<circle cx="${F.X(q[0])}" cy="${F.Z(q[1])}" r="5" fill="none" stroke="${G}" stroke-width="1.3"/>`; }
+    if (O.planar) { const x = F.X(O.planar.u_m), y = F.Z(O.planar.h_m); s += `<path d="M${x - 5} ${y - 5}L${x + 5} ${y + 5}M${x - 5} ${y + 5}L${x + 5} ${y - 5}" stroke="${PL}" stroke-width="1.3"/>`; } }
+  s += `<rect x="${F.X(op[0]) - 4}" y="${F.Z(op[1]) - 4}" width="8" height="8" fill="${PL}"/><circle cx="${F.X(og[0])}" cy="${F.Z(og[1])}" r="4.5" fill="${G}"/>`;
+  s += `<path d="M${F.X(pk[0])} ${F.Z(pk[1]) - 2}l-4 -9h8z" fill="${INK}"/></g>`;
+  s += `<text x="${F.X(op[0]) + 10}" y="${Math.min(F.Z(og[1]) + 16, F.m.t + F.ph - 5)}" font-size="12" class="cap">Drop ${num(g.globe_observer_drop_m, 1)} m</text>`;
+  s += `<text x="${F.m.l + F.pw - 6}" y="${F.m.t + 14}" font-size="12" text-anchor="end" class="cap">Heights exaggerated ${ve} times</text>`;
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 4.</b> Topographical side view from observer to summit and beyond, heights exaggerated ${ve} times. ` +
+    (T ? `Hatched ground is the globe's, falling away from the tangent plane at the summit; the broken outline is the same ground laid flat.` : `No ground is drawn for an aircraft.`) + `</figcaption></figure>`;
+}
+
+// ---------- Figs. 5, 6: celestial navigation view, after the author's celestial-theodolite diagram ----------
+// Two celestial spheres, O1 at the observer and O2 at the summit, at the same instant. Angles are drawn larger than true.
+function figNav(e, globe) {
+  const a = e.astropy || {}, g = e.geometry || {}, c = e.csv || {}, cm = e.comparison || {};
+  const W = 1000, H = 452, RS = 185, col = globe ? G : PL, rad = d => d * Math.PI / 180, o = [];
+  const starP = (x, y, r) => { let d = ""; for (let i = 0; i < 10; i++) { const t = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .42 : r; d += (i ? "L" : "M") + (x + rr * Math.cos(t)).toFixed(1) + " " + (y + rr * Math.sin(t)).toFixed(1); } return `<path d="${d}Z" fill="#f3ecd9" stroke="${INK}" stroke-width="1"/>`; };
+  // one sphere in its own level frame: horizon through the centre, zenith above; el = drawn elevation of the star ray
+  const sphere = (n, el, wedge) => { const u = [Math.cos(rad(el)), -Math.sin(rad(el))], Sx = RS * u[0], Sy = RS * u[1]; let q = "";
+    q += `<path d="M${-RS} 0A${RS} ${RS} 0 0 1 ${RS} 0" fill="none" stroke="${INK}" stroke-width="1"/><line x1="${-RS - 26}" x2="${RS + 26}" y1="0" y2="0" stroke="${INK}" stroke-width=".7" stroke-dasharray="3 3"/>`;
+    q += `<line x1="0" x2="0" y1="${-RS - 7}" y2="${-RS + 7}" stroke="${INK}" stroke-width="1"/><text x="0" y="${-RS - 11}" font-size="12" text-anchor="middle" class="it">zenith</text><text x="${-RS + 6}" y="-6" font-size="12" class="it">horizon at O${n}</text>`;
+    if (wedge) { const w = [Math.cos(rad(el - wedge)), -Math.sin(rad(el - wedge))];
+      q += `<path d="M0 0L${(RS * w[0]).toFixed(1)} ${(RS * w[1]).toFixed(1)}A${RS} ${RS} 0 0 0 ${Sx.toFixed(1)} ${Sy.toFixed(1)}Z" fill="url(#hatch)" stroke="${col}" stroke-width="1"/>`; }
+    q += `<line x1="${(-70 * u[0]).toFixed(1)}" y1="${(-70 * u[1]).toFixed(1)}" x2="${((RS + 46) * u[0]).toFixed(1)}" y2="${((RS + 46) * u[1]).toFixed(1)}" stroke="${INK}" stroke-width="1" stroke-dasharray="8 6"/>`;
+    q += `<path d="M0 0H${Sx.toFixed(1)}V${Sy.toFixed(1)}Z" fill="none" stroke="${col}" stroke-width="1.5"/><path d="M${(Sx - 11).toFixed(1)} 0v-11h11" fill="none" stroke="${col}" stroke-width="1"/>`;
+    q += `<path d="M58 0A58 58 0 0 0 ${(58 * u[0]).toFixed(1)} ${(58 * u[1]).toFixed(1)}" fill="none" stroke="${col}" stroke-width="1.1"/><text x="66" y="-7" font-size="17" fill="${col}" class="it">θ${n === 1 ? "₁" : "₂"}</text>`;
+    q += starP(Sx, Sy, 11) + `<circle r="4.5" fill="${INK}"/><text x="-30" y="24" font-size="17" class="cap">O${n}</text><text x="${(Sx - 14).toFixed(1)}" y="${(Sy - 12).toFixed(1)}" font-size="17" text-anchor="end" class="cap">P${n}</text>`;
+    return q; };
+  const mount = (x, gy, top) => `<path d="M${x - 52} ${gy}L${x} ${top}L${x + 40} ${gy}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+  if (!globe) { const Gy = 332, el = 20, O1 = 215, O2 = O1 + 2 * RS + 115, dA = cm.star_shift_csv_deg;
+    const kq = ok(dA) ? Math.sign(dA) * Math.min(16, 14 * Math.sqrt(Math.abs(dA) * 60 / 54)) : 0, rise = RS * Math.sin(rad(el)), run = RS * Math.cos(rad(el));
+    o.push(`<line x1="14" x2="${W - 14}" y1="${Gy}" y2="${Gy}" stroke="${INK}" stroke-width="1.6"/><rect x="14" y="${Gy}" width="${W - 28}" height="8" fill="url(#hatch)"/>`);
+    o.push(`<line x1="14" x2="${W - 14}" y1="${Gy - rise}" y2="${Gy - rise}" stroke="${INK}" stroke-width=".8"/><text x="18" y="${Gy - rise - 6}" font-size="12" class="it">through the summit, parallel to the ground</text>`);
+    o.push(mount(O1 + run, Gy, Gy - rise) + mount(O2, Gy, Gy - rise));
+    o.push(`<g transform="translate(${O1} ${Gy})">${sphere(1, el, 0)}</g><g transform="translate(${O2} ${Gy})">${sphere(2, el, kq)}</g>`);
+    const wl = rad(el - kq); o.push(`<text x="${W - 16}" y="${(Gy - RS * Math.sin(wl) + 17).toFixed(1)}" font-size="12.5" fill="${col}" text-anchor="end">♈︎ at observer ${dms(c.true_obs)}</text>`);
+    o.push(`<text x="${Math.min(O2 + run, W - 92).toFixed(1)}" y="${(Gy - rise - 30).toFixed(1)}" font-size="12.5" fill="${col}" text-anchor="middle">♈︎ at summit ${dms(c.true_peak)}</text>`);
+    o.push(`<path d="M${O1} ${Gy + 14}v44M${O2} ${Gy + 14}v44M${O1} ${Gy + 40}H${O2}" stroke="${INK}" stroke-width="1" fill="none"/>`);
+    o.push(`<text x="${(O1 + O2) / 2}" y="${Gy + 33}" font-size="15" text-anchor="middle">D = ${num(g.csv_distance_m)} m <tspan class="it">gives</tspan> ♈︎Δ = ${dms(dA)}</text>`);
+    o.push(`<text x="${O1}" y="${Gy + 74}" font-size="12" text-anchor="middle" class="it">T = 0</text><text x="${O2}" y="${Gy + 74}" font-size="12" text-anchor="middle" class="it">T = 0</text>`);
+    o.push(`<text x="18" y="22" font-size="14.5">θ₁, summit by rise over run = ${dms(g.planar_angle_deg)}</text><text x="18" y="42" font-size="14.5">θ₂, star at the summit (♈︎) = ${dms(c.true_peak)}</text><text x="18" y="62" font-size="14.5">θ₂ − θ₁ = Hₒ = ${dms(cm.ho_csv_deg)}</text>`);
+    o.push(`<text x="${W - 18}" y="${H - 10}" font-size="12" text-anchor="end" class="it">Angles drawn larger than true.</text>`);
+    return `<figure>${svg({ W, H, clip: "" }, o.join(""))}<figcaption><b>Fig. 5.</b> The distance plane. The observer is carried from O₁ to the summit at O₂ at the same instant. The hatched wedge is ♈︎Δ, the recorded change in the star's true altitude between the two places, set against the distance D.</figcaption></figure>`; }
+  const be = 7, el = 20, rho = (RS + 57.5) / Math.sin(rad(be)), cx = 470, top = 318 - rho * (1 - Math.cos(rad(be))), cy = top + rho;
+  const st = d => [cx + rho * Math.sin(rad(d)), cy - rho * Math.cos(rad(d))], A = st(-be), B = st(be); let arc = "";
+  for (let d = -13.5; d <= 15; d += .5) { const p = st(d); arc += (arc ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }
+  o.push(`<path d="${arc}" fill="none" stroke="${INK}" stroke-width="1.6"/>`);
+  for (const [p, d] of [[A, -be], [B, be]]) o.push(`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${(p[0] - 96 * Math.sin(rad(d))).toFixed(1)}" y2="${(p[1] + 96 * Math.cos(rad(d))).toFixed(1)}" stroke="${INK}" stroke-width=".8" stroke-dasharray="2 4"/>`);
+  o.push(`<g transform="translate(${A[0].toFixed(1)} ${A[1].toFixed(1)}) rotate(${-be})">${sphere(1, el - be, 0)}</g><g transform="translate(${B[0].toFixed(1)} ${B[1].toFixed(1)}) rotate(${be})">${sphere(2, el + be, 2 * be)}</g>`);
+  o.push(`<text x="${cx}" y="${A[1] + 62}" font-size="15" text-anchor="middle">γ, angle at the Earth's centre = ${dms(g.central_angle_deg)}</text>`);
+  o.push(`<text x="${cx}" y="${A[1] + 82}" font-size="12" text-anchor="middle" class="it">the plumb lines at O₁ and O₂ meet at this angle</text>`);
+  o.push(`<text x="18" y="22" font-size="14.5">θ₁, star at the observer, by catalogue = ${dms(a.true_alt_obs_deg)}</text><text x="18" y="42" font-size="14.5">θ₂, star at the summit, by catalogue = ${dms(a.true_alt_peak_deg)}</text><text x="18" y="62" font-size="14.5">θ₂ − θ₁ = ${dms(cm.star_shift_astropy_deg)}; less γ = ${asec(cm.star_shift_astropy_minus_central_angle_arcsec)}</text>`);
+  o.push(`<text x="${W - 18}" y="${H - 10}" font-size="12" text-anchor="end" class="it">Angles drawn larger than true.</text>`);
+  return `<figure>${svg({ W, H, clip: "" }, o.join(""))}<figcaption><b>Fig. 6.</b> The globe. The star's rays are parallel, and each place measures from its own horizon. The horizons are inclined by γ, so the star stands higher at O₂ by the hatched wedge.</figcaption></figure>`;
+}
+
+// ---------- Fig. 7: the column of air ----------
+function figAtmo(e) {
+  const A = e.profiles && e.profiles.atmosphere; if (!A || !A.length) return "";
+  const W = 560, H = 250, t = 22, b = 30, l = 44, gap = 10, cols = [["n_minus_1_ppm", "n − 1, parts in 10⁶", 1], ["T_K", "temperature, K", 0], ["P_Pa", "pressure, Pa", 0], ["RH_pct", "moisture, per cent", 0]];
+  const pw = (W - l - 6 - gap * 3) / 4, alts = A.map(r => r.alt_m), alo = Math.min(...alts), ahi = Math.max(...alts), Y = v => t + (H - t - b) * (1 - (v - alo) / (ahi - alo)); let s = "";
+  for (const v of nice(alo, ahi, 5)) s += `<text x="${l - 5}" y="${Y(v) + 3.5}" font-size="10" text-anchor="end">${num(v)}</text><line x1="${l - 3}" x2="${l}" y1="${Y(v)}" y2="${Y(v)}" stroke="${INK}" stroke-width=".6"/>`;
+  s += `<text transform="translate(10 ${t + (H - t - b) / 2}) rotate(-90)" font-size="10.5" text-anchor="middle" class="it">altitude, metres</text>`;
+  cols.forEach(([k, lab], i) => { const x0 = l + i * (pw + gap), vs = A.map(r => r[k]).filter(ok); if (!vs.length) return; let lo = Math.min(...vs), hi = Math.max(...vs); if (hi === lo) hi = lo + 1;
+    const X = v => x0 + 4 + (pw - 8) * (v - lo) / (hi - lo);
+    s += `<rect x="${x0}" y="${t}" width="${pw}" height="${H - t - b}" fill="${i === 0 ? "url(#stip)" : "none"}" stroke="${INK}" stroke-width=".7"/>`;
+    s += `<path d="${A.filter(r => ok(r[k])).map((r, j) => (j ? "L" : "M") + X(r[k]).toFixed(1) + " " + Y(r.alt_m).toFixed(1)).join("")}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+    s += `<text x="${x0 + pw / 2}" y="${t - 7}" font-size="10.5" text-anchor="middle" class="it">${lab}</text><text x="${x0 + 2}" y="${H - b + 13}" font-size="10">${num(lo, k === "n_minus_1_ppm" ? 1 : 0)}</text><text x="${x0 + pw - 2}" y="${H - b + 13}" font-size="10" text-anchor="end">${num(hi, k === "n_minus_1_ppm" ? 1 : 0)}</text>`; });
+  return `<figure>${svg({ W, H, clip: "" }, s)}<figcaption><b>Fig. 7.</b> The column of air used for the ray, from the observer to forty kilometres.</figcaption></figure>`;
+}
+
+// ---------- the plate ----------
+const S = { id: null, ho: true, line: "star_azimuth" };
+function description(e) {
+  const g = e.geometry || {}, a = e.astropy || {}, O = obst(e, "star_azimuth"), sk = usesSkyline(e), out = [];
+  out.push(`On ${esc(e.time.local_date)}, at ${esc(e.time.local_time)} by the local clock (UTC ${num(e.time.utc_offset_h, 0, true)} h), ${esc(e.observer.name)} recorded ${esc(e.star.name)} to vanish behind ${esc(e.peak.name)}, ${num(g.geodesic_distance_m)} metres distant and ${num(g.peak_height_above_observer_m)} metres above the station.`);
+  if (ok(a.true_alt_obs_deg)) out.push(`At that instant the star's true altitude was ${dms(a.true_alt_obs_deg)}, in azimuth ${num(a.az_obs_deg, 3)}°, and it was moving ${num(a.alt_rate_deg_per_s, 5, true)}° in altitude each second.`);
+  out.push(`Measured against ${sk ? "the surveyed skyline along the star's azimuth" : "the summit alone"}, the globe with its traced refraction leaves a residual of ${asec(pref(e, "globe_ciddor_arcsec"))} (${tsec(pref(e, "globe_ciddor_seconds"))}). The plane leaves ${asec(pref(e, "planar_geometric_arcsec"))} (${tsec(pref(e, "planar_geometric_seconds"))}) without refraction, and ${asec(pref(e, "planar_refracted_arcsec"))} (${tsec(pref(e, "planar_refracted_seconds"))}) with it.`);
+  if (O && O.globe_refracted) { const b = O.globe_refracted;
+    if (b.near_peak) out.push(`Under the globe, the ground that hid the star lies ${num(b.u_m, 0, true)} metres from the summit's place along the line, at ${num(b.h_m, 1)} metres: the named summit.`);
+    else if (b.same_peak) out.push(`Under the globe, the ground that hid the star lies ${num(b.u_m, 0, true)} metres from the catalogued place of the summit, at ${num(b.h_m, 1)} metres. It is the same mountain; the catalogued coordinate is imprecise.`);
+    else out.push(`<strong>The named summit was not what hid the star.</strong> Under the globe the skyline along the star's azimuth lies ${num(b.u_m, 0, true)} metres from ${esc(e.peak.name)}, at ${num(b.h_m, 1)} metres` + (b.nearest_named_peak ? `, ${num(b.nearest_named_peak.distance_m)} metres from ${esc(b.nearest_named_peak.name)}.` : `.`)); }
+  if (e.flags.target_type === "aircraft") out.push(`The occulting body was an aircraft; no ground is examined.`);
+  if (!e.flags.in_summary) out.push(`<em>This observation takes no part in the summary.</em>`);
+  return out.map(p => `<p>${p}</p>`).join("");
+}
+function anglesTable(e) {
+  const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, g = e.geometry || {}, O = obst(e, "star_azimuth") || {}, tc = (e.terrain || {}).comparison || {};
+  const rows = [["Star, true, at the observer", a.true_alt_obs_deg], ["Star, apparent, by the tables", a.erfa_apparent_alt_obs_deg], ["Star, true, at the summit", a.true_alt_peak_deg],
+    ["Spreadsheet: true, apparent at observer", c.true_obs, c.app_obs], ["Spreadsheet: true, apparent at summit", c.true_peak, c.app_peak],
+    ["Plane: summit by rise over run", g.planar_angle_deg], ["Plane: skyline on the star's azimuth", (O.planar || {}).angle_deg],
+    ["Globe: summit, geometric", r.peak_geometric_deg], ["Globe: summit, as seen (refracted)", r.peak_apparent_deg], ["Globe: skyline, as seen", (O.globe_refracted || {}).angle_deg],
+    ["Globe: true altitude of a star on the summit", r.star_geometric_deg], ["Globe: true altitude of a star on the skyline", tc.globe_skyline_star_true_deg], ["Angle at the Earth's centre", g.central_angle_deg]];
+  let h = `<table><thead><tr><th class="l">Angle</th><th>° ′ ″</th><th></th></tr></thead><tbody>`;
+  for (const r2 of rows) h += `<tr><td class="l">${r2[0]}</td><td>${dms(r2[1])}</td><td>${r2.length > 2 ? dms(r2[2]) : ""}</td></tr>`;
+  h += `</tbody></table><div class="tw" style="margin-top:.8rem"><table><thead><tr><th class="l">Residual, obs. − comp.</th><th>arc <span class="unit">″</span></th><th>time <span class="unit">s</span></th></tr></thead><tbody>`;
+  const cm = e.comparison || {}, res = [["Globe, skyline", tc.globe_ciddor_arcsec, tc.globe_ciddor_seconds], ["Globe, summit only", cm.globe_ciddor_arcsec, cm.globe_ciddor_seconds],
+    ["Plane, skyline", tc.planar_geometric_arcsec, tc.planar_geometric_seconds], ["Plane, summit only", cm.planar_geometric_arcsec, cm.planar_geometric_seconds],
+    ["Plane with refraction, skyline", tc.planar_refracted_arcsec, tc.planar_refracted_seconds], ["Plane with refraction, summit only", cm.planar_refracted_arcsec, cm.planar_refracted_seconds],
+    ["Globe, skyline with forest", tc.globe_ciddor_dsm_arcsec, tc.globe_ciddor_dsm_seconds]];
+  for (const x of res) h += `<tr><td class="l">${x[0]}</td><td>${num(x[1], 1, true)}</td><td>${num(x[2], 1, true)}</td></tr>`;
+  return h + `</tbody></table></div>`;
+}
+function provenance(e) {
+  const r = e.refraction || {}, sd = r.sounding, t = e.terrain || {}, ch = t.checks, L = t.star_azimuth || t.to_peak, cn = t.canopy || {}; let h = `<dl>`;
+  h += `<div class="h">The air</div>`;
+  if (sd) h += `<dt>Sounding</dt><dd>${esc(sd.station)} (${esc(sd.wmo)})</dd><dt>Launched</dt><dd>${esc(sd.valid_utc)}</dd><dt>From the observer</dt><dd>${num(sd.distance_km, 1)} km</dd><dt>Source</dt><dd>${esc(sd.source)}, ${num(sd.levels)} levels</dd>`;
+  h += `<dt>Refraction, traced</dt><dd>${num(r.star_uplift_arcmin, 2)}′</dd><dt>Refraction, Bennett</dt><dd>${num(r.bennett_arcmin, 2)}′</dd><dt>Pressure, temperature</dt><dd>${num(r.pressure_hpa_obs, 1)} hPa, ${num(r.temp_c_obs, 1)} °C</dd>`;
+  h += `<div class="h">The ground</div>`;
+  if (t.skipped) h += `<dt>Not examined</dt><dd>${esc(t.skipped)}</dd>`;
+  if (L && L.sources) h += `<dt>Bare earth</dt><dd>${esc((L.sources.dtm || []).join("; ") || DASH)}</dd><dt>With forest</dt><dd>${esc((L.sources.dsm || []).join("; ") || DASH)}</dd>`;
+  if (ch) h += `<dt>Summit: survey, spreadsheet</dt><dd>${num(ch.dtm_at_peak_m, 1)} m, ${num(ch.csv_peak_alt_m, 1)} m</dd><dt>Observer: survey, spreadsheet</dt><dd>${num(ch.dtm_at_observer_m, 1)} m, ${num(ch.csv_observer_alt_m, 1)} m</dd>`;
+  if (ok(t.star_minus_peak_azimuth_arcsec)) h += `<dt>Star's azimuth less summit's</dt><dd>${asec(t.star_minus_peak_azimuth_arcsec)}</dd><dt>Offset at the summit</dt><dd>${num(t.lateral_offset_at_peak_m, 1, true)} m</dd>`;
+  if (cn.star_azimuth) h += `<dt>Forest on the skyline</dt><dd>${asec(cn.star_azimuth.dsm_minus_dtm_skyline_arcsec)}${cn.star_azimuth.flag ? " (review)" : ""}</dd>`;
+  h += `<div class="h">The star</div><dt>Catalogue name</dt><dd>${esc(e.star.query || DASH)}</dd><dt>Source</dt><dd>${esc(e.star.source || DASH)}</dd>`;
+  return h + `</dl>`;
+}
+function renderPlate() {
+  const e = BYID[S.id], g = e.geometry || {}, peaks = [...new Set(PLATES.map(p => p.peak.name))], stars = PLATES.filter(p => p.peak.name === e.peak.name);
+  const starLabel = p => p.star.name + testMark(p) + (stars.filter(q => q.star.name === p.star.name && q.flags.test_kind === p.flags.test_kind).length > 1 ? " · " + utc(p).slice(0, 16) : "");
+  const tg = (key, val, lab) => `<button type="button" data-k="${key}" data-v="${val}" aria-pressed="${String(S[key]) === String(val)}">${lab}</button>`;
+  const hasLines = TER[e.id] && TER[e.id].to_peak && TER[e.id].star_azimuth, w = e.flags.warnings || [];
+  $("plate").innerHTML = `
+  <div class="pn"><span>Plate ${plateNo(e)}.</span><span>${e.flags.target_type === "aircraft" ? "Aircraft" : e.flags.is_test ? "Trial row" : e.flags.in_summary ? "In the summary" : "Not in the summary"}</span></div>
+  <h3>${esc(e.peak.name)} <span style="font-style:italic">&amp;</span> ${esc(e.star.name)}${testMark(e)}</h3>
+  <div class="when">${esc(utc(e))} UTC · observed by ${esc(e.observer.name)}</div>
+  <div class="grid">
+    <div class="g-data panel"><h4>Data</h4>
+      <label for="selPeak">Summit</label><select id="selPeak">${peaks.map(p => `<option${p === e.peak.name ? " selected" : ""}>${esc(p)}</option>`).join("")}</select>
+      <label for="selStar">Star</label><select id="selStar">${stars.map(p => `<option value="${p.id}"${p.id === e.id ? " selected" : ""}>${esc(starLabel(p))}</option>`).join("")}</select>
+      <label>Refraction in the drawings</label><div class="tog">${tg("ho", true, "On")}${tg("ho", false, "Off")}</div>
+      ${hasLines ? `<label>Ground drawn along</label><div class="tog">${tg("line", "star_azimuth", "Star's azimuth")}${tg("line", "to_peak", "Line to summit")}</div>` : ""}
+      <dl><div class="h">Observer</div><dt>Latitude</dt><dd>${num(e.observer.lat, 5)}°</dd><dt>Longitude</dt><dd>${num(e.observer.lon, 5)}°</dd><dt>Elevation</dt><dd>${num(e.observer.alt_m, 1)} m</dd>
+      <div class="h">${e.flags.target_type === "aircraft" ? "Aircraft" : "Summit"}</div><dt>Latitude</dt><dd>${num(e.peak.lat, 5)}°</dd><dt>Longitude</dt><dd>${num(e.peak.lon, 5)}°</dd><dt>Elevation</dt><dd>${num(e.peak.alt_m, 1)} m</dd>
+      <div class="h">Between them</div><dt>Distance, geodesic</dt><dd>${num(g.geodesic_distance_m)} m</dd><dt>Distance, spreadsheet</dt><dd>${num(g.csv_distance_m)} m</dd><dt>Azimuth</dt><dd>${num(g.azimuth_deg, 3)}°</dd><dt>Radius of the Earth</dt><dd>${num(g.earth_radius_m)} m</dd><dt>Globe observer's drop</dt><dd>${num(g.globe_observer_drop_m, 1)} m</dd></dl>
+    </div>
+    <div class="g-peak">${figPeak(e, S)}</div>
+    <div class="g-side">${figObserver(e, S)}${figSphere(e, S)}</div>
+    <div class="g-topo">${figTopo(e, S)}
+      <div class="keyline"><span><svg viewBox="0 0 30 10"><line x1="0" x2="30" y1="5" y2="5" stroke="${G}" stroke-width="1.6"/></svg> globe ray</span><span><svg viewBox="0 0 30 10"><line x1="0" x2="30" y1="5" y2="5" stroke="${PL}" stroke-width="1.4" stroke-dasharray="7 4"/></svg> planar sight line</span><span><svg viewBox="0 0 30 10"><circle cx="15" cy="5" r="4" fill="${G}"/></svg> globe observer</span><span><svg viewBox="0 0 30 10"><rect x="11" y="1" width="8" height="8" fill="${PL}"/></svg> planar observer</span></div></div>
+    <div class="g-desc panel desc"><h4>Description</h4>${description(e)}</div>
+    <div class="g-nav">${figNav(e, false)}${figNav(e, true)}</div>
+  </div>
+  <div class="below"><div><h4>Table of angles</h4><div class="tw">${anglesTable(e)}</div></div>
+    <div>${figAtmo(e)}<h4 style="margin-top:1rem">Provenance</h4>${provenance(e)}</div></div>
+  <div class="notes"><span class="sc">Notes.</span> ${w.length ? `<ol>${w.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : `<em>None attached to this observation.</em>`}
+    <div class="foot">Row ${e.row} of the spreadsheet${e.csv && e.csv.ge_check ? `; its own check of the time reads ${esc(e.csv.ge_check)}` : ""}. Residuals are observed less computed.</div></div>`;
+  $("selPeak").onchange = ev => { const f = PLATES.find(p => p.peak.name === ev.target.value); go(f.id, false); };
+  $("selStar").onchange = ev => go(ev.target.value, false);
+  $("plate").querySelectorAll(".tog button").forEach(b => b.onclick = () => { S[b.dataset.k] = b.dataset.k === "ho" ? b.dataset.v === "true" : b.dataset.v; renderPlate(); });
+}
+function go(id, scroll) { if (!BYID[id] || BYID[id].flags.excluded) return; S.id = id; renderPlate();
+  try { history.replaceState(null, "", "#" + id); } catch (err) { /* hash is a convenience only */ }
+  if (scroll) $("plates").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); }
+
+// ---------- summary plate ----------
+const SUM = EV.filter(e => e.flags.in_summary);
+const SER = [["globe_ciddor", "Globe, refraction traced", G], ["planar_geometric", "Plane, no refraction", PL], ["planar_refracted", "Plane, with refraction", PL]];
+function mark(k, x, y, col) { return k === 0 ? `<circle cx="${x}" cy="${y}" r="4.2" fill="${col}"/>` : k === 1 ? `<circle cx="${x}" cy="${y}" r="4" fill="#f3ecd9" stroke="${col}" stroke-width="1.4"/>` : `<path d="M${x} ${y - 5}l4.6 8.4h-9.2z" fill="#f3ecd9" stroke="${col}" stroke-width="1.3"/>`; }
+function renderSummary() {
+  const all = []; SUM.forEach(e => SER.forEach(s => { const v = pref(e, s[0] + "_arcsec"); if (ok(v)) all.push(v); }));
+  const rh = 17, l = 250, r = 16, t = 34, W = 1000, H = t + SUM.length * rh + 12, lo = Math.min(...all, 0), hi = Math.max(...all, 0), pad = (hi - lo) * .04, X = v => l + (W - l - r) * (v - (lo - pad)) / (hi - lo + 2 * pad);
+  let s = "";
+  for (const v of nice(lo, hi, 8)) s += `<line x1="${X(v)}" x2="${X(v)}" y1="${t - 4}" y2="${H - 8}" stroke="${INK}" stroke-width="${v === 0 ? 1.1 : .4}" ${v === 0 ? "" : 'stroke-dasharray="1 4"'}/><text x="${X(v)}" y="${t - 9}" font-size="11.5" text-anchor="middle">${v === 0 ? "0" : num(v, 0, true)}</text>`;
+  s += `<text x="${W - r}" y="12" font-size="12" text-anchor="end" class="it">residual, seconds of arc</text>`;
+  SUM.forEach((e, i) => { const y = t + i * rh + rh / 2;
+    s += `<g class="row" data-id="${e.id}" style="cursor:pointer"><rect x="0" y="${y - rh / 2}" width="${W}" height="${rh}" fill="${i % 2 ? "none" : "#e9dfc6"}" opacity=".55"/><text x="${l - 10}" y="${y + 4}" font-size="12.5" text-anchor="end">${esc(e.peak.name)} <tspan class="it">· ${esc(e.star.name)}</tspan></text>`;
+    SER.forEach((sr, k) => { const v = pref(e, sr[0] + "_arcsec"); if (ok(v)) s += `<g class="pt" data-id="${e.id}" data-k="${k}">${mark(k, X(v).toFixed(1), y, sr[2])}</g>`; }); s += `</g>`; });
+  $("sumchart").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" style="display:block;width:100%;height:auto;border:1px solid #8a7a63;background:#f3ecd9">${s}</svg>`;
+  $("sumkey").innerHTML = SER.map((sr, k) => `<span><svg viewBox="0 0 30 10">${mark(k, 15, 5, sr[2])}</svg> ${sr[1]}</span>`).join("");
+  const tip = $("tip");
+  $("sumchart").querySelectorAll(".pt").forEach(p => { const show = ev => { const e = BYID[p.dataset.id], sr = SER[+p.dataset.k];
+      tip.innerHTML = `<span class="sc">${esc(e.peak.name)}</span> · <em>${esc(e.star.name)}</em><br>${sr[1]}: ${asec(pref(e, sr[0] + "_arcsec"))}, ${tsec(pref(e, sr[0] + "_seconds"))}<br><em>${usesSkyline(e) ? "against the surveyed skyline" : "against the summit alone"}</em>`;
+      tip.style.display = "block"; const x = Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 8); tip.style.left = Math.max(8, x) + "px"; tip.style.top = (ev.clientY + 16) + "px"; };
+    p.addEventListener("pointermove", show); p.addEventListener("pointerdown", show); p.addEventListener("pointerleave", () => tip.style.display = "none"); });
+  $("sumchart").querySelectorAll(".row").forEach(g => g.addEventListener("click", () => go(g.dataset.id, true)));
+  // statistics of the summary set (medians and extremes of the given residuals)
+  const med = a => { const b = a.slice().sort((p, q) => p - q), n = b.length; return n ? (n % 2 ? b[(n - 1) / 2] : (b[n / 2 - 1] + b[n / 2]) / 2) : null; };
+  let h = `<thead><tr><th class="l">Hypothesis</th><th>n</th><th>median <span class="unit">″</span></th><th>least <span class="unit">″</span></th><th>greatest <span class="unit">″</span></th><th>median <span class="unit">s</span></th></tr></thead><tbody>`;
+  for (const sr of SER) { const a = SUM.map(e => pref(e, sr[0] + "_arcsec")).filter(ok), ts = SUM.map(e => pref(e, sr[0] + "_seconds")).filter(ok);
+    h += `<tr><td class="l">${sr[1]}</td><td>${a.length}</td><td>${num(med(a), 1, true)}</td><td>${num(Math.min(...a), 1, true)}</td><td>${num(Math.max(...a), 1, true)}</td><td>${num(med(ts), 1, true)}</td></tr>`; }
+  $("stats").innerHTML = h + `</tbody><caption>Medians and extremes of the residuals of the ${SUM.length} observations admitted to the summary. The seconds are the clock errors that would close each residual.</caption>`;
+}
+
+// ---------- catalogue, aircraft, appendix, errata ----------
+function rowsTable(el, list, withPlate) {
+  let h = `<thead><tr><th class="l">Pl.</th><th class="l">Summit</th><th class="l">Star</th><th class="l">Observer</th><th class="l">UTC</th><th>Distance <span class="unit">m</span></th><th>Height <span class="unit">m</span></th><th>Globe <span class="unit">″</span></th><th>Plane <span class="unit">″</span></th><th>Plane, refr. <span class="unit">″</span></th><th class="l">Sounding</th><th></th></tr></thead><tbody>`;
+  for (const e of list) { const g = e.geometry || {}, sd = (e.refraction || {}).sounding || {};
+    h += `<tr class="go" tabindex="0" data-id="${e.id}"><td class="l">${plateNo(e)}</td><td class="l">${esc(e.peak.name)}${testMark(e)}</td><td class="l"><em>${esc(e.star.name)}</em></td><td class="l">${esc(e.observer.name)}</td><td class="l">${esc(utc(e))}</td><td>${num(g.geodesic_distance_m)}</td><td>${num(g.peak_height_above_observer_m)}</td><td>${num(pref(e, "globe_ciddor_arcsec"), 1, true)}</td><td>${num(pref(e, "planar_geometric_arcsec"), 1, true)}</td><td>${num(pref(e, "planar_refracted_arcsec"), 1, true)}</td><td class="l">${esc(sd.station || DASH)}</td><td>${(e.flags.warnings || []).length ? "†" : ""}${e.flags.in_summary ? "" : " ‡"}</td></tr>`; }
+  el.innerHTML = h + `</tbody><caption>Residuals are observed less computed, against the surveyed skyline where one exists, else against the summit. † carries notes. ‡ takes no part in the summary.</caption>`;
+  el.querySelectorAll("tr.go").forEach(tr => { tr.onclick = () => go(tr.dataset.id, true); tr.onkeydown = ev => { if (ev.key === "Enter") go(tr.dataset.id, true); }; });
+}
+function renderRest() {
+  const real = PLATES.filter(e => !e.flags.is_test && e.flags.target_type === "peak"), air = PLATES.filter(e => e.flags.target_type === "aircraft"), tests = PLATES.filter(e => e.flags.is_test), excl = EV.filter(e => e.flags.excluded);
+  $("byline").innerHTML = `Reduced by <span class="sc">${esc(DOC.generator)}</span> · ${esc(DOC.generated_utc.replace("T", " ").replace("Z", " UTC"))}<br>${PLATES.length} observations in plates, ${SUM.length} admitted to the summary`;
+  $("intro1").innerHTML = `Observers at ${new Set(PLATES.map(e => e.observer.name)).size} stations timed the instant at which a star vanished behind a distant summit, and in four cases behind an aircraft. For each occultation these pages ask one question: at the recorded time, where did the star truly stand, and where ought it to have stood for the summit just to cover it?`;
+  $("sumlead").textContent = `The ${SUM.length} observations of summits that carry no doubt as to clock or star.`;
+  rowsTable($("cat"), real, true);
+  rowsTable($("air"), air, true);
+  $("airnotes").innerHTML = air.map(e => `<li><span class="sc">${esc(e.peak.name)}</span> · <em>${esc(e.star.name)}</em><ul>${(e.flags.warnings || []).map(w => `<li>${esc(w)}</li>`).join("") || "<li><em>No notes.</em></li>"}</ul></li>`).join("");
+  rowsTable($("tests"), tests, true);
+  let h = `<thead><tr><th class="l">Pl.</th><th class="l">Observation</th><th class="l">Station</th><th class="l">Launched, UTC</th><th>Distance <span class="unit">km</span></th><th>Levels</th><th class="l">Source</th></tr></thead><tbody>`;
+  for (const e of PLATES) { const sd = (e.refraction || {}).sounding; if (!sd) continue;
+    h += `<tr class="go" tabindex="0" data-id="${e.id}"><td class="l">${plateNo(e)}</td><td class="l">${esc(e.peak.name)} · <em>${esc(e.star.name)}</em>${testMark(e)}</td><td class="l">${esc(sd.station)} (${esc(sd.wmo)})</td><td class="l">${esc(sd.valid_utc)}</td><td>${num(sd.distance_km, 1)}</td><td>${num(sd.levels)}</td><td class="l">${esc(sd.source)}</td></tr>`; }
+  $("snd").innerHTML = h + `</tbody>`;
+  $("snd").querySelectorAll("tr.go").forEach(tr => tr.onclick = () => go(tr.dataset.id, true));
+  $("errlist").innerHTML = PLATES.filter(e => (e.flags.warnings || []).length).map(e => `<li><a href="#${e.id}" data-id="${e.id}"><span class="sc">Plate ${plateNo(e)}.</span> ${esc(e.peak.name)} · <em>${esc(e.star.name)}</em>${testMark(e)}</a>, row ${e.row}<ul>${e.flags.warnings.map(w => `<li>${esc(w)}</li>`).join("")}</ul></li>`).join("");
+  $("errlist").querySelectorAll("a").forEach(a => a.onclick = ev => { ev.preventDefault(); go(a.dataset.id, true); });
+  $("exlist").innerHTML = excl.map(e => `<li><span class="sc">${esc(e.peak.name)}</span> · <em>${esc(e.star.name)}</em>, row ${e.row}<ul><li>${esc(e.flags.excluded_reason)}</li></ul></li>`).join("") || "<li><em>None.</em></li>";
+  $("segm").textContent = num(DOC.settings.segment_m); $("wl").textContent = num(DOC.settings.wavelength_nm); $("toa").textContent = num(DOC.settings.top_of_atmosphere_m);
+  const obs = [...new Set(PLATES.map(e => e.observer.name))].sort();
+  $("colophon").innerHTML = `The observations are the work of ${obs.map(o => `<span class="sc">${esc(o)}</span>`).join(", ").replace(/, ([^,]*)$/, " and $1")}.<br>Reduced from <em>${esc(DOC.source_csv)}</em> by ${esc(DOC.generator)}, schema ${esc(DOC.schema_version)}, on ${esc(DOC.generated_utc.slice(0, 10))}.<br>Set in Fell types and Garamond. No figure herein has been computed afresh.`;
+}
+renderSummary(); renderRest();
+const h0 = location.hash.slice(1);
+S.id = BYID[h0] && !BYID[h0].flags.excluded ? h0 : (SUM[0] || PLATES[0]).id; renderPlate();
+if (BYID[h0] && !BYID[h0].flags.excluded) $("plates").scrollIntoView();
+addEventListener("hashchange", () => { const h = location.hash.slice(1); if (BYID[h] && h !== S.id) go(h, true); });
+</script>
+</body>
+</html>

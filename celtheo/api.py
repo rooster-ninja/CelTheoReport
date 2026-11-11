@@ -113,6 +113,18 @@ def finalize(results):
             else:
                 f["warnings"].append(f"terrain {b['u_m'] / 1000:+.1f} km from the peak rises above the summit on the {line.replace('_', ' ')} line")
             break
+        # two-station quantities for the celestial-navigation view (O1 at the observer, O2 at the peak)
+        cm, ap, cs, gm = ev.get("comparison"), ev.get("astropy") or {}, ev.get("csv") or {}, ev.get("geometry") or {}
+        if cm is not None:
+            num = lambda x: isinstance(x, (int, float))
+            if num(ap.get("true_alt_peak_deg")) and num(ap.get("true_alt_obs_deg")):
+                cm["star_shift_astropy_deg"] = ap["true_alt_peak_deg"] - ap["true_alt_obs_deg"]
+                if num(gm.get("central_angle_deg")):
+                    cm["star_shift_astropy_minus_central_angle_arcsec"] = round((cm["star_shift_astropy_deg"] - gm["central_angle_deg"]) * 3600, 2)
+            if num(cs.get("true_peak")) and num(cs.get("true_obs")):
+                cm["star_shift_csv_deg"] = cs["true_peak"] - cs["true_obs"]
+            if num(cs.get("true_peak")) and num(gm.get("planar_angle_deg")):
+                cm["ho_csv_deg"] = cs["true_peak"] - gm["planar_angle_deg"]
         if (ev.get("star") or {}).get("kind") == "body":
             f["warnings"].append("Moon: astropy gives the centre; the occultation was timed on a limb (about ±15′), so residuals are not comparable with stars")
         f["in_summary"] = bool(not f.get("excluded") and not f.get("is_test") and f.get("target_type") == "peak"

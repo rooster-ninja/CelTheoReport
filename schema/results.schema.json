@@ -438,6 +438,22 @@
             },
             "csv_implied_alt_residual_arcsec": {
               "$ref": "#/$defs/num"
+            },
+            "star_shift_astropy_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Star's true altitude at the peak minus at the observer, same instant (astropy)."
+            },
+            "star_shift_astropy_minus_central_angle_arcsec": {
+              "$ref": "#/$defs/num",
+              "description": "star_shift_astropy_deg − geometry.central_angle_deg. On a globe with a star at infinity the shift equals the central angle along the star's azimuth."
+            },
+            "star_shift_csv_deg": {
+              "$ref": "#/$defs/num",
+              "description": "♈︎Δ: CSV Star→Peak ♈︎ − Star→Obs ♈︎."
+            },
+            "ho_csv_deg": {
+              "$ref": "#/$defs/num",
+              "description": "θ₂ − θ₁: CSV Star→Peak ♈︎ − geometry.planar_angle_deg (the Desmos Hₒ)."
             }
           }
         },

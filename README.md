@@ -57,6 +57,12 @@ everything it fetches:
 
 Commit both so later runs are reproducible offline. `out/` is tracked too, so the results (including terrain profiles, which need network access to regenerate) travel with the repo.
 
+## Report
+
+`report/index.html` is the memoir-style interactive report. It reads `report/data.js`, which
+`python report/build.py` writes from `out/`. The report only formats values; anything it shows
+is computed by the pipeline.
+
 ## Inputs
 
 | Path | What |
