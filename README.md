@@ -54,7 +54,7 @@ everything it fetches:
 - **stars** in `data/stars_cache.json`;
 - **soundings** in `data/soundings/{wmo}_{YYYY-MM-DDTHH}Z.csv`.
 
-Commit both so later runs are reproducible offline.
+Commit both so later runs are reproducible offline. `out/` is tracked too, so the results (including terrain profiles, which need network access to regenerate) travel with the repo.
 
 ## Inputs
 
