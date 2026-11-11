@@ -27,5 +27,9 @@
  "north-peak-hd56813-2025-03-24": {
   "utc_offset_h": -7,
   "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
+ },
+ "hounds-tooth-hd199828-2025-06-28": {
+  "utc_offset_h": -7,
+  "note": "CSV angles (Stellarium) fit UTC-7: +60 min clock shift puts the star on the peak azimuth; approved by observer 2026-11-10"
  }
 }
