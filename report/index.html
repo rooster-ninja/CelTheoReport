@@ -102,6 +102,14 @@ dl .h { grid-column: 1 / -1; font-family: var(--caps); font-style: normal; color
 #tip { position: fixed; pointer-events: none; background: var(--paper); border: 1px solid var(--ink); padding: .3rem .55rem; font-size: .95rem; max-width: 19rem; display: none; z-index: 5; font-variant-numeric: oldstyle-nums tabular-nums; }
 ul.err { list-style: none; padding: 0; margin: 0; } ul.err > li { margin-bottom: .7rem; } ul.err ul { margin: .1rem 0 0; padding-left: 1.3rem; font-size: 1.02rem; }
 .colophon { text-align: center; font-size: 1.02rem; color: var(--ink-soft); }
+.navbar { display: flex; justify-content: flex-end; margin-bottom: .3rem; }
+.play { font: inherit; font-size: .95rem; font-style: italic; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); border-radius: 0; padding: .1rem .6rem; cursor: pointer; }
+.play:hover { background: var(--paper-deep); }
+@keyframes flashAng { 0%, 100% { stroke-width: 1.4px; } 20%, 60% { stroke-width: 4px; stroke: #b0412f; } 40%, 80% { stroke-width: 1.4px; } }
+@keyframes flashPar { 0%, 30% { stroke: var(--ink); } 45%, 75% { stroke: #1f4e6b; stroke-width: 3px; } 60%, 100% { stroke: var(--ink); } }
+.navplane.flashing .ang { animation: flashAng 1.6s ease-in-out 1; }
+.navplane.flashing .par { animation: flashPar 2.6s ease-in-out .6s 1; }
+@media (prefers-reduced-motion: reduce) { .navplane.flashing .ang, .navplane.flashing .par { animation: none; } }
 svg text { font-family: var(--body); fill: var(--ink); font-variant-numeric: lining-nums; }
 svg .cap { font-family: var(--caps); letter-spacing: .06em; }
 svg .it { font-style: italic; }
@@ -411,6 +419,63 @@ function figTopo(e, S) {
     (T ? `Hatched ground is the globe's, falling away from the tangent plane at the summit; the broken outline is the same ground laid flat.` : `No ground is drawn for an aircraft.`) + `</figcaption></figure>`;
 }
 
+// ---------- Fig. 5 frame builder: distance plane, carried copy at fraction f of D ----------
+function navPlane(e, f, flash) {
+  const c = e.csv || {}, g = e.geometry || {}, cm = e.comparison || {}, W = 1000, H = 452, RS = 185, Gy = 332, el0 = 20, O1 = 215, O2 = O1 + 2 * RS + 115;
+  const rad = d => d * Math.PI / 180, dA = cm.star_shift_csv_deg;
+  const kq = ok(dA) ? Math.sign(dA) * Math.min(16, 14 * Math.sqrt(Math.abs(dA) * 60 / 54)) : 0;
+  const ox = O1 + f * (O2 - O1), elf = el0 + f * kq, rise = RS * Math.sin(rad(el0)), run = RS * Math.cos(rad(el0));
+  const th = ok(c.true_obs) && ok(c.true_peak) ? c.true_obs + f * (c.true_peak - c.true_obs) : null, dist = ok(g.csv_distance_m) ? f * g.csv_distance_m : null;
+  const starP = (x, y, r) => { let d = ""; for (let i = 0; i < 10; i++) { const t = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .42 : r; d += (i ? "L" : "M") + (x + rr * Math.cos(t)).toFixed(1) + " " + (y + rr * Math.sin(t)).toFixed(1); } return `<path d="${d}Z" fill="#f3ecd9" stroke="${INK}" stroke-width="1"/>`; };
+  const U = el => [Math.cos(rad(el)), -Math.sin(rad(el))];
+  // one celestial sphere with its summit (combo), observer at (x, Gy), star at drawn elevation el
+  const combo = (x, el, n, wedge) => { const u = U(el), S = [x + RS * u[0], Gy + RS * u[1]], F = [x + run, Gy], P = [F[0], Gy - rise]; let q = "";
+    q += `<path d="M${x - RS} ${Gy}A${RS} ${RS} 0 0 1 ${x + RS} ${Gy}" fill="none" stroke="${INK}" stroke-width="1"/>`;
+    q += `<line x1="${x}" x2="${x}" y1="${Gy - RS - 7}" y2="${Gy - RS + 7}" stroke="${INK}"/><text x="${x}" y="${Gy - RS - 11}" font-size="12" text-anchor="middle" class="it">zenith</text>`;
+    q += `<text x="${x - RS + 6}" y="${Gy - 6}" font-size="12" class="it">horizon at O${n}</text>`;
+    q += `<path d="M${P[0] - 52} ${Gy}L${P[0]} ${P[1]}L${P[0] + 40} ${Gy}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+    q += `<path d="M${x} ${Gy}H${F[0]}V${P[1]}Z" fill="none" stroke="${PL}" stroke-width="1" stroke-opacity=".55"/>`;
+    if (wedge) { const w = U(el0); q += `<path d="M${x} ${Gy}L${(x + RS * w[0]).toFixed(1)} ${(Gy + RS * w[1]).toFixed(1)}A${RS} ${RS} 0 0 0 ${S[0].toFixed(1)} ${S[1].toFixed(1)}Z" fill="url(#hatch)" stroke="none"/>`; }
+    q += `<line class="ang" x1="${(x - 70 * u[0]).toFixed(1)}" y1="${(Gy - 70 * u[1]).toFixed(1)}" x2="${(x + (RS + 46) * u[0]).toFixed(1)}" y2="${(Gy + (RS + 46) * u[1]).toFixed(1)}" stroke="${PL}" stroke-width="1.4"/>`;
+    q += `<path class="ang" d="M${x + 58} ${Gy}A58 58 0 0 0 ${(x + 58 * u[0]).toFixed(1)} ${(Gy + 58 * u[1]).toFixed(1)}" fill="none" stroke="${PL}" stroke-width="1.2"/><text x="${x + 66}" y="${Gy - 7}" font-size="17" fill="${PL}" class="it">θ${n === 1 ? "₁" : "₂"}</text>`;
+    q += starP(S[0], S[1], 11) + `<circle cx="${x}" cy="${Gy}" r="4.5" fill="${INK}"/><text x="${x - 30}" y="${Gy + 24}" font-size="17" class="cap">O${n}</text>`;
+    return { q, S }; };
+  const o = [];
+  o.push(`<rect x="14" y="${Gy}" width="${W - 28}" height="8" fill="url(#hatch)"/><line class="par" x1="14" x2="${W - 14}" y1="${Gy}" y2="${Gy}" stroke="${INK}" stroke-width="1.6"/>`);
+  o.push(`<line class="par" x1="14" x2="${W - 14}" y1="${Gy - rise}" y2="${Gy - rise}" stroke="${INK}" stroke-width=".8"/><text x="18" y="${Gy - rise - 6}" font-size="12" class="it">through the summit, parallel to the ground</text>`);
+  const A = combo(O1, el0, 1, false); o.push(`<g>${A.q}</g>`);
+  o.push(`<text x="${(A.S[0] - 16).toFixed(1)}" y="${(A.S[1] - 14).toFixed(1)}" font-size="17" text-anchor="end" class="cap">P1</text>`);
+  o.push(`<text x="${O1 - RS + 6}" y="${Gy - rise - 24}" font-size="12.5" fill="${PL}">♈︎ at observer ${dms(c.true_obs)}</text>`);
+  const B = combo(ox, elf, 2, f > 0); o.push(`<g opacity="${f < 1 ? .55 : 1}">${B.q}</g>`);
+  if (f > 0) o.push(`<text x="${Math.min(B.S[0] + 14, W - 16).toFixed(1)}" y="${(B.S[1] - 14).toFixed(1)}" font-size="12.5" fill="${PL}" text-anchor="${B.S[0] + 200 > W ? "end" : "start"}">♈︎ ${dms(th)}</text>`);
+  if (flash) { // corresponding angle at O2: the ray it would have if parallel to O1's
+    const u = U(el0); o.push(`<line class="par ghost" x1="${ox}" y1="${Gy}" x2="${(ox + (RS + 46) * u[0]).toFixed(1)}" y2="${(Gy + (RS + 46) * u[1]).toFixed(1)}" stroke="${INK}" stroke-width="1.2" stroke-dasharray="2 4"/>`);
+    for (const [x, y] of [[O1 - 110, Gy], [ox + RS + 30, Gy], [O1 - 110, Gy - rise], [ox + RS + 30, Gy - rise]]) o.push(`<path class="par" d="M${x} ${y - 5}l7 5l-7 5M${x + 7} ${y - 5}l7 5l-7 5" fill="none" stroke="${INK}" stroke-width="1.3"/>`);
+    o.push(`<text x="${W - 18}" y="${Gy - rise - 28}" font-size="12.5" text-anchor="end" class="it">corresponding angles: equal would mean parallel</text>`); }
+  o.push(`<path d="M${O1} ${Gy + 14}v44M${ox} ${Gy + 14}v44M${O1} ${Gy + 40}H${ox}" stroke="${INK}" stroke-width="1" fill="none"/>`);
+  o.push(`<text x="${(O1 + O2) / 2}" y="${Gy + 33}" font-size="15" text-anchor="middle">d = ${num(dist)} m ${f >= 1 ? `<tspan class="it">gives</tspan> ♈︎Δ = ${dms(dA)}` : ""}</text>`);
+  o.push(`<text x="${O1}" y="${Gy + 74}" font-size="12" text-anchor="middle" class="it">T = 0</text><text x="${ox}" y="${Gy + 74}" font-size="12" text-anchor="middle" class="it">T = 0</text>`);
+  o.push(`<text x="18" y="22" font-size="14.5">θ₁, star at the observer (♈︎) = ${dms(c.true_obs)}</text><text x="18" y="42" font-size="14.5">θ₂, star at the summit (♈︎) = ${dms(c.true_peak)}</text><text x="18" y="62" font-size="14.5">carried ${num(dist)} m of ${num(g.csv_distance_m)} m: star at ${dms(th)}</text>`);
+  o.push(`<text x="${W - 18}" y="${H - 10}" font-size="12" text-anchor="end" class="it">Angles drawn larger than true.</text>`);
+  return o.join("");
+}
+let NAV_RAF = null, NAV_OBS = null;
+function navAnim(e) {
+  const fig = document.querySelector(".navplane"); if (!fig) return;
+  const svgEl = fig.querySelector("svg"), btn = fig.querySelector(".play"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const draw = (f, flash) => { svgEl.innerHTML = DEFS + navPlane(e, f, flash); };
+  draw(1, true);
+  const play = () => { if (NAV_RAF) cancelAnimationFrame(NAV_RAF); if (reduce) { draw(1, true); return; }
+    fig.classList.remove("flashing"); const t0 = performance.now(), hold = 500, slide = 4200;
+    const step = now => { const t = now - t0, x = Math.max(0, Math.min(1, (t - hold) / slide)), f = x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+      draw(f, false);
+      if (x < 1) NAV_RAF = requestAnimationFrame(step); else { draw(1, true); void fig.offsetWidth; fig.classList.add("flashing"); NAV_RAF = null; } };
+    NAV_RAF = requestAnimationFrame(step); };
+  btn.onclick = play;
+  if (NAV_OBS) NAV_OBS.disconnect();
+  if (!reduce && "IntersectionObserver" in window) { NAV_OBS = new IntersectionObserver(ent => { if (ent[0].isIntersecting) { NAV_OBS.disconnect(); play(); } }, { threshold: .6 }); NAV_OBS.observe(fig); }
+}
+
 // ---------- Figs. 5, 6: celestial navigation view, after the author's celestial-theodolite diagram ----------
 // Two celestial spheres, O1 at the observer and O2 at the summit, at the same instant. Angles are drawn larger than true.
 function figNav(e, globe) {
@@ -429,20 +494,7 @@ function figNav(e, globe) {
     q += starP(Sx, Sy, 11) + `<circle r="4.5" fill="${INK}"/><text x="-30" y="24" font-size="17" class="cap">O${n}</text><text x="${(Sx - 14).toFixed(1)}" y="${(Sy - 12).toFixed(1)}" font-size="17" text-anchor="end" class="cap">P${n}</text>`;
     return q; };
   const mount = (x, gy, top) => `<path d="M${x - 52} ${gy}L${x} ${top}L${x + 40} ${gy}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
-  if (!globe) { const Gy = 332, el = 20, O1 = 215, O2 = O1 + 2 * RS + 115, dA = cm.star_shift_csv_deg;
-    const kq = ok(dA) ? Math.sign(dA) * Math.min(16, 14 * Math.sqrt(Math.abs(dA) * 60 / 54)) : 0, rise = RS * Math.sin(rad(el)), run = RS * Math.cos(rad(el));
-    o.push(`<line x1="14" x2="${W - 14}" y1="${Gy}" y2="${Gy}" stroke="${INK}" stroke-width="1.6"/><rect x="14" y="${Gy}" width="${W - 28}" height="8" fill="url(#hatch)"/>`);
-    o.push(`<line x1="14" x2="${W - 14}" y1="${Gy - rise}" y2="${Gy - rise}" stroke="${INK}" stroke-width=".8"/><text x="18" y="${Gy - rise - 6}" font-size="12" class="it">through the summit, parallel to the ground</text>`);
-    o.push(mount(O1 + run, Gy, Gy - rise) + mount(O2, Gy, Gy - rise));
-    o.push(`<g transform="translate(${O1} ${Gy})">${sphere(1, el, 0)}</g><g transform="translate(${O2} ${Gy})">${sphere(2, el, kq)}</g>`);
-    const wl = rad(el - kq); o.push(`<text x="${W - 16}" y="${(Gy - RS * Math.sin(wl) + 17).toFixed(1)}" font-size="12.5" fill="${col}" text-anchor="end">♈︎ at observer ${dms(c.true_obs)}</text>`);
-    o.push(`<text x="${Math.min(O2 + run, W - 92).toFixed(1)}" y="${(Gy - rise - 30).toFixed(1)}" font-size="12.5" fill="${col}" text-anchor="middle">♈︎ at summit ${dms(c.true_peak)}</text>`);
-    o.push(`<path d="M${O1} ${Gy + 14}v44M${O2} ${Gy + 14}v44M${O1} ${Gy + 40}H${O2}" stroke="${INK}" stroke-width="1" fill="none"/>`);
-    o.push(`<text x="${(O1 + O2) / 2}" y="${Gy + 33}" font-size="15" text-anchor="middle">D = ${num(g.csv_distance_m)} m <tspan class="it">gives</tspan> ♈︎Δ = ${dms(dA)}</text>`);
-    o.push(`<text x="${O1}" y="${Gy + 74}" font-size="12" text-anchor="middle" class="it">T = 0</text><text x="${O2}" y="${Gy + 74}" font-size="12" text-anchor="middle" class="it">T = 0</text>`);
-    o.push(`<text x="18" y="22" font-size="14.5">θ₁, summit by rise over run = ${dms(g.planar_angle_deg)}</text><text x="18" y="42" font-size="14.5">θ₂, star at the summit (♈︎) = ${dms(c.true_peak)}</text><text x="18" y="62" font-size="14.5">θ₂ − θ₁ = Hₒ = ${dms(cm.ho_csv_deg)}</text>`);
-    o.push(`<text x="${W - 18}" y="${H - 10}" font-size="12" text-anchor="end" class="it">Angles drawn larger than true.</text>`);
-    return `<figure>${svg({ W, H, clip: "" }, o.join(""))}<figcaption><b>Fig. 5.</b> The distance plane. The observer is carried from O₁ to the summit at O₂ at the same instant. The hatched wedge is ♈︎Δ, the recorded change in the star's true altitude between the two places, set against the distance D.</figcaption></figure>`; }
+  if (!globe) return `<figure class="navplane" data-id="${e.id}"><div class="navbar"><button type="button" class="play" aria-label="Set Fig. 5 in motion">▸ Set in motion</button></div>${svg({ W, H, clip: "" }, navPlane(e, 1, false))}<figcaption><b>Fig. 5.</b> The distance plane. The original sphere and summit stay at O₁, the star on the summit at its true altitude there. A copy is carried to O₂ at the same instant, and the star rises to its recorded altitude at the summit. Intermediate altitudes are interpolated linearly between the two recorded values. At the end the corresponding angles are marked: had the angle at O₂ equalled the angle at O₁, the two rays would be parallel (dotted at O₂) and the star would lie on the line through the summit, parallel to the ground.</figcaption></figure>`;
   const be = 7, el = 20, rho = (RS + 57.5) / Math.sin(rad(be)), cx = 470, top = 318 - rho * (1 - Math.cos(rad(be))), cy = top + rho;
   const st = d => [cx + rho * Math.sin(rad(d)), cy - rho * Math.cos(rad(d))], A = st(-be), B = st(be); let arc = "";
   for (let d = -13.5; d <= 15; d += .5) { const p = st(d); arc += (arc ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }
@@ -548,6 +600,7 @@ function renderPlate() {
     <div>${figAtmo(e)}<h4 style="margin-top:1rem">Provenance</h4>${provenance(e)}</div></div>
   <div class="notes"><span class="sc">Notes.</span> ${w.length ? `<ol>${w.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : `<em>None attached to this observation.</em>`}
     <div class="foot">Row ${e.row} of the spreadsheet${e.csv && e.csv.ge_check ? `; its own check of the time reads ${esc(e.csv.ge_check)}` : ""}. Residuals are observed less computed.</div></div>`;
+  navAnim(e);
   $("selPeak").onchange = ev => { const f = PLATES.find(p => p.peak.name === ev.target.value); go(f.id, false); };
   $("selStar").onchange = ev => go(ev.target.value, false);
   $("plate").querySelectorAll(".tog button").forEach(b => b.onclick = () => { S[b.dataset.k] = b.dataset.k === "ho" ? b.dataset.v === "true" : b.dataset.v; renderPlate(); });
