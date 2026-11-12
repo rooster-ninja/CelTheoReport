@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import csv
+import math
 import json
 import time
 from dataclasses import asdict
@@ -125,6 +126,12 @@ def finalize(results):
                 cm["star_shift_csv_deg"] = cs["true_peak"] - cs["true_obs"]
             if num(cs.get("true_peak")) and num(gm.get("planar_angle_deg")):
                 cm["ho_csv_deg"] = cs["true_peak"] - gm["planar_angle_deg"]
+        # drop as an angle: tangent-chord (inscribed angle) theorem gives gamma/2; the frame coordinates give it directly too
+        if isinstance(gm.get("central_angle_deg"), (int, float)):
+            gm["drop_angle_deg"] = gm["central_angle_deg"] / 2.0
+            og, op = gm.get("observer_globe_xz_m"), gm.get("observer_planar_xz_m")
+            if og and op and og[0]:
+                gm["drop_angle_frame_deg"] = math.degrees(math.atan2(op[1] - og[1], abs(og[0])))
         rf = ev.get("refraction") or {}
         app = rf.get("star_apparent_ciddor_obs_deg")
         if cm is not None and isinstance(app, (int, float)):

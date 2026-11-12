@@ -1192,7 +1192,9 @@
     "peak_xz_m": [
      0.0,
      4300.0
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22730467312169758
    },
    "comparison": {
     "globe_ciddor_arcsec": 23.76,
@@ -2683,7 +2685,9 @@
     "peak_xz_m": [
      0.0,
      2870.0
-    ]
+    ],
+    "drop_angle_deg": 0.16065882777682894,
+    "drop_angle_frame_deg": 0.16066496927520735
    },
    "comparison": {
     "globe_ciddor_arcsec": 109.76,
@@ -4090,7 +4094,9 @@
     "peak_xz_m": [
      0.0,
      2883.0
-    ]
+    ],
+    "drop_angle_deg": 0.19132947000944822,
+    "drop_angle_frame_deg": 0.19133588538533536
    },
    "comparison": {
     "globe_ciddor_arcsec": 67.31,
@@ -5509,7 +5515,9 @@
     "peak_xz_m": [
      0.0,
      3001.0
-    ]
+    ],
+    "drop_angle_deg": 0.22349297172111363,
+    "drop_angle_frame_deg": 0.22349871893782108
    },
    "comparison": {
     "globe_ciddor_arcsec": 19.04,
@@ -6976,7 +6984,9 @@
     "peak_xz_m": [
      0.0,
      3506.0
-    ]
+    ],
+    "drop_angle_deg": 0.2141579523610616,
+    "drop_angle_frame_deg": 0.21415256952927508
    },
    "comparison": {
     "globe_ciddor_arcsec": 48.56,
@@ -8421,7 +8431,9 @@
     "peak_xz_m": [
      0.0,
      3084.9
-    ]
+    ],
+    "drop_angle_deg": 0.23660458721594718,
+    "drop_angle_frame_deg": 0.23660373051587108
    },
    "comparison": {
     "globe_ciddor_arcsec": 154.06,
@@ -9837,7 +9849,9 @@
     "peak_xz_m": [
      0.0,
      3765.0
-    ]
+    ],
+    "drop_angle_deg": 0.5876967018064977,
+    "drop_angle_frame_deg": 0.587696696384562
    },
    "comparison": {
     "globe_ciddor_arcsec": -143.99,
@@ -11284,7 +11298,9 @@
     "peak_xz_m": [
      0.0,
      3765.0
-    ]
+    ],
+    "drop_angle_deg": 0.5876967018064977,
+    "drop_angle_frame_deg": 0.587696696384562
    },
    "comparison": {
     "globe_ciddor_arcsec": -109.89,
@@ -12731,7 +12747,9 @@
     "peak_xz_m": [
      0.0,
      3765.0
-    ]
+    ],
+    "drop_angle_deg": 0.5876967018064977,
+    "drop_angle_frame_deg": 0.587696696384562
    },
    "comparison": {
     "globe_ciddor_arcsec": -108.92,
@@ -14188,7 +14206,9 @@
     "peak_xz_m": [
      0.0,
      1642.0
-    ]
+    ],
+    "drop_angle_deg": 0.22021197063230502,
+    "drop_angle_frame_deg": 0.22021697119587416
    },
    "comparison": {
     "globe_ciddor_arcsec": -17.31,
@@ -15845,7 +15865,9 @@
     "peak_xz_m": [
      0.0,
      3067.0
-    ]
+    ],
+    "drop_angle_deg": 0.039519056488441416,
+    "drop_angle_frame_deg": 0.03949547753825582
    },
    "comparison": {
     "globe_ciddor_arcsec": -37.42,
@@ -17380,7 +17402,9 @@
     "peak_xz_m": [
      0.0,
      650.0
-    ]
+    ],
+    "drop_angle_deg": 0.09916397830808035,
+    "drop_angle_frame_deg": 0.09916557352754236
    },
    "comparison": {
     "globe_ciddor_arcsec": 37.17,
@@ -18915,7 +18939,9 @@
     "peak_xz_m": [
      0.0,
      636.0
-    ]
+    ],
+    "drop_angle_deg": 0.09915129305732429,
+    "drop_angle_frame_deg": 0.099152662258433
    },
    "comparison": {
     "globe_ciddor_arcsec": 34.03,
@@ -20406,7 +20432,9 @@
     "peak_xz_m": [
      0.0,
      650.0
-    ]
+    ],
+    "drop_angle_deg": 0.18371746543749326,
+    "drop_angle_frame_deg": 0.183712311689256
    },
    "comparison": {
     "globe_ciddor_arcsec": 89.14,
@@ -21897,7 +21925,9 @@
     "peak_xz_m": [
      0.0,
      631.0
-    ]
+    ],
+    "drop_angle_deg": 0.18372661661082212,
+    "drop_angle_frame_deg": 0.18373131434269288
    },
    "comparison": {
     "globe_ciddor_arcsec": -50.98,
@@ -23514,7 +23544,9 @@
     "peak_xz_m": [
      0.0,
      1424.0
-    ]
+    ],
+    "drop_angle_deg": 0.07499282071087744,
+    "drop_angle_frame_deg": 0.07498349301152714
    },
    "comparison": {
     "globe_ciddor_arcsec": 46.3,
@@ -24940,7 +24972,9 @@
     "peak_xz_m": [
      0.0,
      2000.0
-    ]
+    ],
+    "drop_angle_deg": 0.2451177858074061,
+    "drop_angle_frame_deg": 0.24511767080822083
    },
    "comparison": {
     "globe_ciddor_arcsec": -142.79,
@@ -26393,7 +26427,9 @@
     "peak_xz_m": [
      0.0,
      2000.0
-    ]
+    ],
+    "drop_angle_deg": 0.2451177858074061,
+    "drop_angle_frame_deg": 0.24511767080822083
    },
    "comparison": {
     "globe_ciddor_arcsec": -229.19,
@@ -27878,7 +27914,9 @@
     "peak_xz_m": [
      0.0,
      1877.0
-    ]
+    ],
+    "drop_angle_deg": 0.23345679792297602,
+    "drop_angle_frame_deg": 0.23345918296675186
    },
    "comparison": {
     "globe_ciddor_arcsec": -123.24,
@@ -29357,7 +29395,9 @@
     "peak_xz_m": [
      0.0,
      1848.0
-    ]
+    ],
+    "drop_angle_deg": 0.23036240342838923,
+    "drop_angle_frame_deg": 0.2303633135255561
    },
    "comparison": {
     "globe_ciddor_arcsec": 88.58,
@@ -30840,7 +30880,9 @@
     "peak_xz_m": [
      0.0,
      1845.0
-    ]
+    ],
+    "drop_angle_deg": 0.2259079668961738,
+    "drop_angle_frame_deg": 0.22590297624739478
    },
    "comparison": {
     "globe_ciddor_arcsec": -1122.72,
@@ -32275,7 +32317,9 @@
     "peak_xz_m": [
      0.0,
      4300.0
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22730467312169758
    },
    "comparison": {
     "globe_ciddor_arcsec": 23.76,
@@ -33769,7 +33813,9 @@
     "peak_xz_m": [
      0.0,
      2870.0
-    ]
+    ],
+    "drop_angle_deg": 0.16065882777682894,
+    "drop_angle_frame_deg": 0.16066496927520735
    },
    "comparison": {
     "globe_ciddor_arcsec": 109.76,
@@ -35192,7 +35238,9 @@
     "peak_xz_m": [
      0.0,
      4300.0
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22730467312169758
    },
    "comparison": {
     "globe_ciddor_arcsec": 715.19,
@@ -36684,7 +36732,9 @@
     "peak_xz_m": [
      0.0,
      2870.0
-    ]
+    ],
+    "drop_angle_deg": 0.16065882777682894,
+    "drop_angle_frame_deg": 0.16066496927520735
    },
    "comparison": {
     "globe_ciddor_arcsec": 109.76,
@@ -37704,7 +37754,9 @@
     "peak_xz_m": [
      0.0,
      965.0
-    ]
+    ],
+    "drop_angle_deg": 0.004844779295539746,
+    "drop_angle_frame_deg": 0.004774206225576171
    },
    "comparison": {
     "globe_ciddor_arcsec": 8768.63,
@@ -39213,7 +39265,9 @@
     "peak_xz_m": [
      0.0,
      4300.0
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22732729026475926
    },
    "comparison": {
     "globe_ciddor_arcsec": 49.45,
@@ -40634,7 +40688,9 @@
     "peak_xz_m": [
      0.0,
      4299.8
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22732729026475926
    },
    "comparison": {
     "globe_ciddor_arcsec": 38.11,
@@ -42055,7 +42111,9 @@
     "peak_xz_m": [
      0.0,
      4299.8
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22732729026475926
    },
    "comparison": {
     "globe_ciddor_arcsec": -2.57,
@@ -43445,7 +43503,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -165.75,
@@ -44835,7 +44895,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -78.69,
@@ -46225,7 +46287,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -167.62,
@@ -47617,7 +47681,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -197.36,
@@ -49009,7 +49075,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -228.82,
@@ -50401,7 +50469,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -100.11,
@@ -51791,7 +51861,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -161.68,
@@ -53181,7 +53253,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -147.93,
@@ -54571,7 +54645,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -81.87,
@@ -55961,7 +56037,9 @@
     "peak_xz_m": [
      0.0,
      1506.0
-    ]
+    ],
+    "drop_angle_deg": 0.02513541335029349,
+    "drop_angle_frame_deg": 0.025143623196800087
    },
    "comparison": {
     "globe_ciddor_arcsec": -141.88,
@@ -57384,7 +57462,9 @@
     "peak_xz_m": [
      0.0,
      4300.0
-    ]
+    ],
+    "drop_angle_deg": 0.22730366131067506,
+    "drop_angle_frame_deg": 0.22730467312169758
    },
    "comparison": {
     "globe_ciddor_arcsec": 0.77,
@@ -58923,7 +59003,9 @@
     "peak_xz_m": [
      0.0,
      10375.5
-    ]
+    ],
+    "drop_angle_deg": 0.15896326105673858,
+    "drop_angle_frame_deg": 0.15891842737449702
    },
    "comparison": {
     "globe_ciddor_arcsec": -61546.83,
@@ -60157,7 +60239,9 @@
     "peak_xz_m": [
      0.0,
      9466.8
-    ]
+    ],
+    "drop_angle_deg": 0.31633897337621214,
+    "drop_angle_frame_deg": 0.31632482320280536
    },
    "comparison": {
     "globe_ciddor_arcsec": -95600.92,
@@ -61386,7 +61470,9 @@
     "peak_xz_m": [
      0.0,
      11898.2
-    ]
+    ],
+    "drop_angle_deg": 0.2533494753573983,
+    "drop_angle_frame_deg": 0.25335307275470187
    },
    "comparison": {
     "globe_ciddor_arcsec": -2814.6,
@@ -62617,7 +62703,9 @@
     "peak_xz_m": [
      0.0,
      9392.2
-    ]
+    ],
+    "drop_angle_deg": 0.40455423278178054,
+    "drop_angle_frame_deg": 0.4045567147318589
    },
    "comparison": {
     "globe_ciddor_arcsec": -42481.43,
@@ -63840,7 +63928,9 @@
     "peak_xz_m": [
      0.0,
      2706.0
-    ]
+    ],
+    "drop_angle_deg": 0.3491134414075624,
+    "drop_angle_frame_deg": 0.3491123319829974
    },
    "comparison": {
     "globe_ciddor_arcsec": -5.96,
@@ -65303,7 +65393,9 @@
     "peak_xz_m": [
      0.0,
      2496.0
-    ]
+    ],
+    "drop_angle_deg": 0.26792854998996973,
+    "drop_angle_frame_deg": 0.267927778833724
    },
    "comparison": {
     "globe_ciddor_arcsec": -48.58,
@@ -66764,7 +66856,9 @@
     "peak_xz_m": [
      0.0,
      2349.0
-    ]
+    ],
+    "drop_angle_deg": 0.2628128931417872,
+    "drop_angle_frame_deg": 0.2628101934123574
    },
    "comparison": {
     "globe_ciddor_arcsec": 212.25,
@@ -68178,7 +68272,9 @@
     "peak_xz_m": [
      0.0,
      2828.0
-    ]
+    ],
+    "drop_angle_deg": 0.3501983724149124,
+    "drop_angle_frame_deg": 0.3501960344036197
    },
    "comparison": {
     "globe_ciddor_arcsec": -36.85,
@@ -69596,7 +69692,9 @@
     "peak_xz_m": [
      0.0,
      2374.0
-    ]
+    ],
+    "drop_angle_deg": 0.27149307360585345,
+    "drop_angle_frame_deg": 0.27149406829309125
    },
    "comparison": {
     "globe_ciddor_arcsec": 402.87,

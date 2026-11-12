@@ -329,7 +329,7 @@ function figObserver(e, S) {
   const g = e.geometry, op = g.observer_planar_xz_m, og = g.observer_globe_xz_m, pk = g.peak_xz_m;
   if (!op || !og) return "";
   const drop = g.globe_observer_drop_m, half = Math.max(40, 2.4 * Math.abs(drop));
-  const xd = [Math.min(op[0], og[0]) - half * .55, op[0] + half * 1.45], zd = [Math.min(op[1], og[1]) - half * .3, Math.max(op[1], og[1]) + half * .55];
+  const xd = [Math.min(op[0], og[0]) - half * .55, op[0] + half * 1.45], zd = [Math.min(op[1], og[1]) - half * .3, Math.max(op[1], og[1]) + half * .9];
   const F = frame(380, 280, { l: 50, r: 8, t: 8, b: 32 }, xd, zd, 1), T = lineFor(e, S.line);
   let s = axes(F, "distance from the summit, metres", "elevation, metres", 3, 4) + `<g clip-path="url(#${F.id})">`;
   if (T) { s += ground(F, pts(T, "gx", "gz", F.xlo - 2000, F.xhi + 2000).filter(p => p[0] >= F.xlo - 500 && p[0] <= F.xhi + 500), INK, true);
@@ -338,11 +338,21 @@ function figObserver(e, S) {
   s += `<path d="${P(F, through(F, op, pk))}" stroke="${PL}" stroke-width="1.1" stroke-dasharray="7 4" fill="none"/>`;
   if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
   else s += `<path d="${P(F, through(F, og, pk))}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
+  // chord from the globe observer to the summit's foot level: it rises at γ/2 toward the summit (tangent–chord angle);
+  // the planar observer's level is the tangent direction. Drawn from the frame points given.
+  s += `<path d="${P(F, [[F.xlo, op[1]], [F.xhi, op[1]]])}" stroke="${INK}" stroke-width=".7" stroke-dasharray="1 3"/>`;
+  s += `<path d="${P(F, [og, [0, op[1]]])}" stroke="${INK}" stroke-width=".9"/>`;
   s += `<path d="${P(F, [op, og])}" stroke="${INK}" stroke-width=".9" stroke-dasharray="2 3"/>`;
   s += `<rect x="${F.X(op[0]) - 4}" y="${F.Z(op[1]) - 4}" width="8" height="8" fill="${PL}"/><circle cx="${F.X(og[0])}" cy="${F.Z(og[1])}" r="4.5" fill="${G}"/></g>`;
   const mx = F.X((op[0] + og[0]) / 2) + 9, my = F.Z((op[1] + og[1]) / 2) + 4;
   s += `<text x="${mx}" y="${my}" font-size="12.5" class="cap">Drop ${num(drop, 1)} m</text>`;
-  return `<figure>${svg(F, s)}<figcaption><b>Fig. 2.</b> At the observer, true scale. The square is the planar observer; the disc is the globe observer, ${num(drop, 1)} m lower. The green wedge leaves the globe observer between the star's true and apparent directions.</figcaption></figure>`;
+  { const xr = F.xhi - (F.xhi - F.xlo) * .03, zc = og[1] + (op[1] - og[1]) * (xr - og[0]) / (0 - og[0]);
+    s += `<text x="${F.X(xr)}" y="${F.Z(zc) + 14}" font-size="11.5" text-anchor="end" class="it">chord to the summit, rising at γ/2 = ${dms(g.drop_angle_deg)}</text>`; }
+  { const bx = F.m.l + 6, by = F.m.t + 6, rows = [["Drop of the observer", num(drop, 1) + " m"], ["γ, angle at the centre", dms(g.central_angle_deg)], ["γ/2, drop as an angle", dms(g.drop_angle_deg)], ["from the frame", dms(g.drop_angle_frame_deg)]];
+    s += `<g transform="translate(${bx} ${by})"><rect width="196" height="${20 + rows.length * 15}" fill="#f3ecd9" stroke="${INK}" stroke-width=".8"/><text x="7" y="14" font-size="10.5" class="cap">Inscribed angle theorem</text>`;
+    rows.forEach((rw, i) => s += `<text x="7" y="${30 + i * 15}" font-size="10.5" class="it">${rw[0]}</text><text x="189" y="${30 + i * 15}" font-size="10.5" text-anchor="end">${rw[1]}</text>`);
+    s += `</g>`; }
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 2.</b> At the observer, true scale. The square is the planar observer; the disc is the globe observer, ${num(drop, 1)} m lower. Seen from the summit, the drop subtends γ/2, half the angle at the centre, by the inscribed angle theorem: the solid chord rises to the summit at that angle above the planar observer's level (dotted). The green wedge leaves the globe observer between the star's true and apparent directions.</figcaption></figure>`;
 }
 
 // ---------- Fig. 3: on the celestial sphere (altitudes at the observer) ----------
@@ -350,9 +360,7 @@ function figSphere(e, S) {
   const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, O = obst(e, "star_azimuth"), tc = (e.terrain || {}).comparison || {};
   const L = [], R = [];
   if (ok(a.true_alt_obs_deg)) L.push([a.true_alt_obs_deg, "★ true place", INK]);
-  if (S.ho && ok(r.star_apparent_ciddor_obs_deg)) L.push([r.star_apparent_ciddor_obs_deg, "★ apparent, Ciddor (AstronomyLive)", RF]);
-  if (ok(c.true_obs)) L.push([c.true_obs, "spreadsheet, true", "#5d4f3f"]);
-  if (S.ho && ok(c.app_obs)) L.push([c.app_obs, "spreadsheet, apparent", "#5d4f3f"]);
+  if (S.ho && ok(r.star_apparent_ciddor_obs_deg)) L.push([r.star_apparent_ciddor_obs_deg, "★ apparent (Ciddor)", RF]);
   const gTrue = ok(tc.globe_skyline_star_true_deg) ? tc.globe_skyline_star_true_deg : r.star_geometric_deg;
   if (ok(gTrue)) R.push([gTrue, "globe: star vanishes", G]);
   const gApp = O && O.globe_refracted && ok(O.globe_refracted.angle_deg) ? O.globe_refracted.angle_deg : r.peak_apparent_deg;
@@ -363,8 +371,6 @@ function figSphere(e, S) {
   let lo = Math.min(...all), hi = Math.max(...all); const pad = Math.max((hi - lo) * .12, 0.01); lo -= pad; hi += pad;
   const W = 380, H = 330, t = 26, b = 14, cx = W / 2, Y = v => t + (H - t - b) * (1 - (v - lo) / (hi - lo));
   let s = "";
-  if (S.ho && ok(a.true_alt_obs_deg) && ok(r.star_apparent_ciddor_obs_deg)) { const y1 = Y(r.star_apparent_ciddor_obs_deg), y2 = Y(a.true_alt_obs_deg);
-    s += `<path d="M${cx} ${y2}L${cx - 70} ${y2 - 4}L${cx - 70} ${y1 + 4}L${cx} ${y1}Z" fill="${RF}" fill-opacity=".17" stroke="${RF}" stroke-width=".6"/>`; }
   s += `<line x1="${cx}" x2="${cx}" y1="${t - 6}" y2="${H - b + 4}" stroke="${INK}" stroke-width="1"/>`;
   for (const v of nice(lo, hi, 6)) s += `<line x1="${cx - 3}" x2="${cx + 3}" y1="${Y(v)}" y2="${Y(v)}" stroke="${INK}" stroke-width=".7"/>`;
   s += `<text x="${cx - 12}" y="14" font-size="11.5" text-anchor="end" class="cap">The star</text><text x="${cx + 12}" y="14" font-size="11.5" class="cap">The hypotheses</text>`;
@@ -377,7 +383,7 @@ function figSphere(e, S) {
       s += `<text x="${tx}" y="${ly[i] - 1}" font-size="11.5" text-anchor="${an}" fill="${it[2]}" class="it">${it[1]}</text><text x="${tx}" y="${ly[i] + 11}" font-size="11.5" text-anchor="${an}">${dms(it[0])}</text>`; }); }
   side(L, -1); side(R, 1);
   const F = { W, H, clip: "" };
-  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere: altitudes at the observer at the recorded instant. The green wedge is the refraction of the star by the Ciddor ray trace, ${num(r.star_refraction_ciddor_obs_arcmin, 2)}′; Bennett gives ${num(r.star_refraction_bennett_obs_arcmin, 2)}′ and astropy ${num(r.star_refraction_erfa_obs_arcmin, 2)}′. Globe residual ${asec(pref(e, "globe_ciddor_arcsec"))}; plane ${asec(pref(e, "planar_geometric_arcsec"))}; plane with refraction ${asec(pref(e, "planar_refracted_arcsec"))}.</figcaption></figure>`;
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere: altitudes at the observer at the recorded instant. On the left, the star's true place and its apparent place by the Ciddor ray trace, ${num(r.star_refraction_ciddor_obs_arcmin, 2)}′ higher; Bennett gives ${num(r.star_refraction_bennett_obs_arcmin, 2)}′ and astropy ${num(r.star_refraction_erfa_obs_arcmin, 2)}′. Globe residual ${asec(pref(e, "globe_ciddor_arcsec"))}; plane ${asec(pref(e, "planar_geometric_arcsec"))}; plane with refraction ${asec(pref(e, "planar_refracted_arcsec"))}.</figcaption></figure>`;
 }
 
 // ---------- Fig. 4: topographical side view ----------
@@ -486,10 +492,9 @@ function anglesTable(e) {
   const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, g = e.geometry || {}, O = obst(e, "star_azimuth") || {}, tc = (e.terrain || {}).comparison || {};
   const rows = [["Star, true, at the observer", a.true_alt_obs_deg], ["Star, apparent, Ciddor (AstronomyLive)", r.star_apparent_ciddor_obs_deg], ["Star, apparent, astropy (ERFA)", a.erfa_apparent_alt_obs_deg],
     ["Star, true, at the summit", a.true_alt_peak_deg], ["Star, apparent at the summit, Ciddor", r.star_apparent_ciddor_peak_deg],
-    ["Spreadsheet: true, apparent at observer", c.true_obs, c.app_obs], ["Spreadsheet: true, apparent at summit", c.true_peak, c.app_peak],
     ["Plane: summit by rise over run", g.planar_angle_deg], ["Plane: skyline on the star's azimuth", (O.planar || {}).angle_deg],
     ["Globe: summit, geometric", r.peak_geometric_deg], ["Globe: summit, as seen (refracted)", r.peak_apparent_deg], ["Globe: skyline, as seen", (O.globe_refracted || {}).angle_deg],
-    ["Globe: true altitude of a star on the summit", r.star_geometric_deg], ["Globe: true altitude of a star on the skyline", tc.globe_skyline_star_true_deg], ["Angle at the Earth's centre", g.central_angle_deg]];
+    ["Globe: true altitude of a star on the summit", r.star_geometric_deg], ["Globe: true altitude of a star on the skyline", tc.globe_skyline_star_true_deg], ["Angle at the Earth's centre, γ", g.central_angle_deg], ["Drop of the observer as an angle, γ/2", g.drop_angle_deg]];
   let h = `<table><thead><tr><th class="l">Angle</th><th>° ′ ″</th><th></th></tr></thead><tbody>`;
   for (const r2 of rows) h += `<tr><td class="l">${r2[0]}</td><td>${dms(r2[1])}</td><td>${r2.length > 2 ? dms(r2[2]) : ""}</td></tr>`;
   h += `</tbody></table><div class="tw" style="margin-top:.8rem"><table><thead><tr><th class="l">Residual, obs. − comp.</th><th>arc <span class="unit">″</span></th><th>time <span class="unit">s</span></th></tr></thead><tbody>`;

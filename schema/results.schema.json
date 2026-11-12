@@ -427,6 +427,14 @@
             "peak_xz_m": {
               "type": "array",
               "description": "[0, peak alt]: the peak is at the same place in both models."
+            },
+            "drop_angle_deg": {
+              "$ref": "#/$defs/num",
+              "description": "The globe observer's drop as an angle at the summit: γ/2, half the central angle, by the inscribed angle (tangent–chord) theorem."
+            },
+            "drop_angle_frame_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Check: atan(drop / horizontal distance) from the peak-anchored frame coordinates; ≈ drop_angle_deg."
             }
           }
         },
