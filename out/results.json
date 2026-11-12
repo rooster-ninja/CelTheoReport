@@ -102,7 +102,15 @@
     "star_uplift_gauss_arcmin": 13.331930873493452,
     "bennett_arcmin": 13.642974166583175,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": -0.2
+    "temp_c_obs": -0.2,
+    "star_apparent_ciddor_obs_deg": 2.3241534582303855,
+    "star_refraction_ciddor_obs_arcmin": 13.3169,
+    "star_refraction_bennett_obs_arcmin": 13.6219,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.305,
+    "star_refraction_erfa_obs_arcmin": 9.0292,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.2877,
+    "star_apparent_ciddor_peak_deg": 2.7231221914699724,
+    "star_refraction_ciddor_peak_arcmin": 9.9786
    },
    "profiles": {
     "ray_to_peak": [
@@ -1199,7 +1207,8 @@
     "star_shift_astropy_deg": 0.454607866082656,
     "star_shift_astropy_minus_central_angle_arcsec": 0.0,
     "star_shift_csv_deg": 0.4538000000000002,
-    "ho_csv_deg": 0.033693032125006184
+    "ho_csv_deg": 0.033693032125006184,
+    "globe_ciddor_apparent_arcsec": 22.56
    },
    "terrain": {
     "file": "terrain/pikes-peak-39-aquarii-2025-01-28.json",
@@ -1416,7 +1425,8 @@
      "planar_geometric_dsm_arcsec": -1379.21,
      "planar_geometric_dsm_seconds": 125.6,
      "planar_refracted_dsm_arcsec": -837.45,
-     "planar_refracted_dsm_seconds": 76.27
+     "planar_refracted_dsm_seconds": 76.27,
+     "globe_ciddor_apparent_arcsec": 130.59
     },
     "canopy": {
      "to_peak": {
@@ -1515,7 +1525,15 @@
     "star_uplift_gauss_arcmin": 17.43694541572348,
     "bennett_arcmin": 18.210515741025887,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 1.1596008862294909,
+    "star_refraction_ciddor_obs_arcmin": 17.3119,
+    "star_refraction_bennett_obs_arcmin": 18.0546,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.7427,
+    "star_refraction_erfa_obs_arcmin": 8.4253,
+    "star_ciddor_minus_erfa_obs_arcmin": 8.8867,
+    "star_apparent_ciddor_peak_deg": 1.4456923990195867,
+    "star_refraction_ciddor_peak_arcmin": 15.1983
    },
    "profiles": {
     "ray_to_peak": [
@@ -2680,7 +2698,8 @@
     "star_shift_astropy_deg": 0.32131906786240594,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.3212999999999999,
-    "ho_csv_deg": -0.08537411822096397
+    "ho_csv_deg": -0.08537411822096397,
+    "globe_ciddor_apparent_arcsec": 101.48
    },
    "terrain": {
     "file": "terrain/blodgett-peak-lp-aquarii-2025-02-08.json",
@@ -2897,7 +2916,8 @@
      "planar_geometric_dsm_arcsec": -1444.65,
      "planar_geometric_dsm_seconds": 124.55,
      "planar_refracted_dsm_arcsec": -939.13,
-     "planar_refracted_dsm_seconds": 80.97
+     "planar_refracted_dsm_seconds": 80.97,
+     "globe_ciddor_apparent_arcsec": 104.05
     },
     "canopy": {
      "to_peak": {
@@ -3000,7 +3020,15 @@
     "star_uplift_gauss_arcmin": 19.27115925839856,
     "bennett_arcmin": 19.449062460323947,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.9378527079820255,
+    "star_refraction_ciddor_obs_arcmin": 19.1746,
+    "star_refraction_bennett_obs_arcmin": 19.3437,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.1691,
+    "star_refraction_erfa_obs_arcmin": 8.4242,
+    "star_ciddor_minus_erfa_obs_arcmin": 10.7504,
+    "star_apparent_ciddor_peak_deg": 1.2714858536692053,
+    "star_refraction_ciddor_peak_arcmin": 16.2327
    },
    "profiles": {
     "ray_to_peak": [
@@ -4077,7 +4105,8 @@
     "star_shift_astropy_deg": 0.3826652987245709,
     "star_shift_astropy_minus_central_angle_arcsec": 0.02,
     "star_shift_csv_deg": 0.38266,
-    "ho_csv_deg": -0.08946961888611193
+    "ho_csv_deg": -0.08946961888611193,
+    "globe_ciddor_apparent_arcsec": 61.4
    },
    "terrain": {
     "file": "terrain/cheyenne-mtn-mu-fornacis-2025-03-10.json",
@@ -4294,7 +4323,8 @@
      "planar_geometric_dsm_arcsec": -1703.28,
      "planar_geometric_dsm_seconds": 194.87,
      "planar_refracted_dsm_arcsec": -1197.82,
-     "planar_refracted_dsm_seconds": 137.04
+     "planar_refracted_dsm_seconds": 137.04,
+     "globe_ciddor_apparent_arcsec": 59.49
     },
     "canopy": {
      "to_peak": {
@@ -4397,7 +4427,15 @@
     "star_uplift_gauss_arcmin": 19.011664309034753,
     "bennett_arcmin": 19.77126465184832,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.8744383236848386,
+    "star_refraction_ciddor_obs_arcmin": 18.9862,
+    "star_refraction_bennett_obs_arcmin": 19.7404,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.7542,
+    "star_refraction_erfa_obs_arcmin": 8.424,
+    "star_ciddor_minus_erfa_obs_arcmin": 10.5623,
+    "star_apparent_ciddor_peak_deg": 1.2720170012450256,
+    "star_refraction_ciddor_peak_arcmin": 16.0211
    },
    "profiles": {
     "ray_to_peak": [
@@ -5486,7 +5524,8 @@
     "star_shift_astropy_deg": 0.4469967059214801,
     "star_shift_astropy_minus_central_angle_arcsec": 0.04,
     "star_shift_csv_deg": 0.44696999999999987,
-    "ho_csv_deg": -0.06447826956770841
+    "ho_csv_deg": -0.06447826956770841,
+    "globe_ciddor_apparent_arcsec": 17.44
    },
    "terrain": {
     "file": "terrain/blue-mtn-hd-32515-2025-03-13.json",
@@ -5703,7 +5742,8 @@
      "planar_geometric_dsm_arcsec": -1799.34,
      "planar_geometric_dsm_seconds": 211.23,
      "planar_refracted_dsm_arcsec": -1293.9,
-     "planar_refracted_dsm_seconds": 151.9
+     "planar_refracted_dsm_seconds": 151.9,
+     "globe_ciddor_apparent_arcsec": 73.01
     },
     "canopy": {
      "to_peak": {
@@ -5806,7 +5846,15 @@
     "star_uplift_gauss_arcmin": 15.806834514711113,
     "bennett_arcmin": 16.18166021175501,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 1.5454636111881652,
+    "star_refraction_ciddor_obs_arcmin": 15.7569,
+    "star_refraction_bennett_obs_arcmin": 16.1241,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.3673,
+    "star_refraction_erfa_obs_arcmin": 8.4264,
+    "star_ciddor_minus_erfa_obs_arcmin": 7.3305,
+    "star_apparent_ciddor_peak_deg": 1.9222230818582362,
+    "star_refraction_ciddor_peak_arcmin": 12.6632
    },
    "profiles": {
     "ray_to_peak": [
@@ -6943,7 +6991,8 @@
     "star_shift_astropy_deg": 0.4283199675708582,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.4283300000000001,
-    "ho_csv_deg": -0.012027907094161128
+    "ho_csv_deg": -0.012027907094161128,
+    "globe_ciddor_apparent_arcsec": 45.34
    },
    "terrain": {
     "file": "terrain/mount-rosa-hd-17320-2025-03-11.json",
@@ -7160,7 +7209,8 @@
      "planar_geometric_dsm_arcsec": -1335.05,
      "planar_geometric_dsm_seconds": 138.63,
      "planar_refracted_dsm_arcsec": -829.47,
-     "planar_refracted_dsm_seconds": 86.13
+     "planar_refracted_dsm_seconds": 86.13,
+     "globe_ciddor_apparent_arcsec": 297.23
     },
     "canopy": {
      "to_peak": {
@@ -7261,7 +7311,15 @@
     "star_uplift_gauss_arcmin": 19.668278989995958,
     "bennett_arcmin": 19.626187067879087,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.9314884999106721,
+    "star_refraction_ciddor_obs_arcmin": 19.4441,
+    "star_refraction_bennett_obs_arcmin": 19.3829,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.0612,
+    "star_refraction_erfa_obs_arcmin": 8.4242,
+    "star_ciddor_minus_erfa_obs_arcmin": 11.0199,
+    "star_apparent_ciddor_peak_deg": 1.3466373639489624,
+    "star_refraction_ciddor_peak_arcmin": 15.9601
    },
    "profiles": {
     "ray_to_peak": [
@@ -8378,7 +8436,8 @@
     "star_shift_astropy_deg": 0.47321546818190996,
     "star_shift_astropy_minus_central_angle_arcsec": 0.02,
     "star_shift_csv_deg": 0.47320000000000007,
-    "ho_csv_deg": -0.020900996971763064
+    "ho_csv_deg": -0.020900996971763064,
+    "globe_ciddor_apparent_arcsec": 140.44
    },
    "terrain": {
     "file": "terrain/green-mtn-hd-28388-2025-03-15.json",
@@ -8595,7 +8654,8 @@
      "planar_geometric_dsm_arcsec": -1709.47,
      "planar_geometric_dsm_seconds": 189.36,
      "planar_refracted_dsm_arcsec": -1204.02,
-     "planar_refracted_dsm_seconds": 133.37
+     "planar_refracted_dsm_seconds": 133.37,
+     "globe_ciddor_apparent_arcsec": 99.7
     },
     "canopy": {
      "to_peak": {
@@ -8699,7 +8759,15 @@
     "star_uplift_gauss_arcmin": 23.15169881438729,
     "bennett_arcmin": 24.756534360048544,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.1826124406100411,
+    "star_refraction_ciddor_obs_arcmin": 23.3485,
+    "star_refraction_bennett_obs_arcmin": 25.0921,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.7436,
+    "star_refraction_erfa_obs_arcmin": 8.4191,
+    "star_ciddor_minus_erfa_obs_arcmin": 14.9294,
+    "star_apparent_ciddor_peak_deg": 1.2222467260885015,
+    "star_refraction_ciddor_peak_arcmin": 15.1972
    },
    "profiles": {
     "ray_to_peak": [
@@ -9784,7 +9852,8 @@
     "star_shift_astropy_deg": 1.1754891467290922,
     "star_shift_astropy_minus_central_angle_arcsec": 0.34,
     "star_shift_csv_deg": 1.168,
-    "ho_csv_deg": 0.2263655064609048
+    "ho_csv_deg": 0.2263655064609048,
+    "globe_ciddor_apparent_arcsec": -131.1
    },
    "terrain": {
     "file": "terrain/north-peak-hd55892-i-puppis-2025-03-24.json",
@@ -10032,7 +10101,8 @@
      "planar_geometric_dsm_arcsec": -3348.55,
      "planar_geometric_dsm_seconds": 808.79,
      "planar_refracted_dsm_arcsec": -2843.4,
-     "planar_refracted_dsm_seconds": 686.78
+     "planar_refracted_dsm_seconds": 686.78,
+     "globe_ciddor_apparent_arcsec": -55.4
     },
     "canopy": {
      "to_peak": {
@@ -10136,7 +10206,15 @@
     "star_uplift_gauss_arcmin": 23.15169881438729,
     "bennett_arcmin": 24.756534360048544,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.19125126261644362,
+    "star_refraction_ciddor_obs_arcmin": 23.2985,
+    "star_refraction_bennett_obs_arcmin": 25.0119,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.7134,
+    "star_refraction_erfa_obs_arcmin": 8.4192,
+    "star_ciddor_minus_erfa_obs_arcmin": 14.8793,
+    "star_apparent_ciddor_peak_deg": 1.2310426086897461,
+    "star_refraction_ciddor_peak_arcmin": 15.159
    },
    "profiles": {
     "ray_to_peak": [
@@ -11221,7 +11299,8 @@
     "star_shift_astropy_deg": 1.17545028346508,
     "star_shift_astropy_minus_central_angle_arcsec": 0.2,
     "star_shift_csv_deg": 1.1754,
-    "ho_csv_deg": 0.24026550646090483
+    "ho_csv_deg": 0.24026550646090483,
+    "globe_ciddor_apparent_arcsec": -100.0
    },
    "terrain": {
     "file": "terrain/north-peak-hd56455-pr-puppis-2025-03-24.json",
@@ -11469,7 +11548,8 @@
      "planar_geometric_dsm_arcsec": -3298.55,
      "planar_geometric_dsm_seconds": 806.1,
      "planar_refracted_dsm_arcsec": -2793.39,
-     "planar_refracted_dsm_seconds": 682.65
+     "planar_refracted_dsm_seconds": 682.65,
+     "globe_ciddor_apparent_arcsec": -3.46
     },
     "canopy": {
      "to_peak": {
@@ -11573,7 +11653,15 @@
     "star_uplift_gauss_arcmin": 23.15169881438729,
     "bennett_arcmin": 24.756534360048544,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.19149631894831323,
+    "star_refraction_ciddor_obs_arcmin": 23.2971,
+    "star_refraction_bennett_obs_arcmin": 25.0096,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.7125,
+    "star_refraction_erfa_obs_arcmin": 8.4192,
+    "star_ciddor_minus_erfa_obs_arcmin": 14.8779,
+    "star_apparent_ciddor_peak_deg": 1.2312947951761253,
+    "star_refraction_ciddor_peak_arcmin": 15.1562
    },
    "profiles": {
     "ray_to_peak": [
@@ -12658,7 +12746,8 @@
     "star_shift_astropy_deg": 1.1754810936008586,
     "star_shift_astropy_minus_central_angle_arcsec": 0.32,
     "star_shift_csv_deg": 1.1784,
-    "ho_csv_deg": 0.23716550646090484
+    "ho_csv_deg": 0.23716550646090484,
+    "globe_ciddor_apparent_arcsec": -99.12
    },
    "terrain": {
     "file": "terrain/north-peak-hd56813-2025-03-24.json",
@@ -12906,7 +12995,8 @@
      "planar_geometric_dsm_arcsec": -3252.35,
      "planar_geometric_dsm_seconds": 787.98,
      "planar_refracted_dsm_arcsec": -2747.2,
-     "planar_refracted_dsm_seconds": 665.59
+     "planar_refracted_dsm_seconds": 665.59,
+     "globe_ciddor_apparent_arcsec": 44.12
     },
     "canopy": {
      "to_peak": {
@@ -13003,7 +13093,15 @@
     "star_uplift_gauss_arcmin": 23.10960240991487,
     "bennett_arcmin": 24.108385057904435,
     "pressure_hpa_obs": 910.8,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.703253561036098,
+    "star_refraction_ciddor_obs_arcmin": 23.1638,
+    "star_refraction_bennett_obs_arcmin": 24.1421,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.9784,
+    "star_refraction_erfa_obs_arcmin": 9.896,
+    "star_ciddor_minus_erfa_obs_arcmin": 13.2678,
+    "star_apparent_ciddor_peak_deg": 1.0521285823128148,
+    "star_refraction_ciddor_peak_arcmin": 17.6707
    },
    "profiles": {
     "ray_to_peak": [
@@ -14105,7 +14203,8 @@
     "star_shift_astropy_deg": 0.44042681866840416,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.4434199999999999,
-    "ho_csv_deg": -0.12201046878258237
+    "ho_csv_deg": -0.12201046878258237,
+    "globe_ciddor_apparent_arcsec": -15.08
    },
    "terrain": {
     "file": "terrain/getaway-mtn-hd-102928-2025-07-01.json",
@@ -14322,7 +14421,8 @@
      "planar_geometric_dsm_arcsec": -1956.43,
      "planar_geometric_dsm_seconds": 180.72,
      "planar_refracted_dsm_arcsec": -1362.67,
-     "planar_refracted_dsm_seconds": 125.87
+     "planar_refracted_dsm_seconds": 125.87,
+     "globe_ciddor_apparent_arcsec": 38.09
     },
     "canopy": {
      "to_peak": {
@@ -14425,7 +14525,15 @@
     "star_uplift_gauss_arcmin": 3.9166457951250777,
     "bennett_arcmin": 4.033420492101395,
     "pressure_hpa_obs": 854.84,
-    "temp_c_obs": 26.1
+    "temp_c_obs": 26.1,
+    "star_apparent_ciddor_obs_deg": 10.60369359188815,
+    "star_refraction_ciddor_obs_arcmin": 3.9205,
+    "star_refraction_bennett_obs_arcmin": 4.0372,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.1167,
+    "star_refraction_erfa_obs_arcmin": 3.9837,
+    "star_ciddor_minus_erfa_obs_arcmin": -0.0632,
+    "star_apparent_ciddor_peak_deg": 10.674609661998007,
+    "star_refraction_ciddor_peak_arcmin": 3.4331
    },
    "profiles": {
     "ray_to_peak": [
@@ -15752,7 +15860,8 @@
     "star_shift_astropy_deg": 0.07903827717315792,
     "star_shift_astropy_minus_central_angle_arcsec": 0.0,
     "star_shift_csv_deg": 0.07910000000000039,
-    "ho_csv_deg": -0.0530214832476581
+    "ho_csv_deg": -0.0530214832476581,
+    "globe_ciddor_apparent_arcsec": -37.2
    },
    "terrain": {
     "file": "terrain/hounds-tooth-hd199828-2025-06-28.json",
@@ -15969,7 +16078,8 @@
      "planar_geometric_dsm_arcsec": -304.11,
      "planar_geometric_dsm_seconds": -30.0,
      "planar_refracted_dsm_arcsec": -65.09,
-     "planar_refracted_dsm_seconds": -6.42
+     "planar_refracted_dsm_seconds": -6.42,
+     "globe_ciddor_apparent_arcsec": 41.8
     },
     "canopy": {
      "to_peak": {
@@ -16068,7 +16178,15 @@
     "star_uplift_gauss_arcmin": 21.04151927307331,
     "bennett_arcmin": 20.8753818352991,
     "pressure_hpa_obs": 1008.09,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 1.5137217241058143,
+    "star_refraction_ciddor_obs_arcmin": 20.9874,
+    "star_refraction_bennett_obs_arcmin": 20.8201,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.1673,
+    "star_refraction_erfa_obs_arcmin": 11.0912,
+    "star_ciddor_minus_erfa_obs_arcmin": 9.8962,
+    "star_apparent_ciddor_peak_deg": 1.657716532342437,
+    "star_refraction_ciddor_peak_arcmin": 17.7274
    },
    "profiles": {
     "ray_to_peak": [
@@ -17277,7 +17395,8 @@
     "star_shift_astropy_deg": 0.19832842109345994,
     "star_shift_astropy_minus_central_angle_arcsec": 0.0,
     "star_shift_csv_deg": 0.19906000000000001,
-    "ho_csv_deg": -0.21364532593056995
+    "ho_csv_deg": -0.21364532593056995,
+    "globe_ciddor_apparent_arcsec": 33.56
    },
    "terrain": {
     "file": "terrain/old-blyn-mtn-hd206088-2025-05-28.json",
@@ -17494,7 +17613,8 @@
      "planar_geometric_dsm_arcsec": -1346.66,
      "planar_geometric_dsm_seconds": -150.07,
      "planar_refracted_dsm_arcsec": -681.18,
-     "planar_refracted_dsm_seconds": -75.91
+     "planar_refracted_dsm_seconds": -75.91,
+     "globe_ciddor_apparent_arcsec": 192.91
     },
     "canopy": {
      "to_peak": {
@@ -17593,7 +17713,15 @@
     "star_uplift_gauss_arcmin": 21.275530624641075,
     "bennett_arcmin": 21.090743856802384,
     "pressure_hpa_obs": 1008.09,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 1.4769866392112927,
+    "star_refraction_ciddor_obs_arcmin": 21.2255,
+    "star_refraction_bennett_obs_arcmin": 21.0393,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.1862,
+    "star_refraction_erfa_obs_arcmin": 11.0911,
+    "star_ciddor_minus_erfa_obs_arcmin": 10.1344,
+    "star_apparent_ciddor_peak_deg": 1.61971860366902,
+    "star_refraction_ciddor_peak_arcmin": 17.8921
    },
    "profiles": {
     "ray_to_peak": [
@@ -18802,7 +18930,8 @@
     "star_shift_astropy_deg": 0.19828849594583708,
     "star_shift_astropy_minus_central_angle_arcsec": -0.05,
     "star_shift_csv_deg": 0.20177999999999985,
-    "ho_csv_deg": -0.2155083714317445
+    "ho_csv_deg": -0.2155083714317445,
+    "globe_ciddor_apparent_arcsec": 30.67
    },
    "terrain": {
     "file": "terrain/old-blyn-mtn-hd207098-2025-05-28.json",
@@ -19019,7 +19148,8 @@
      "planar_geometric_dsm_arcsec": -1421.08,
      "planar_geometric_dsm_seconds": -157.13,
      "planar_refracted_dsm_arcsec": -755.62,
-     "planar_refracted_dsm_seconds": -83.55
+     "planar_refracted_dsm_seconds": -83.55,
+     "globe_ciddor_apparent_arcsec": 149.92
     },
     "canopy": {
      "to_peak": {
@@ -19118,7 +19248,15 @@
     "star_uplift_gauss_arcmin": 26.937546435034584,
     "bennett_arcmin": 26.277760413429302,
     "pressure_hpa_obs": 1012.53,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.7879901805457828,
+    "star_refraction_ciddor_obs_arcmin": 26.7318,
+    "star_refraction_bennett_obs_arcmin": 26.0959,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.6358,
+    "star_refraction_erfa_obs_arcmin": 11.1422,
+    "star_ciddor_minus_erfa_obs_arcmin": 15.5896,
+    "star_apparent_ciddor_peak_deg": 1.061244353271338,
+    "star_refraction_ciddor_peak_arcmin": 21.0807
    },
    "profiles": {
     "ray_to_peak": [
@@ -20283,7 +20421,8 @@
     "star_shift_astropy_deg": 0.36743847149592096,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.35999999999999993,
-    "ho_csv_deg": -0.20303807558325748
+    "ho_csv_deg": -0.20303807558325748,
+    "globe_ciddor_apparent_arcsec": 76.0
    },
    "terrain": {
     "file": "terrain/ediz-blyn-mtn-hd187663-2025-05-28.json",
@@ -20500,7 +20639,8 @@
      "planar_geometric_dsm_arcsec": -1958.56,
      "planar_geometric_dsm_seconds": -206.91,
      "planar_refracted_dsm_arcsec": -1290.03,
-     "planar_refracted_dsm_seconds": -136.28
+     "planar_refracted_dsm_seconds": -136.28,
+     "globe_ciddor_apparent_arcsec": 173.75
     },
     "canopy": {
      "to_peak": {
@@ -20599,7 +20739,15 @@
     "star_uplift_gauss_arcmin": 27.217475302575085,
     "bennett_arcmin": 26.509900727751365,
     "pressure_hpa_obs": 1012.53,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.728278799094255,
+    "star_refraction_ciddor_obs_arcmin": 27.3605,
+    "star_refraction_bennett_obs_arcmin": 26.6157,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.7448,
+    "star_refraction_erfa_obs_arcmin": 11.1416,
+    "star_ciddor_minus_erfa_obs_arcmin": 16.2188,
+    "star_apparent_ciddor_peak_deg": 0.9970684553404668,
+    "star_refraction_ciddor_peak_arcmin": 21.4417
    },
    "profiles": {
     "ray_to_peak": [
@@ -21764,7 +21912,8 @@
     "star_shift_astropy_deg": 0.3674366013907332,
     "star_shift_astropy_minus_central_angle_arcsec": -0.06,
     "star_shift_csv_deg": 0.36740999999999996,
-    "ho_csv_deg": -0.23666697446571805
+    "ho_csv_deg": -0.23666697446571805,
+    "globe_ciddor_apparent_arcsec": -43.19
    },
    "terrain": {
     "file": "terrain/ediz-blyn-mtn-3-cap-2025-05-28.json",
@@ -21981,7 +22130,8 @@
      "planar_geometric_dsm_arcsec": -2003.58,
      "planar_geometric_dsm_seconds": -210.97,
      "planar_refracted_dsm_arcsec": -1335.08,
-     "planar_refracted_dsm_seconds": -140.58
+     "planar_refracted_dsm_seconds": -140.58,
+     "globe_ciddor_apparent_arcsec": 204.84
     },
     "canopy": {
      "to_peak": {
@@ -22078,7 +22228,15 @@
     "star_uplift_gauss_arcmin": 10.128057861142654,
     "bennett_arcmin": 10.23330505300073,
     "pressure_hpa_obs": 1012.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 4.8042753744193,
+    "star_refraction_ciddor_obs_arcmin": 10.1083,
+    "star_refraction_bennett_obs_arcmin": 10.2119,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.1036,
+    "star_refraction_erfa_obs_arcmin": 9.7169,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.3914,
+    "star_apparent_ciddor_peak_deg": 4.925075246512926,
+    "star_refraction_ciddor_peak_arcmin": 8.3572
    },
    "profiles": {
     "ray_to_peak": [
@@ -23371,7 +23529,8 @@
     "star_shift_astropy_deg": 0.14998534952945608,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.15000999999999998,
-    "ho_csv_deg": -0.08073634195064727
+    "ho_csv_deg": -0.08073634195064727,
+    "globe_ciddor_apparent_arcsec": 45.03
    },
    "terrain": {
     "file": "terrain/varley-se2-squamish-regulus-2025-06-11.json",
@@ -23592,7 +23751,8 @@
      "planar_geometric_dsm_arcsec": -763.17,
      "planar_geometric_dsm_seconds": 80.23,
      "planar_refracted_dsm_arcsec": -180.16,
-     "planar_refracted_dsm_seconds": 18.94
+     "planar_refracted_dsm_seconds": 18.94,
+     "globe_ciddor_apparent_arcsec": 61.96
     },
     "canopy": {
      "to_peak": {
@@ -23689,7 +23849,15 @@
     "star_uplift_gauss_arcmin": 24.367468139414814,
     "bennett_arcmin": 22.114340790215543,
     "pressure_hpa_obs": 910.8,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.9387945615875608,
+    "star_refraction_ciddor_obs_arcmin": 24.6871,
+    "star_refraction_bennett_obs_arcmin": 22.3579,
+    "star_ciddor_minus_bennett_obs_arcmin": 2.3292,
+    "star_refraction_erfa_obs_arcmin": 9.8972,
+    "star_ciddor_minus_erfa_obs_arcmin": 14.7899,
+    "star_apparent_ciddor_peak_deg": 1.3186776484105163,
+    "star_refraction_ciddor_peak_arcmin": 18.0663
    },
    "profiles": {
     "ray_to_peak": [
@@ -24787,7 +24955,8 @@
     "star_shift_astropy_deg": 0.4902299878326236,
     "star_shift_astropy_minus_central_angle_arcsec": -0.02,
     "star_shift_csv_deg": 0.43694444450000003,
-    "ho_csv_deg": -0.203467916335766
+    "ho_csv_deg": -0.203467916335766,
+    "globe_ciddor_apparent_arcsec": -124.45
    },
    "terrain": {
     "file": "terrain/puhitempi-kuaikatete-ez-cet-2025-12-31.json",
@@ -25035,7 +25204,8 @@
      "planar_geometric_dsm_arcsec": -2108.38,
      "planar_geometric_dsm_seconds": 199.87,
      "planar_refracted_dsm_arcsec": -1514.55,
-     "planar_refracted_dsm_seconds": 143.58
+     "planar_refracted_dsm_seconds": 143.58,
+     "globe_ciddor_apparent_arcsec": 37.09
     },
     "canopy": {
      "to_peak": {
@@ -25132,7 +25302,15 @@
     "star_uplift_gauss_arcmin": 24.367468139414814,
     "bennett_arcmin": 22.114340790215543,
     "pressure_hpa_obs": 910.8,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.9179224927161176,
+    "star_refraction_ciddor_obs_arcmin": 24.8748,
+    "star_refraction_bennett_obs_arcmin": 22.5071,
+    "star_ciddor_minus_bennett_obs_arcmin": 2.3677,
+    "star_refraction_erfa_obs_arcmin": 9.8971,
+    "star_ciddor_minus_erfa_obs_arcmin": 14.9777,
+    "star_apparent_ciddor_peak_deg": 1.2967390140273694,
+    "star_refraction_ciddor_peak_arcmin": 18.1902
    },
    "profiles": {
     "ray_to_peak": [
@@ -26230,7 +26408,8 @@
     "star_shift_astropy_deg": 0.49022697757880895,
     "star_shift_astropy_minus_central_angle_arcsec": -0.03,
     "star_shift_csv_deg": 0.436917,
-    "ho_csv_deg": -0.22899547193576597
+    "ho_csv_deg": -0.22899547193576597,
+    "globe_ciddor_apparent_arcsec": -199.59
    },
    "terrain": {
     "file": "terrain/puhitempi-kuaikatete-53-cet-2025-12-31.json",
@@ -26478,7 +26657,8 @@
      "planar_geometric_dsm_arcsec": -2173.48,
      "planar_geometric_dsm_seconds": 206.0,
      "planar_refracted_dsm_arcsec": -1579.66,
-     "planar_refracted_dsm_seconds": 149.72
+     "planar_refracted_dsm_seconds": 149.72,
+     "globe_ciddor_apparent_arcsec": -3.42
     },
     "canopy": {
      "to_peak": {
@@ -26575,7 +26755,15 @@
     "star_uplift_gauss_arcmin": 24.97435835552695,
     "bennett_arcmin": 22.597444931239107,
     "pressure_hpa_obs": 910.8,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.8757342397234706,
+    "star_refraction_ciddor_obs_arcmin": 25.2638,
+    "star_refraction_bennett_obs_arcmin": 22.8138,
+    "star_ciddor_minus_bennett_obs_arcmin": 2.45,
+    "star_refraction_erfa_obs_arcmin": 9.8968,
+    "star_ciddor_minus_erfa_obs_arcmin": 15.367,
+    "star_apparent_ciddor_peak_deg": 1.236145148781931,
+    "star_refraction_ciddor_peak_arcmin": 18.8737
    },
    "profiles": {
     "ray_to_peak": [
@@ -27705,7 +27893,8 @@
     "star_shift_astropy_deg": 0.46691264862844134,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.43633299999999997,
-    "ho_csv_deg": -0.20083344643213552
+    "ho_csv_deg": -0.20083344643213552,
+    "globe_ciddor_apparent_arcsec": -106.8
    },
    "terrain": {
     "file": "terrain/puhitempi-kuaikatete-baten-kaitos-2025-12-31.json",
@@ -27922,7 +28111,8 @@
      "planar_geometric_dsm_arcsec": -2173.0,
      "planar_geometric_dsm_seconds": 205.44,
      "planar_refracted_dsm_arcsec": -1579.19,
-     "planar_refracted_dsm_seconds": 149.3
+     "planar_refracted_dsm_seconds": 149.3,
+     "globe_ciddor_apparent_arcsec": 4.32
     },
     "canopy": {
      "to_peak": {
@@ -28048,7 +28238,15 @@
     "star_uplift_gauss_arcmin": 25.115422709113275,
     "bennett_arcmin": 22.70921578337668,
     "pressure_hpa_obs": 910.8,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.9113615784052855,
+    "star_refraction_ciddor_obs_arcmin": 24.936,
+    "star_refraction_bennett_obs_arcmin": 22.5544,
+    "star_ciddor_minus_bennett_obs_arcmin": 2.3816,
+    "star_refraction_erfa_obs_arcmin": 9.897,
+    "star_ciddor_minus_erfa_obs_arcmin": 15.039,
+    "star_apparent_ciddor_peak_deg": 1.2700394577920044,
+    "star_refraction_ciddor_peak_arcmin": 18.8145
    },
    "profiles": {
     "ray_to_peak": [
@@ -29174,7 +29372,8 @@
     "star_shift_astropy_deg": 0.4607033459149672,
     "star_shift_astropy_minus_central_angle_arcsec": -0.08,
     "star_shift_csv_deg": 0.43936099999999995,
-    "ho_csv_deg": -0.1386731891088121
+    "ho_csv_deg": -0.1386731891088121,
+    "globe_ciddor_apparent_arcsec": 76.84
    },
    "terrain": {
     "file": "terrain/getaway-mtn-44-cet-2025-12-31.json",
@@ -29406,7 +29605,8 @@
      "planar_geometric_dsm_arcsec": -2097.49,
      "planar_geometric_dsm_seconds": 195.76,
      "planar_refracted_dsm_arcsec": -1503.67,
-     "planar_refracted_dsm_seconds": 140.34
+     "planar_refracted_dsm_seconds": 140.34,
+     "globe_ciddor_apparent_arcsec": 4.33
     },
     "canopy": {
      "to_peak": {
@@ -29533,7 +29733,15 @@
     "star_uplift_gauss_arcmin": 24.921976188554403,
     "bennett_arcmin": 22.55598627608015,
     "pressure_hpa_obs": 910.8,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 0.6438643195303781,
+    "star_refraction_ciddor_obs_arcmin": 27.6134,
+    "star_refraction_bennett_obs_arcmin": 24.6291,
+    "star_ciddor_minus_bennett_obs_arcmin": 2.9843,
+    "star_refraction_erfa_obs_arcmin": 9.895,
+    "star_ciddor_minus_erfa_obs_arcmin": 17.7184,
+    "star_apparent_ciddor_peak_deg": 0.9709831589745791,
+    "star_refraction_ciddor_peak_arcmin": 20.7394
    },
    "profiles": {
     "ray_to_peak": [
@@ -30649,7 +30857,8 @@
     "star_shift_astropy_deg": 0.4416856217521892,
     "star_shift_astropy_minus_central_angle_arcsec": -36.47,
     "star_shift_csv_deg": 0.439084,
-    "ho_csv_deg": -0.22732345494621797
+    "ho_csv_deg": -0.22732345494621797,
+    "globe_ciddor_apparent_arcsec": -962.19
    },
    "terrain": {
     "file": "terrain/unknown-hd-9061-uk-2025-12-31.json",
@@ -30876,7 +31085,8 @@
      "planar_geometric_dsm_arcsec": -2760.51,
      "planar_geometric_dsm_seconds": 278.9,
      "planar_refracted_dsm_arcsec": -2166.81,
-     "planar_refracted_dsm_seconds": 218.91
+     "planar_refracted_dsm_seconds": 218.91,
+     "globe_ciddor_apparent_arcsec": -391.06
     },
     "canopy": {
      "to_peak": {
@@ -30975,7 +31185,15 @@
     "star_uplift_gauss_arcmin": 13.331930873493452,
     "bennett_arcmin": 13.151248595914806,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 2.324153743148389,
+    "star_refraction_ciddor_obs_arcmin": 13.3169,
+    "star_refraction_bennett_obs_arcmin": 13.131,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.186,
+    "star_refraction_erfa_obs_arcmin": 8.4266,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.8903,
+    "star_apparent_ciddor_peak_deg": 2.7231150295112947,
+    "star_refraction_ciddor_peak_arcmin": 9.9781
    },
    "profiles": {
     "ray_to_peak": [
@@ -32074,7 +32292,8 @@
     "star_shift_astropy_deg": 0.454607866082656,
     "star_shift_astropy_minus_central_angle_arcsec": 0.0,
     "star_shift_csv_deg": 0.45472,
-    "ho_csv_deg": 0.0008230321250062289
+    "ho_csv_deg": 0.0008230321250062289,
+    "globe_ciddor_apparent_arcsec": 22.56
    },
    "terrain": {
     "file": "terrain/pikes-peak-39-aquarii-2025-01-28-test-epsilon.json",
@@ -32291,7 +32510,8 @@
      "planar_geometric_dsm_arcsec": -1379.21,
      "planar_geometric_dsm_seconds": 125.6,
      "planar_refracted_dsm_arcsec": -873.61,
-     "planar_refracted_dsm_seconds": 79.56
+     "planar_refracted_dsm_seconds": 79.56,
+     "globe_ciddor_apparent_arcsec": 130.59
     },
     "canopy": {
      "to_peak": {
@@ -32391,7 +32611,15 @@
     "star_uplift_gauss_arcmin": 17.43694541572348,
     "bennett_arcmin": 18.210515741025887,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 1.1596008862294909,
+    "star_refraction_ciddor_obs_arcmin": 17.3119,
+    "star_refraction_bennett_obs_arcmin": 18.0546,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.7427,
+    "star_refraction_erfa_obs_arcmin": 8.4253,
+    "star_ciddor_minus_erfa_obs_arcmin": 8.8867,
+    "star_apparent_ciddor_peak_deg": 1.4456923990195867,
+    "star_refraction_ciddor_peak_arcmin": 15.1983
    },
    "profiles": {
     "ray_to_peak": [
@@ -33558,7 +33786,8 @@
     "star_shift_astropy_deg": 0.32131906786240594,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.32139000000000006,
-    "ho_csv_deg": -0.1498141182209638
+    "ho_csv_deg": -0.1498141182209638,
+    "globe_ciddor_apparent_arcsec": 101.48
    },
    "terrain": {
     "file": "terrain/blodgett-peak-lp-aquarii-2025-02-08-test-epsilon.json",
@@ -33775,7 +34004,8 @@
      "planar_geometric_dsm_arcsec": -1444.65,
      "planar_geometric_dsm_seconds": 124.55,
      "planar_refracted_dsm_arcsec": -939.13,
-     "planar_refracted_dsm_seconds": 80.97
+     "planar_refracted_dsm_seconds": 80.97,
+     "globe_ciddor_apparent_arcsec": 104.05
     },
     "canopy": {
      "to_peak": {
@@ -33872,7 +34102,15 @@
     "star_uplift_gauss_arcmin": 13.331930873493452,
     "bennett_arcmin": 13.151248595914806,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 2.5068051986003876,
+    "star_refraction_ciddor_obs_arcmin": 12.7523,
+    "star_refraction_bennett_obs_arcmin": 12.5624,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.1899,
+    "star_refraction_erfa_obs_arcmin": 8.4263,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.3261,
+    "star_apparent_ciddor_peak_deg": 2.9082971846045713,
+    "star_refraction_ciddor_peak_arcmin": 9.5651
    },
    "profiles": {
     "ray_to_peak": [
@@ -34969,7 +35207,8 @@
     "star_shift_astropy_deg": 0.4546130944863602,
     "star_shift_astropy_minus_central_angle_arcsec": 0.02,
     "star_shift_csv_deg": 0.45472,
-    "ho_csv_deg": 0.226383032125006
+    "ho_csv_deg": 0.226383032125006,
+    "globe_ciddor_apparent_arcsec": 680.11
    },
    "terrain": {
     "file": "terrain/pikes-peak-39-aquarii-2025-01-28-test-aries.json",
@@ -35186,7 +35425,8 @@
      "planar_geometric_dsm_arcsec": -797.6,
      "planar_geometric_dsm_seconds": 72.71,
      "planar_refracted_dsm_arcsec": -292.02,
-     "planar_refracted_dsm_seconds": 26.62
+     "planar_refracted_dsm_seconds": 26.62,
+     "globe_ciddor_apparent_arcsec": 676.12
     },
     "canopy": {
      "to_peak": {
@@ -35286,7 +35526,15 @@
     "star_uplift_gauss_arcmin": 17.43694541572348,
     "bennett_arcmin": 18.210515741025887,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 1.1596008862294909,
+    "star_refraction_ciddor_obs_arcmin": 17.3119,
+    "star_refraction_bennett_obs_arcmin": 18.0546,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.7427,
+    "star_refraction_erfa_obs_arcmin": 8.4253,
+    "star_ciddor_minus_erfa_obs_arcmin": 8.8867,
+    "star_apparent_ciddor_peak_deg": 1.4456923990195867,
+    "star_refraction_ciddor_peak_arcmin": 15.1983
    },
    "profiles": {
     "ray_to_peak": [
@@ -36453,7 +36701,8 @@
     "star_shift_astropy_deg": 0.32131906786240594,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.32139000000000006,
-    "ho_csv_deg": 0.1626858817790362
+    "ho_csv_deg": 0.1626858817790362,
+    "globe_ciddor_apparent_arcsec": 101.48
    },
    "terrain": {
     "file": "terrain/blodgett-peak-lp-aquarii-2025-02-08-test-aries.json",
@@ -36670,7 +36919,8 @@
      "planar_geometric_dsm_arcsec": -1444.65,
      "planar_geometric_dsm_seconds": 124.55,
      "planar_refracted_dsm_arcsec": -939.13,
-     "planar_refracted_dsm_seconds": 80.97
+     "planar_refracted_dsm_seconds": 80.97,
+     "globe_ciddor_apparent_arcsec": 104.05
     },
     "canopy": {
      "to_peak": {
@@ -36767,7 +37017,15 @@
     "star_uplift_gauss_arcmin": 9.226391996760182,
     "bennett_arcmin": 8.959299681477434,
     "pressure_hpa_obs": 913.45,
-    "temp_c_obs": -1.6
+    "temp_c_obs": -1.6,
+    "star_apparent_ciddor_obs_deg": 7.625490976780127,
+    "star_refraction_ciddor_obs_arcmin": 6.634,
+    "star_refraction_bennett_obs_arcmin": 6.4661,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.168,
+    "star_refraction_erfa_obs_arcmin": 6.4076,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.2265,
+    "star_apparent_ciddor_peak_deg": 7.63400328564635,
+    "star_refraction_ciddor_peak_arcmin": 6.5631
    },
    "profiles": {
     "ray_to_peak": [
@@ -37461,7 +37719,8 @@
     "star_shift_astropy_deg": 0.009694964085038116,
     "star_shift_astropy_minus_central_angle_arcsec": 0.02,
     "star_shift_csv_deg": 0.014083999999999541,
-    "ho_csv_deg": 2.271933335618839
+    "ho_csv_deg": 2.271933335618839,
+    "globe_ciddor_apparent_arcsec": 8613.01
    },
    "terrain": {
     "file": "terrain/lucky-ridge-moon-2026-01-26.json",
@@ -37740,7 +37999,8 @@
      "planar_geometric_dsm_arcsec": -413.2,
      "planar_geometric_dsm_seconds": 41.81,
      "planar_refracted_dsm_arcsec": -28.74,
-     "planar_refracted_dsm_seconds": 2.91
+     "planar_refracted_dsm_seconds": 2.91,
+     "globe_ciddor_apparent_arcsec": -886.63
     },
     "canopy": {
      "to_peak": {
@@ -37863,7 +38123,15 @@
     "star_uplift_gauss_arcmin": 13.333380753355568,
     "bennett_arcmin": 13.845395314015144,
     "pressure_hpa_obs": 787.71,
-    "temp_c_obs": -4.16
+    "temp_c_obs": -4.16,
+    "star_apparent_ciddor_obs_deg": 2.3301554537676057,
+    "star_refraction_ciddor_obs_arcmin": 13.2967,
+    "star_refraction_bennett_obs_arcmin": 13.801,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.5043,
+    "star_refraction_erfa_obs_arcmin": 9.2729,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.0238,
+    "star_apparent_ciddor_peak_deg": 2.729206911014997,
+    "star_refraction_ciddor_peak_arcmin": 9.9631
    },
    "profiles": {
     "ray_to_peak": [
@@ -38960,7 +39228,8 @@
     "star_shift_astropy_deg": 0.45461130067593647,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.46801000000000004,
-    "ho_csv_deg": 0.05488226881171565
+    "ho_csv_deg": 0.05488226881171565,
+    "globe_ciddor_apparent_arcsec": 46.95
    },
    "terrain": {
     "file": "terrain/pikes-peak-hd-217533-2025-01-28.json",
@@ -39177,7 +39446,8 @@
      "planar_geometric_dsm_arcsec": -1431.41,
      "planar_geometric_dsm_seconds": 130.43,
      "planar_refracted_dsm_arcsec": -875.04,
-     "planar_refracted_dsm_seconds": 79.74
+     "planar_refracted_dsm_seconds": 79.74,
+     "globe_ciddor_apparent_arcsec": 78.17
     },
     "canopy": {
      "to_peak": {
@@ -39274,7 +39544,15 @@
     "star_uplift_gauss_arcmin": 13.474849398142217,
     "bennett_arcmin": 13.833352843404915,
     "pressure_hpa_obs": 787.71,
-    "temp_c_obs": -4.16
+    "temp_c_obs": -4.16,
+    "star_apparent_ciddor_obs_deg": 2.3306811980256965,
+    "star_refraction_ciddor_obs_arcmin": 13.4468,
+    "star_refraction_bennett_obs_arcmin": 13.7992,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.3524,
+    "star_refraction_erfa_obs_arcmin": 9.2729,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.174,
+    "star_apparent_ciddor_peak_deg": 2.722778667706338,
+    "star_refraction_ciddor_peak_arcmin": 9.696
    },
    "profiles": {
     "ray_to_peak": [
@@ -40371,7 +40649,8 @@
     "star_shift_astropy_deg": 0.45461124900778715,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.468121,
-    "ho_csv_deg": 0.05327951506917561
+    "ho_csv_deg": 0.05327951506917561,
+    "globe_ciddor_apparent_arcsec": 36.12
    },
    "terrain": {
     "file": "terrain/pikes-peak-hd-217533-2-2025-02-01.json",
@@ -40588,7 +40867,8 @@
      "planar_geometric_dsm_arcsec": -1438.52,
      "planar_geometric_dsm_seconds": 131.08,
      "planar_refracted_dsm_arcsec": -882.15,
-     "planar_refracted_dsm_seconds": 80.38
+     "planar_refracted_dsm_seconds": 80.38,
+     "globe_ciddor_apparent_arcsec": 77.95
     },
     "canopy": {
      "to_peak": {
@@ -40685,7 +40965,15 @@
     "star_uplift_gauss_arcmin": 13.523856200978619,
     "bennett_arcmin": 13.878607310365608,
     "pressure_hpa_obs": 787.71,
-    "temp_c_obs": -5.0
+    "temp_c_obs": -5.0,
+    "star_apparent_ciddor_obs_deg": 2.3194172294697455,
+    "star_refraction_ciddor_obs_arcmin": 13.5312,
+    "star_refraction_bennett_obs_arcmin": 13.8809,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.3498,
+    "star_refraction_erfa_obs_arcmin": 9.3256,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.2056,
+    "star_apparent_ciddor_peak_deg": 2.712201593774202,
+    "star_refraction_ciddor_peak_arcmin": 9.8218
    },
    "profiles": {
     "ray_to_peak": [
@@ -41782,7 +42070,8 @@
     "star_shift_astropy_deg": 0.454607551598861,
     "star_shift_astropy_minus_central_angle_arcsec": 0.0,
     "star_shift_csv_deg": 0.45472,
-    "ho_csv_deg": 0.02709851506917582
+    "ho_csv_deg": 0.02709851506917582,
+    "globe_ciddor_apparent_arcsec": -2.43
    },
    "terrain": {
     "file": "terrain/pikes-peak-39-aquarii-moon-2025-01-31.json",
@@ -41999,7 +42288,8 @@
      "planar_geometric_dsm_arcsec": -1406.35,
      "planar_geometric_dsm_seconds": 128.07,
      "planar_refracted_dsm_arcsec": -846.82,
-     "planar_refracted_dsm_seconds": 77.11
+     "planar_refracted_dsm_seconds": 77.11,
+     "globe_ciddor_apparent_arcsec": 104.8
     },
     "canopy": {
      "to_peak": {
@@ -42096,7 +42386,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.1127217151272095,
+    "star_refraction_ciddor_obs_arcmin": 7.4915,
+    "star_refraction_bennett_obs_arcmin": 7.5079,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0164,
+    "star_refraction_erfa_obs_arcmin": 7.3301,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1614,
+    "star_apparent_ciddor_peak_deg": 6.155383156791868,
+    "star_refraction_ciddor_peak_arcmin": 7.0349
    },
    "profiles": {
     "ray_to_peak": [
@@ -43162,7 +43460,8 @@
     "star_shift_astropy_deg": 0.05027079132191048,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.050057000000000684,
-    "ho_csv_deg": -0.15839173730181777
+    "ho_csv_deg": -0.15839173730181777,
+    "globe_ciddor_apparent_arcsec": -162.9
    },
    "terrain": {
     "file": "terrain/lucky-peak-hd-76600-2026-02-06.json",
@@ -43379,7 +43678,8 @@
      "planar_geometric_dsm_arcsec": -707.89,
      "planar_geometric_dsm_seconds": -65.27,
      "planar_refracted_dsm_arcsec": -268.08,
-     "planar_refracted_dsm_seconds": -24.72
+     "planar_refracted_dsm_seconds": -24.72,
+     "globe_ciddor_apparent_arcsec": -179.9
     },
     "canopy": {
      "to_peak": {
@@ -43476,7 +43776,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.136488392147916,
+    "star_refraction_ciddor_obs_arcmin": 7.4666,
+    "star_refraction_bennett_obs_arcmin": 7.4828,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0163,
+    "star_refraction_erfa_obs_arcmin": 7.3077,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1588,
+    "star_apparent_ciddor_peak_deg": 6.17911434180448,
+    "star_refraction_ciddor_peak_arcmin": 7.0079
    },
    "profiles": {
     "ray_to_peak": [
@@ -44542,7 +44850,8 @@
     "star_shift_astropy_deg": 0.05027036067801394,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.07099900000000048,
-    "ho_csv_deg": -0.1132827373018177
+    "ho_csv_deg": -0.1132827373018177,
+    "globe_ciddor_apparent_arcsec": -77.34
    },
    "terrain": {
     "file": "terrain/lucky-peak-hd-76525-2026-02-06.json",
@@ -44759,7 +45068,8 @@
      "planar_geometric_dsm_arcsec": -620.83,
      "planar_geometric_dsm_seconds": -57.26,
      "planar_refracted_dsm_arcsec": -182.37,
-     "planar_refracted_dsm_seconds": -16.82
+     "planar_refracted_dsm_seconds": -16.82,
+     "globe_ciddor_apparent_arcsec": -120.28
     },
     "canopy": {
      "to_peak": {
@@ -44856,7 +45166,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.112211004527263,
+    "star_refraction_ciddor_obs_arcmin": 7.492,
+    "star_refraction_bennett_obs_arcmin": 7.5084,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0164,
+    "star_refraction_erfa_obs_arcmin": 7.3306,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1614,
+    "star_apparent_ciddor_peak_deg": 6.154871839618334,
+    "star_refraction_ciddor_peak_arcmin": 7.0355
    },
    "profiles": {
     "ray_to_peak": [
@@ -45922,7 +46240,8 @@
     "star_shift_astropy_deg": 0.05026932641365178,
     "star_shift_astropy_minus_central_angle_arcsec": -0.01,
     "star_shift_csv_deg": 0.05027700000000035,
-    "ho_csv_deg": -0.15869873730181805
+    "ho_csv_deg": -0.15869873730181805,
+    "globe_ciddor_apparent_arcsec": -164.74
    },
    "terrain": {
     "file": "terrain/lucky-peak-sao-117309-2026-02-06.json",
@@ -46139,7 +46458,8 @@
      "planar_geometric_dsm_arcsec": -672.04,
      "planar_geometric_dsm_seconds": -62.01,
      "planar_refracted_dsm_arcsec": -232.2,
-     "planar_refracted_dsm_seconds": -21.42
+     "planar_refracted_dsm_seconds": -21.42,
+     "globe_ciddor_apparent_arcsec": -145.17
     },
     "canopy": {
      "to_peak": {
@@ -46238,7 +46558,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.104092219770709,
+    "star_refraction_ciddor_obs_arcmin": 7.5006,
+    "star_refraction_bennett_obs_arcmin": 7.517,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0164,
+    "star_refraction_erfa_obs_arcmin": 7.3383,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1623,
+    "star_apparent_ciddor_peak_deg": 6.146619465504504,
+    "star_refraction_ciddor_peak_arcmin": 7.036
    },
    "profiles": {
     "ray_to_peak": [
@@ -47304,7 +47632,8 @@
     "star_shift_astropy_deg": 0.05027076167563216,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.05025000000000013,
-    "ho_csv_deg": -0.1669757373018177
+    "ho_csv_deg": -0.1669757373018177,
+    "globe_ciddor_apparent_arcsec": -193.97
    },
    "terrain": {
     "file": "terrain/lucky-peak-hd-77039-2026-02-06.json",
@@ -47521,7 +47850,8 @@
      "planar_geometric_dsm_arcsec": -680.59,
      "planar_geometric_dsm_seconds": -62.74,
      "planar_refracted_dsm_arcsec": -240.3,
-     "planar_refracted_dsm_seconds": -22.15
+     "planar_refracted_dsm_seconds": -22.15,
+     "globe_ciddor_apparent_arcsec": -214.55
     },
     "canopy": {
      "to_peak": {
@@ -47620,7 +47950,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.095505817151731,
+    "star_refraction_ciddor_obs_arcmin": 7.5097,
+    "star_refraction_bennett_obs_arcmin": 7.5261,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0164,
+    "star_refraction_erfa_obs_arcmin": 7.3464,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1633,
+    "star_apparent_ciddor_peak_deg": 6.138045443664923,
+    "star_refraction_ciddor_peak_arcmin": 7.0458
    },
    "profiles": {
     "ray_to_peak": [
@@ -48686,7 +49024,8 @@
     "star_shift_astropy_deg": 0.050270731863808926,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.05027699999999946,
-    "ho_csv_deg": -0.1756987373018184
+    "ho_csv_deg": -0.1756987373018184,
+    "globe_ciddor_apparent_arcsec": -224.88
    },
    "terrain": {
     "file": "terrain/lucky-peak-hd-78282-2026-02-06.json",
@@ -48903,7 +49242,8 @@
      "planar_geometric_dsm_arcsec": -577.68,
      "planar_geometric_dsm_seconds": -53.25,
      "planar_refracted_dsm_arcsec": -136.89,
-     "planar_refracted_dsm_seconds": -12.62
+     "planar_refracted_dsm_seconds": -12.62,
+     "globe_ciddor_apparent_arcsec": -169.83
     },
     "canopy": {
      "to_peak": {
@@ -49002,7 +49342,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.130641067211225,
+    "star_refraction_ciddor_obs_arcmin": 7.4727,
+    "star_refraction_bennett_obs_arcmin": 7.489,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0163,
+    "star_refraction_erfa_obs_arcmin": 7.3132,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1594,
+    "star_apparent_ciddor_peak_deg": 6.173276176622066,
+    "star_refraction_ciddor_peak_arcmin": 7.0145
    },
    "profiles": {
     "ray_to_peak": [
@@ -50068,7 +50416,8 @@
     "star_shift_astropy_deg": 0.05027076181576717,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.05027699999999946,
-    "ho_csv_deg": -0.13994873730181823
+    "ho_csv_deg": -0.13994873730181823,
+    "globe_ciddor_apparent_arcsec": -98.39
    },
    "terrain": {
     "file": "terrain/lucky-peak-sao-117493-2026-02-06.json",
@@ -50285,7 +50634,8 @@
      "planar_geometric_dsm_arcsec": -642.25,
      "planar_geometric_dsm_seconds": -59.22,
      "planar_refracted_dsm_arcsec": -203.46,
-     "planar_refracted_dsm_seconds": -18.76
+     "planar_refracted_dsm_seconds": -18.76,
+     "globe_ciddor_apparent_arcsec": -142.93
     },
     "canopy": {
      "to_peak": {
@@ -50382,7 +50732,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.1138323228255445,
+    "star_refraction_ciddor_obs_arcmin": 7.4903,
+    "star_refraction_bennett_obs_arcmin": 7.5067,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0164,
+    "star_refraction_erfa_obs_arcmin": 7.3291,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1613,
+    "star_apparent_ciddor_peak_deg": 6.156491039316294,
+    "star_refraction_ciddor_peak_arcmin": 7.0337
    },
    "profiles": {
     "ray_to_peak": [
@@ -51448,7 +51806,8 @@
     "star_shift_astropy_deg": 0.050269785637709674,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.0502779999999996,
-    "ho_csv_deg": -0.1570597373018181
+    "ho_csv_deg": -0.1570597373018181,
+    "globe_ciddor_apparent_arcsec": -158.91
    },
    "terrain": {
     "file": "terrain/lucky-peak-hip-45114-2026-02-06.json",
@@ -51665,7 +52024,8 @@
      "planar_geometric_dsm_arcsec": -666.1,
      "planar_geometric_dsm_seconds": -61.45,
      "planar_refracted_dsm_arcsec": -226.36,
-     "planar_refracted_dsm_seconds": -20.88
+     "planar_refracted_dsm_seconds": -20.88,
+     "globe_ciddor_apparent_arcsec": -160.74
     },
     "canopy": {
      "to_peak": {
@@ -51762,7 +52122,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.117585477553936,
+    "star_refraction_ciddor_obs_arcmin": 7.4864,
+    "star_refraction_bennett_obs_arcmin": 7.5027,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0163,
+    "star_refraction_erfa_obs_arcmin": 7.3255,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1609,
+    "star_apparent_ciddor_peak_deg": 6.160239265324571,
+    "star_refraction_ciddor_peak_arcmin": 7.0294
    },
    "profiles": {
     "ray_to_peak": [
@@ -52828,7 +53196,8 @@
     "star_shift_astropy_deg": 0.05027079234444631,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.05027800000000049,
-    "ho_csv_deg": -0.15322573730181777
+    "ho_csv_deg": -0.15322573730181777,
+    "globe_ciddor_apparent_arcsec": -145.39
    },
    "terrain": {
     "file": "terrain/lucky-peak-hip-45592-2026-02-06.json",
@@ -53045,7 +53414,8 @@
      "planar_geometric_dsm_arcsec": -690.08,
      "planar_geometric_dsm_seconds": -63.63,
      "planar_refracted_dsm_arcsec": -250.55,
-     "planar_refracted_dsm_seconds": -23.1
+     "planar_refracted_dsm_seconds": -23.1,
+     "globe_ciddor_apparent_arcsec": -162.39
     },
     "canopy": {
      "to_peak": {
@@ -53142,7 +53512,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.1356197624251285,
+    "star_refraction_ciddor_obs_arcmin": 7.4675,
+    "star_refraction_bennett_obs_arcmin": 7.4837,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0163,
+    "star_refraction_erfa_obs_arcmin": 7.3085,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1589,
+    "star_apparent_ciddor_peak_deg": 6.178247245366491,
+    "star_refraction_ciddor_peak_arcmin": 7.0089
    },
    "profiles": {
     "ray_to_peak": [
@@ -54208,7 +54586,8 @@
     "star_shift_astropy_deg": 0.0502704602995907,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.05024999999999924,
-    "ho_csv_deg": -0.1348927373018185
+    "ho_csv_deg": -0.1348927373018185,
+    "globe_ciddor_apparent_arcsec": -80.47
    },
    "terrain": {
     "file": "terrain/lucky-peak-soa-117565-2026-02-06.json",
@@ -54425,7 +54804,8 @@
      "planar_geometric_dsm_arcsec": -624.02,
      "planar_geometric_dsm_seconds": -57.55,
      "planar_refracted_dsm_arcsec": -185.51,
-     "planar_refracted_dsm_seconds": -17.11
+     "planar_refracted_dsm_seconds": -17.11,
+     "globe_ciddor_apparent_arcsec": -123.4
     },
     "canopy": {
      "to_peak": {
@@ -54522,7 +54902,15 @@
     "star_uplift_gauss_arcmin": 7.44305304453631,
     "bennett_arcmin": 7.4603441697786055,
     "pressure_hpa_obs": 909.81,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 6.119236638562792,
+    "star_refraction_ciddor_obs_arcmin": 7.4847,
+    "star_refraction_bennett_obs_arcmin": 7.501,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.0163,
+    "star_refraction_erfa_obs_arcmin": 7.324,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.1607,
+    "star_apparent_ciddor_peak_deg": 6.161887114913609,
+    "star_refraction_ciddor_peak_arcmin": 7.0275
    },
    "profiles": {
     "ray_to_peak": [
@@ -55588,7 +55976,8 @@
     "star_shift_astropy_deg": 0.05026966611140704,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.0502779999999996,
-    "ho_csv_deg": -0.1515597373018185
+    "ho_csv_deg": -0.1515597373018185,
+    "globe_ciddor_apparent_arcsec": -139.45
    },
    "terrain": {
     "file": "terrain/lucky-peak-hd-80537-2026-02-06.json",
@@ -55805,7 +56194,8 @@
      "planar_geometric_dsm_arcsec": -646.3,
      "planar_geometric_dsm_seconds": -59.63,
      "planar_refracted_dsm_arcsec": -206.87,
-     "planar_refracted_dsm_seconds": -19.09
+     "planar_refracted_dsm_seconds": -19.09,
+     "globe_ciddor_apparent_arcsec": -130.7
     },
     "canopy": {
      "to_peak": {
@@ -55904,7 +56294,15 @@
     "star_uplift_gauss_arcmin": 13.472480181152289,
     "bennett_arcmin": 13.6303729518933,
     "pressure_hpa_obs": 787.77,
-    "temp_c_obs": -0.2
+    "temp_c_obs": -0.2,
+    "star_apparent_ciddor_obs_deg": 2.3218410133453276,
+    "star_refraction_ciddor_obs_arcmin": 13.4769,
+    "star_refraction_bennett_obs_arcmin": 13.6297,
+    "star_ciddor_minus_bennett_obs_arcmin": -0.1528,
+    "star_refraction_erfa_obs_arcmin": 9.0292,
+    "star_ciddor_minus_erfa_obs_arcmin": 4.4476,
+    "star_apparent_ciddor_peak_deg": 2.7137943042035735,
+    "star_refraction_ciddor_peak_arcmin": 9.7176
    },
    "profiles": {
     "ray_to_peak": [
@@ -57001,7 +57399,8 @@
     "star_shift_astropy_deg": 0.4546076788436939,
     "star_shift_astropy_minus_central_angle_arcsec": 0.0,
     "star_shift_csv_deg": 0.4546079999999999,
-    "ho_csv_deg": 0.04387203212500612
+    "ho_csv_deg": 0.04387203212500612,
+    "globe_ciddor_apparent_arcsec": 0.73
    },
    "terrain": {
     "file": "terrain/pikes-peak-39-aquarii-3-2025-02-01.json",
@@ -57218,7 +57617,8 @@
      "planar_geometric_dsm_arcsec": -1397.13,
      "planar_geometric_dsm_seconds": 127.23,
      "planar_refracted_dsm_arcsec": -855.37,
-     "planar_refracted_dsm_seconds": 77.89
+     "planar_refracted_dsm_seconds": 77.89,
+     "globe_ciddor_apparent_arcsec": 108.7
     },
     "canopy": {
      "to_peak": {
@@ -57317,7 +57717,12 @@
     "star_uplift_gauss_arcmin": 3.1776906923376202,
     "bennett_arcmin": 3.3176857406383915,
     "pressure_hpa_obs": 1013.38,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": null,
+    "star_refraction_ciddor_obs_arcmin": null,
+    "star_refraction_erfa_obs_arcmin": 11.1389,
+    "star_apparent_ciddor_peak_deg": null,
+    "star_refraction_ciddor_peak_arcmin": null
    },
    "profiles": {
     "ray_to_peak": [
@@ -58535,7 +58940,8 @@
     "star_shift_astropy_deg": 0.3120463332432831,
     "star_shift_astropy_minus_central_angle_arcsec": -21.17,
     "star_shift_csv_deg": 0.3200000000000003,
-    "ho_csv_deg": 0.19140126481734754
+    "ho_csv_deg": 0.19140126481734754,
+    "globe_ciddor_apparent_arcsec": -1394107.06
    },
    "terrain": {
     "skipped": "aircraft target: the occluder is the aircraft, not terrain"
@@ -58624,7 +59030,12 @@
     "star_uplift_gauss_arcmin": 7.045235012232585,
     "bennett_arcmin": 7.089280141884046,
     "pressure_hpa_obs": 1012.72,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": null,
+    "star_refraction_ciddor_obs_arcmin": null,
+    "star_refraction_erfa_obs_arcmin": 9.8476,
+    "star_apparent_ciddor_peak_deg": null,
+    "star_refraction_ciddor_peak_arcmin": null
    },
    "profiles": {
     "ray_to_peak": [
@@ -59763,7 +60174,8 @@
     "star_shift_astropy_deg": 0.6134768229485914,
     "star_shift_astropy_minus_central_angle_arcsec": -69.12,
     "star_shift_csv_deg": 0.6300000000000008,
-    "ho_csv_deg": 0.23951841362545956
+    "ho_csv_deg": 0.23951841362545956,
+    "globe_ciddor_apparent_arcsec": -3984003.35
    },
    "terrain": {
     "skipped": "aircraft target: the occluder is the aircraft, not terrain"
@@ -59852,7 +60264,15 @@
     "star_uplift_gauss_arcmin": 4.584235344409215,
     "bennett_arcmin": 4.5847721365445935,
     "pressure_hpa_obs": 1012.51,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": 10.950958429122561,
+    "star_refraction_ciddor_obs_arcmin": 4.9002,
+    "star_refraction_bennett_obs_arcmin": 4.8996,
+    "star_ciddor_minus_bennett_obs_arcmin": 0.0006,
+    "star_refraction_erfa_obs_arcmin": 4.8602,
+    "star_ciddor_minus_erfa_obs_arcmin": 0.04,
+    "star_apparent_ciddor_peak_deg": 11.366512141686206,
+    "star_refraction_ciddor_peak_arcmin": 1.2011
    },
    "profiles": {
     "ray_to_peak": [
@@ -60983,7 +61403,8 @@
     "star_shift_astropy_deg": 0.47720543544967775,
     "star_shift_astropy_minus_central_angle_arcsec": -106.18,
     "star_shift_csv_deg": 0.5099999999999998,
-    "ho_csv_deg": 0.1819868390801176
+    "ho_csv_deg": 0.1819868390801176,
+    "globe_ciddor_apparent_arcsec": -2795.63
    },
    "terrain": {
     "skipped": "aircraft target: the occluder is the aircraft, not terrain"
@@ -61073,7 +61494,12 @@
     "star_uplift_gauss_arcmin": 8.996473589507819,
     "bennett_arcmin": 8.971175748117263,
     "pressure_hpa_obs": 1012.51,
-    "temp_c_obs": 10.0
+    "temp_c_obs": 10.0,
+    "star_apparent_ciddor_obs_deg": null,
+    "star_refraction_ciddor_obs_arcmin": null,
+    "star_refraction_erfa_obs_arcmin": 10.9658,
+    "star_apparent_ciddor_peak_deg": null,
+    "star_refraction_ciddor_peak_arcmin": null
    },
    "profiles": {
     "ray_to_peak": [
@@ -62208,7 +62634,8 @@
     "star_shift_astropy_deg": 0.7848795627403948,
     "star_shift_astropy_minus_central_angle_arcsec": -87.22,
     "star_shift_csv_deg": 0.8099999999999996,
-    "ho_csv_deg": 0.3145210556482718
+    "ho_csv_deg": 0.3145210556482718,
+    "globe_ciddor_apparent_arcsec": -2771367.07
    },
    "terrain": {
     "skipped": "aircraft target: the occluder is the aircraft, not terrain"
@@ -62297,7 +62724,15 @@
     "star_uplift_gauss_arcmin": 21.79411786767337,
     "bennett_arcmin": 23.24155879019036,
     "pressure_hpa_obs": 897.66,
-    "temp_c_obs": -4.0
+    "temp_c_obs": -4.0,
+    "star_apparent_ciddor_obs_deg": 0.9292308683638831,
+    "star_refraction_ciddor_obs_arcmin": 21.8163,
+    "star_refraction_bennett_obs_arcmin": 23.2527,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.4365,
+    "star_refraction_erfa_obs_arcmin": 10.6948,
+    "star_ciddor_minus_erfa_obs_arcmin": 11.1215,
+    "star_apparent_ciddor_peak_deg": 1.534340804487323,
+    "star_refraction_ciddor_peak_arcmin": 16.2291
    },
    "profiles": {
     "ray_to_peak": [
@@ -63420,7 +63855,8 @@
     "star_shift_astropy_deg": 0.6982285664902591,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.6983299999999999,
-    "ho_csv_deg": 0.012200403056292775
+    "ho_csv_deg": 0.012200403056292775,
+    "globe_ciddor_apparent_arcsec": -5.42
    },
    "terrain": {
     "file": "terrain/mount-bolton-mintaka-2026-03-02.json",
@@ -63641,7 +64077,8 @@
      "planar_geometric_dsm_arcsec": -2440.18,
      "planar_geometric_dsm_seconds": 254.29,
      "planar_refracted_dsm_arcsec": -1798.5,
-     "planar_refracted_dsm_seconds": 187.42
+     "planar_refracted_dsm_seconds": 187.42,
+     "globe_ciddor_apparent_arcsec": 9.84
     },
     "canopy": {
      "to_peak": {
@@ -63738,7 +64175,15 @@
     "star_uplift_gauss_arcmin": 20.380717358388292,
     "bennett_arcmin": 21.51135674300106,
     "pressure_hpa_obs": 897.66,
-    "temp_c_obs": -4.0
+    "temp_c_obs": -4.0,
+    "star_apparent_ciddor_obs_deg": 1.167459552993567,
+    "star_refraction_ciddor_obs_arcmin": 20.4587,
+    "star_refraction_bennett_obs_arcmin": 21.5921,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.1334,
+    "star_refraction_erfa_obs_arcmin": 10.696,
+    "star_ciddor_minus_erfa_obs_arcmin": 9.7627,
+    "star_apparent_ciddor_peak_deg": 1.6331647528442153,
+    "star_refraction_ciddor_peak_arcmin": 16.254
    },
    "profiles": {
     "ray_to_peak": [
@@ -64873,7 +65318,8 @@
     "star_shift_astropy_deg": 0.5357834555872547,
     "star_shift_astropy_minus_central_angle_arcsec": -0.27,
     "star_shift_csv_deg": 0.535833,
-    "ho_csv_deg": -0.06666862645196736
+    "ho_csv_deg": -0.06666862645196736,
+    "globe_ciddor_apparent_arcsec": -44.46
    },
    "terrain": {
     "file": "terrain/plateau-mountain-rigel-2026-03-02.json",
@@ -65094,7 +65540,8 @@
      "planar_geometric_dsm_arcsec": -2075.11,
      "planar_geometric_dsm_seconds": 222.73,
      "planar_refracted_dsm_arcsec": -1433.35,
-     "planar_refracted_dsm_seconds": 153.84
+     "planar_refracted_dsm_seconds": 153.84,
+     "globe_ciddor_apparent_arcsec": 35.25
     },
     "canopy": {
      "to_peak": {
@@ -65197,7 +65644,15 @@
     "star_uplift_gauss_arcmin": 21.017812980678567,
     "bennett_arcmin": 22.274518748350477,
     "pressure_hpa_obs": 897.66,
-    "temp_c_obs": -4.0
+    "temp_c_obs": -4.0,
+    "star_apparent_ciddor_obs_deg": 1.1199023453970485,
+    "star_refraction_ciddor_obs_arcmin": 20.725,
+    "star_refraction_bennett_obs_arcmin": 21.9076,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.1826,
+    "star_refraction_erfa_obs_arcmin": 10.6958,
+    "star_ciddor_minus_erfa_obs_arcmin": 10.0292,
+    "star_apparent_ciddor_peak_deg": 1.58144278862932,
+    "star_refraction_ciddor_peak_arcmin": 16.8797
    },
    "profiles": {
     "ray_to_peak": [
@@ -66324,7 +66779,8 @@
     "star_shift_astropy_deg": 0.5256284146323319,
     "star_shift_astropy_minus_central_angle_arcsec": 0.01,
     "star_shift_csv_deg": 0.5256390000000001,
-    "ho_csv_deg": -0.013368375333680182
+    "ho_csv_deg": -0.013368375333680182,
+    "globe_ciddor_apparent_arcsec": 194.0
    },
    "terrain": {
     "file": "terrain/burke-48-ori-2026-03-02.json",
@@ -66545,7 +67001,8 @@
      "planar_geometric_dsm_arcsec": -2035.59,
      "planar_geometric_dsm_seconds": 212.89,
      "planar_refracted_dsm_arcsec": -1393.84,
-     "planar_refracted_dsm_seconds": 145.78
+     "planar_refracted_dsm_seconds": 145.78,
+     "globe_ciddor_apparent_arcsec": 107.41
     },
     "canopy": {
      "to_peak": {
@@ -66645,7 +67102,15 @@
     "star_uplift_gauss_arcmin": 21.29478694595857,
     "bennett_arcmin": 22.614110750637803,
     "pressure_hpa_obs": 897.66,
-    "temp_c_obs": -4.0
+    "temp_c_obs": -4.0,
+    "star_apparent_ciddor_obs_deg": 1.0080740951598923,
+    "star_refraction_ciddor_obs_arcmin": 21.3602,
+    "star_refraction_bennett_obs_arcmin": 22.6804,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.3202,
+    "star_refraction_erfa_obs_arcmin": 10.6952,
+    "star_ciddor_minus_erfa_obs_arcmin": 10.665,
+    "star_apparent_ciddor_peak_deg": 1.6101077286708965,
+    "star_refraction_ciddor_peak_arcmin": 15.4584
    },
    "profiles": {
     "ray_to_peak": [
@@ -67728,7 +68193,8 @@
     "star_shift_astropy_deg": 0.7003958428768922,
     "star_shift_astropy_minus_central_angle_arcsec": -0.0,
     "star_shift_csv_deg": 0.700417,
-    "ho_csv_deg": 0.01415895173983106
+    "ho_csv_deg": 0.01415895173983106,
+    "globe_ciddor_apparent_arcsec": -33.65
    },
    "terrain": {
     "file": "terrain/mount-aldridge-north-peak-alnilam-2026-03-02.json",
@@ -67949,7 +68415,8 @@
      "planar_geometric_dsm_arcsec": -2284.3,
      "planar_geometric_dsm_seconds": 238.25,
      "planar_refracted_dsm_arcsec": -1642.59,
-     "planar_refracted_dsm_seconds": 171.32
+     "planar_refracted_dsm_seconds": 171.32,
+     "globe_ciddor_apparent_arcsec": 78.13
     },
     "canopy": {
      "to_peak": {
@@ -68049,7 +68516,15 @@
     "star_uplift_gauss_arcmin": 21.16521832191323,
     "bennett_arcmin": 22.45434211413045,
     "pressure_hpa_obs": 897.66,
-    "temp_c_obs": -4.0
+    "temp_c_obs": -4.0,
+    "star_apparent_ciddor_obs_deg": 1.1424124205698796,
+    "star_refraction_ciddor_obs_arcmin": 20.599,
+    "star_refraction_bennett_obs_arcmin": 21.7573,
+    "star_ciddor_minus_bennett_obs_arcmin": -1.1583,
+    "star_refraction_erfa_obs_arcmin": 10.6959,
+    "star_ciddor_minus_erfa_obs_arcmin": 9.9031,
+    "star_apparent_ciddor_peak_deg": 1.620421227957448,
+    "star_refraction_ciddor_peak_arcmin": 16.7262
    },
    "profiles": {
     "ray_to_peak": [
@@ -69136,7 +69611,8 @@
     "star_shift_astropy_deg": 0.5425551111602518,
     "star_shift_astropy_minus_central_angle_arcsec": -1.55,
     "star_shift_csv_deg": 0.670944,
-    "ho_csv_deg": 0.174794601788542
+    "ho_csv_deg": 0.174794601788542,
+    "globe_ciddor_apparent_arcsec": 368.21
    },
    "terrain": {
     "file": "terrain/baril-peak-alnitak-2026-03-02.json",
@@ -69387,7 +69863,8 @@
      "planar_geometric_dsm_arcsec": -2201.96,
      "planar_geometric_dsm_seconds": 229.98,
      "planar_refracted_dsm_arcsec": -1560.21,
-     "planar_refracted_dsm_seconds": 162.95
+     "planar_refracted_dsm_seconds": 162.95,
+     "globe_ciddor_apparent_arcsec": 119.96
     },
     "canopy": {
      "to_peak": {

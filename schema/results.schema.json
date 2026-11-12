@@ -346,6 +346,38 @@
             },
             "temp_c_obs": {
               "$ref": "#/$defs/num"
+            },
+            "star_apparent_ciddor_obs_deg": {
+              "$ref": "#/$defs/num",
+              "description": "AstronomyLive method: apparent altitude of the actual star at the observer, from its astropy true altitude by Ciddor ray trace (inverse of star_geometric_deg)."
+            },
+            "star_refraction_ciddor_obs_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "star_apparent_ciddor_obs_deg − astropy.true_alt_obs_deg: how far the air lifted the star."
+            },
+            "star_refraction_bennett_obs_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "Bennett (1982) at the Ciddor apparent altitude, observer P/T. Side value."
+            },
+            "star_ciddor_minus_bennett_obs_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "Ciddor − Bennett, as compared in AL_RefractionAnalysis."
+            },
+            "star_refraction_erfa_obs_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "astropy/ERFA refraction (astropy.erfa_apparent_alt_obs_deg − true). Side value; the ERFA model is not valid this near the horizon and runs low."
+            },
+            "star_ciddor_minus_erfa_obs_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "Ciddor apparent − ERFA apparent."
+            },
+            "star_apparent_ciddor_peak_deg": {
+              "$ref": "#/$defs/num",
+              "description": "Apparent altitude of the star from the summit/target, same method, at the same instant."
+            },
+            "star_refraction_ciddor_peak_arcmin": {
+              "$ref": "#/$defs/num",
+              "description": "Refraction at the summit/target."
             }
           }
         },
@@ -454,6 +486,10 @@
             "ho_csv_deg": {
               "$ref": "#/$defs/num",
               "description": "θ₂ − θ₁: CSV Star→Peak ♈︎ − geometry.planar_angle_deg (the Desmos Hₒ)."
+            },
+            "globe_ciddor_apparent_arcsec": {
+              "$ref": "#/$defs/num",
+              "description": "Apparent-sky residual: Ciddor apparent star − apparent summit (refraction.peak_apparent_deg). terrain.comparison carries the same against the apparent skyline."
             }
           }
         },

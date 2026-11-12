@@ -125,6 +125,15 @@ def finalize(results):
                 cm["star_shift_csv_deg"] = cs["true_peak"] - cs["true_obs"]
             if num(cs.get("true_peak")) and num(gm.get("planar_angle_deg")):
                 cm["ho_csv_deg"] = cs["true_peak"] - gm["planar_angle_deg"]
+        rf = ev.get("refraction") or {}
+        app = rf.get("star_apparent_ciddor_obs_deg")
+        if cm is not None and isinstance(app, (int, float)):
+            if isinstance(rf.get("peak_apparent_deg"), (int, float)):
+                cm["globe_ciddor_apparent_arcsec"] = round((app - rf["peak_apparent_deg"]) * 3600, 2)
+            tc = (ev.get("terrain") or {}).get("comparison")
+            sky = ((((ev.get("terrain") or {}).get("star_azimuth") or {}).get("obstruction") or {}).get("dtm") or {}).get("globe_refracted") or {}
+            if tc is not None and isinstance(sky.get("angle_deg"), (int, float)):
+                tc["globe_ciddor_apparent_arcsec"] = round((app - sky["angle_deg"]) * 3600, 2)
         if (ev.get("star") or {}).get("kind") == "body":
             f["warnings"].append("Moon: astropy gives the centre; the occultation was timed on a limb (about ±15′), so residuals are not comparable with stars")
         f["in_summary"] = bool(not f.get("excluded") and not f.get("is_test") and f.get("target_type") == "peak"
@@ -204,6 +213,39 @@ def write(doc: dict, out_dir):
 def refinalize(out_dir="out"):
     """Re-apply finalize() to an existing run and rewrite results.json/.csv (no recomputation)."""
     doc = load_results(Path(out_dir) / "results.json")
+    finalize(doc["events"])
+    write(doc, out_dir)
+    return doc
+
+
+def add_star_refraction(out_dir="out", log=print):
+    """Add the Ciddor (AstronomyLive) refraction of the actual star to an existing run, offline,
+    using the cached soundings. Then re-finalize."""
+    from .compute import star_refraction
+    from .refraction import CiddorAtmosphere, RefractionSettings, wgs84_normal_section_radius
+    from .refraction import EMPTY_SOUNDING
+    from .soundings import SOUNDING_DIR, _to_sounding, parse_wyoming_csv
+    doc = load_results(Path(out_dir) / "results.json")
+    st = RefractionSettings(**doc.get("settings", {}))
+    for i, ev in enumerate(doc["events"], 1):
+        rf, g = ev.get("refraction") or {}, ev.get("geometry") or {}
+        sd = rf.get("sounding")
+        if ev["flags"].get("excluded") or not sd or not g.get("earth_radius_m") or not (ev.get("astropy") or {}).get("true_alt_obs_deg"):
+            continue
+        snd = EMPTY_SOUNDING
+        if sd.get("source") == "radiosonde":
+            f = SOUNDING_DIR / f"{sd['wmo']}_{sd['valid_utc'][:13]}Z.csv"
+            if not f.exists():
+                log(f"[{i}] {ev['id']}: sounding file {f.name} missing, skipped")
+                continue
+            snd = _to_sounding(parse_wyoming_csv(f.read_text()), {})
+        atm = CiddorAtmosphere(snd, st)
+        az = g.get("azimuth_deg")
+        R_peak = wgs84_normal_section_radius(ev["peak"]["lat"], (az + 180.0) % 360.0) if az is not None else g["earth_radius_m"]
+        for k in [k for k in rf if k.startswith(("star_apparent_ciddor", "star_refraction_", "star_ciddor_minus"))]:
+            rf.pop(k)  # clear values from an earlier pass
+        rf.update(star_refraction(atm, ev, g["earth_radius_m"], R_peak))
+        log(f"[{i}] {ev['id']}: Ciddor {rf.get('star_refraction_ciddor_obs_arcmin')}′, Bennett {rf.get('star_refraction_bennett_obs_arcmin')}′, ERFA {rf.get('star_refraction_erfa_obs_arcmin')}′")
     finalize(doc["events"])
     write(doc, out_dir)
     return doc

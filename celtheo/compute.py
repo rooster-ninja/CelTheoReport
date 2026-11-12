@@ -7,7 +7,7 @@ from datetime import timedelta
 from typing import Optional
 
 from .data import Event
-from .refraction import (CiddorAtmosphere, RefractionSettings, apparent_geometric_target, bennett_arcmin,
+from .refraction import (CiddorAtmosphere, RefractionSettings, apparent_from_geometric_infinite, apparent_geometric_target, bennett_arcmin,
                          geometric_from_apparent_infinite, ray_path_xy, wgs84_gauss_radius)
 from .soundings import sounding_for_event
 from .stars import resolve
@@ -109,6 +109,33 @@ def implied_clock_offset(e: Event, star: dict, target_alt_deg: float, window_h=6
     return {"minutes": fine[j] / 60.0, "alt_residual_arcsec": (aa.alt.deg[j] - target_alt_deg) * 3600}
 
 
+def star_refraction(atm, ev_like: dict, R_obs: float, R_peak: float) -> dict:
+    """AstronomyLive Ciddor refraction of the actual star: true altitude (astropy) -> apparent altitude, at the observer
+    and at the summit/target. Bennett (at the Ciddor apparent altitude, observer P/T) and astropy/ERFA kept as side values."""
+    a, o, p = ev_like.get("astropy") or {}, ev_like["observer"], ev_like["peak"]
+    out = {}
+    to, tp = a.get("true_alt_obs_deg"), a.get("true_alt_peak_deg")
+    guess = (a["erfa_apparent_alt_obs_deg"] - to) if a.get("erfa_apparent_alt_obs_deg") is not None and to is not None else None
+    if to is not None:
+        app = apparent_from_geometric_infinite(atm, to, o["alt_m"], R_obs, guess)
+        out["star_apparent_ciddor_obs_deg"] = _f(app)
+        out["star_refraction_ciddor_obs_arcmin"] = _f((app - to) * 60, 4)
+        P = pressure_hpa(o["alt_m"])
+        T = a.get("temp_c_used") if a.get("temp_c_used") is not None else 10.0
+        if math.isfinite(app):
+            out["star_refraction_bennett_obs_arcmin"] = _f(bennett_arcmin(app, P, T), 4)
+            out["star_ciddor_minus_bennett_obs_arcmin"] = _f((app - to) * 60 - bennett_arcmin(app, P, T), 4)
+        if a.get("erfa_apparent_alt_obs_deg") is not None:
+            out["star_refraction_erfa_obs_arcmin"] = _f((a["erfa_apparent_alt_obs_deg"] - to) * 60, 4)
+            if math.isfinite(app):
+                out["star_ciddor_minus_erfa_obs_arcmin"] = _f((app - a["erfa_apparent_alt_obs_deg"]) * 60, 4)
+    if tp is not None and p.get("alt_m") is not None:
+        appp = apparent_from_geometric_infinite(atm, tp, p["alt_m"], R_peak, guess)
+        out["star_apparent_ciddor_peak_deg"] = _f(appp)
+        out["star_refraction_ciddor_peak_arcmin"] = _f((appp - tp) * 60, 4)
+    return out
+
+
 def compute_event(e: Event, settings: RefractionSettings, offline=False, log=print, profiles=True, refresh_stars=False,
                   terrain=True, terrain_settings=None) -> dict:
     warn = list(e.warnings)
@@ -163,6 +190,12 @@ def compute_event(e: Event, settings: RefractionSettings, offline=False, log=pri
             "bennett_arcmin": _f(bennett_arcmin(sol.apparent_deg, P, T)),
             "pressure_hpa_obs": _f(P, 2), "temp_c_obs": _f(T),
         }
+        try:
+            from .refraction import wgs84_normal_section_radius
+            R_peak = wgs84_normal_section_radius(e.peak_lat, (sol.azimuth_deg + 180.0) % 360.0) if math.isfinite(sol.azimuth_deg) else sol.radius_m
+            out["refraction"].update(star_refraction(atm, out, sol.radius_m, R_peak))
+        except Exception as ex:  # noqa: BLE001
+            warn.append(f"star refraction failed: {ex}")
         if profiles:
             out["profiles"] = {
                 "ray_to_peak": [[_f(x, 1), _f(y, 2)] for x, y in to_peak_frame_xy(

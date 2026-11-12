@@ -236,6 +236,24 @@ def geometric_from_apparent_infinite(atm, apparent_elev_deg, observer_alt_m, R, 
     return math.degrees(math.atan2(dx, dy))
 
 
+def apparent_from_geometric_infinite(atm, true_elev_deg, observer_alt_m, R, first_guess_deg=None, tol_arcsec=0.01, max_iter=12):
+    """Apparent elevation of a star whose true (vacuum) elevation is ``true_elev_deg``: the inverse of
+    geometric_from_apparent_infinite. Fixed-point iteration (d true / d apparent ≈ 1), a few traces."""
+    if not math.isfinite(true_elev_deg) or true_elev_deg < -1.0:
+        return float("nan")  # star too far below the horizon to be seen at all
+    app = true_elev_deg + (first_guess_deg if first_guess_deg is not None and 0 < first_guess_deg < 1.5 else 0.2)
+    for _ in range(max_iter):
+        g = geometric_from_apparent_infinite(atm, app, observer_alt_m, R)
+        if not math.isfinite(g):
+            return float("nan")
+        err = true_elev_deg - g
+        app += err
+        if abs(err) * 3600 < tol_arcsec:
+            refr = app - true_elev_deg
+            return app if 0.0 <= refr < 2.0 else float("nan")  # refraction lifts a star by 0..~1.2 deg
+    return float("nan")
+
+
 @dataclass
 class TargetSolution:
     apparent_deg: float

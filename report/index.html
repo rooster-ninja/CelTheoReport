@@ -18,6 +18,7 @@
   --rule: #8a7a63;
   --globe: #1f4e6b;        /* Prussian blue: globe model */
   --planar: #7c2a25;       /* oxblood: planar model */
+  --refr: #3d6b4a;         /* verdigris: refraction of the star (AstronomyLive Ciddor) */
   --display: "IM Fell English", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --caps: "IM Fell English SC", "IM Fell English", Georgia, serif;
   --body: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -164,6 +165,7 @@ svg .it { font-style: italic; }
     <h2>Appendix. Of the Method</h2>
     <p><span class="sc">The place of the star.</span> Each star's catalogue position, with its proper motion, is carried to the instant of the observation, and its altitude and azimuth are found for the observer and for the summit. The altitude called <em>true</em> is geometric, as it would be seen through a vacuum, reckoned above the observer's horizon on the ellipsoid.</p>
     <p><span class="sc">The ray.</span> For a spherically layered atmosphere the ray obeys Bouguer's law, <em>b = n · r · cos α</em>, in which <em>n</em> is the index of the air, <em>r</em> the distance from the Earth's centre, and <em>α</em> the inclination of the ray to the local level. The quantity <em>b</em> is constant along the ray. The index is Ciddor's of 1996, computed from the temperature, pressure and moisture of each layer. The ray is stepped in segments of <span id="segm"></span> metres, at a wavelength of <span id="wl"></span> nanometres, to a height of <span id="toa"></span> metres, above which the air is taken as void.</p>
+    <p><span class="sc">The refraction of the star.</span> The star's apparent place is found by the same AstronomyLive ray trace run backward from its true altitude, by repeating the trace until the ray leaves the air at the star's true direction. That is done at the observer and again at the summit. Bennett's formula of 1982 and the simpler model inside astropy are given beside it for comparison only. The astropy model is not meant for altitudes this low and runs well short.</p>
     <p><span class="sc">The figure of the Earth.</span> The radius used for each line is the radius of curvature of the WGS-84 ellipsoid in the normal section along the azimuth from observer to summit. Distances are geodesics upon the same ellipsoid.</p>
     <p><span class="sc">The frame of the drawings.</span> Every profile is drawn from the foot of the summit, upon the plane tangent there. Both hypotheses place the summit alike. Under the globe the ground and the observer fall away below that plane; under the plane they do not. The fall of the observer is written on each plate.</p>
     <p><span class="sc">The ground.</span> Heights along each line are taken from bare-earth surveys: the 3DEP of the United States at one-third of an arc-second, and the HRDEM of Canada at two metres, with coarser models where these fail. A second surface, which includes the forest, serves only to warn where trees might alter the skyline.</p>
@@ -252,7 +254,37 @@ function axes(F, xl, zl, nx = 5, nz = 4) {
 // straight line through two points, drawn across the frame
 function through(F, a, b) { const k = (b[1] - a[1]) / (b[0] - a[0]); return [[F.xlo, a[1] + k * (F.xlo - a[0])], [F.xhi, a[1] + k * (F.xhi - a[0])]]; }
 const svg = (F, inner) => `<svg viewBox="0 0 ${F.W} ${F.H}" role="img">${DEFS}${F.clip}${inner}</svg>`;
-const G = "#1f4e6b", PL = "#7c2a25", INK = "#2b2118";
+const G = "#1f4e6b", PL = "#7c2a25", INK = "#2b2118", RF = "#3d6b4a";
+
+// The star seen from the globe observer: true direction and Ciddor apparent direction (AstronomyLive),
+// with the refraction between them as a translucent wedge. Directions are parallel lines (star at infinity);
+// in the peak-anchored frame the observer's horizon is inclined by the angle at the centre.
+function starWedge(F, e, S, labels, fr = [.04, .14, .25, .4, .55], fw = .95) {
+  const a = e.astropy || {}, r = e.refraction || {}, g = e.geometry || {}, og = g.observer_globe_xz_m, gam = g.central_angle_deg;
+  if (!og || !ok(a.true_alt_obs_deg) || !ok(gam)) return "";
+  const mk = alt => { const k = Math.tan((alt + gam) * Math.PI / 180); return { k, z: x => og[1] + k * (x - og[0]) }; };
+  const T = mk(a.true_alt_obs_deg), xe = F.xhi + (F.xhi - F.xlo), app = r.star_apparent_ciddor_obs_deg, A = ok(app) ? mk(app) : null;
+  let s = "";
+  if (S.ho && A) s += `<path d="${P(F, [og, [xe, A.z(xe)], [xe, T.z(xe)]])}Z" fill="${RF}" fill-opacity=".17" stroke="none"/>` +
+    `<path d="${P(F, [og, [xe, A.z(xe)]])}" stroke="${RF}" stroke-width="1.4" fill="none"/>`;
+  s += `<path d="${P(F, [og, [xe, T.z(xe)]])}" stroke="${RF}" stroke-width="1" stroke-dasharray="2 3" fill="none"/>`;
+  if (!labels) return s;
+  const place = (L, txt, below) => { for (const f of fr) { const x = F.xlo + f * (F.xhi - F.xlo), z = L.z(x);
+      if (z > F.zlo + (F.zhi - F.zlo) * .06 && z < F.zhi - (F.zhi - F.zlo) * .06) { const ang = -Math.atan(L.k * F.sz / F.sx) * 180 / Math.PI;
+        return `<text transform="translate(${F.X(x).toFixed(1)} ${F.Z(z).toFixed(1)}) rotate(${ang.toFixed(2)})" dy="${below ? 13 : -5}" font-size="11.5" fill="${RF}">${txt}</text>`; } } return ""; };
+  s += place(T, `★ true ${dms(a.true_alt_obs_deg)}`, true);
+  if (S.ho && A) { s += place(A, `★ apparent (Ciddor) ${dms(app)}`, false);
+    const x = F.xlo + (F.xhi - F.xlo) * fw, zm = (A.z(x) + T.z(x)) / 2;
+    if (zm > F.zlo && zm < F.zhi) s += `<text x="${F.X(x)}" y="${F.Z(zm) + 4}" font-size="11.5" text-anchor="end" fill="${RF}" class="it">refraction ${num(r.star_refraction_ciddor_obs_arcmin, 2)}′</text>`; }
+  return s;
+}
+function refrBox(e, x, y) {
+  const r = e.refraction || {};
+  const rows = [["Ciddor, traced (AstronomyLive)", r.star_refraction_ciddor_obs_arcmin], ["Bennett (1982)", r.star_refraction_bennett_obs_arcmin], ["astropy (ERFA)", r.star_refraction_erfa_obs_arcmin]];
+  let s = `<g transform="translate(${x} ${y})"><rect x="0" y="0" width="214" height="${20 + rows.length * 15}" fill="#f3ecd9" stroke="${RF}" stroke-width=".8"/><text x="8" y="14" font-size="11" class="cap" fill="${RF}">Refraction of the star</text>`;
+  rows.forEach((rw, i) => s += `<text x="8" y="${30 + i * 15}" font-size="11" class="it">${rw[0]}</text><text x="206" y="${30 + i * 15}" font-size="11" text-anchor="end">${ok(rw[1]) ? num(rw[1], 2) + "′" : DASH}</text>`);
+  return s + `</g>`;
+}
 function lineFor(e, which) { const t = TER[e.id]; if (!t) return null; return t[which] || t.star_azimuth || t.to_peak || null; }
 function obst(e, which) { const t = e.terrain || {}; const L = t[which] || t.star_azimuth || t.to_peak; return (L && L.obstruction && L.obstruction.dtm) || null; }
 const pts = (T, a, b, lo, hi) => { const o = []; for (let i = 0; i < T.u.length; i++) if (T.u[i] >= lo && T.u[i] <= hi) o.push([T[a][i], T[b][i]]); return o; };
@@ -269,10 +301,13 @@ function figPeak(e, S) {
   if (O) for (const k of ["planar", "globe_refracted"]) if (O[k] && Math.abs(O[k].u_m) < 5000) half = Math.max(half, Math.abs(O[k].u_m) * 1.35);
   let zlo = pk[1] - 600, zhi = pk[1] + 260, tp = [];
   if (T) { tp = pts(T, "gx", "gz", -half, half); if (tp.length) { zlo = Math.min(...tp.map(p => p[1])); zhi = Math.max(pk[1], ...tp.map(p => p[1])); const r = zhi - zlo; zhi += r * .3 + 40; zlo -= r * .04; } }
+  { const a = e.astropy || {}, r = e.refraction || {}, gam = g.central_angle_deg;
+    for (const alt of [a.true_alt_obs_deg, S.ho ? r.star_apparent_ciddor_obs_deg : null]) if (og && ok(alt) && ok(gam)) {
+      const z = og[1] + Math.tan((alt + gam) * Math.PI / 180) * (0 - og[0]); zlo = Math.min(zlo, z - 60); zhi = Math.max(zhi, z + 120); } }
   const F = frame(620, 440, { l: 52, r: 10, t: 10, b: 34 }, [-half, half], [zlo, zhi], 1);
   let s = axes(F, "distance from the summit along the line, metres", "elevation, metres") + `<g clip-path="url(#${F.id})">`;
   s += `<line x1="${F.X(0)}" x2="${F.X(0)}" y1="${F.m.t}" y2="${F.m.t + F.ph}" stroke="${INK}" stroke-width=".5" stroke-dasharray="1 4"/>`;
-  s += ground(F, tp, INK, true);
+  s += ground(F, tp, INK, true) + starWedge(F, e, S, true);
   s += `<path d="${P(F, through(F, op, pk))}" stroke="${PL}" stroke-width="1.2" stroke-dasharray="7 4" fill="none"/>`;
   if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
   else if (og) s += `<path d="${P(F, through(F, og, pk))}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
@@ -281,9 +316,11 @@ function figPeak(e, S) {
   const px = F.X(pk[0]), py = F.Z(pk[1]);
   s += `<path d="M${px} ${py - 2}l-4 -9h8z" fill="${INK}"/></g>`;
   s += `<text x="${px}" y="${Math.max(F.m.t + 12, py - 16)}" font-size="12" text-anchor="middle" class="cap">${esc(e.peak.name)}, ${num(e.peak.alt_m)} m</text>`;
+  s += refrBox(e, F.m.l + 8, F.m.t + 8);
   const cap = `<b>Fig. 1.</b> At the summit, drawn to true scale. The broken line is the planar sight line, at ${dms(g.planar_angle_deg)}. The solid line is the globe ray, ` +
     (S.ho ? `refracted, leaving the observer at ${dms((e.refraction || {}).peak_apparent_deg)}.` : `unrefracted, at ${dms((e.refraction || {}).peak_geometric_deg)}.`) +
-    (T ? ` Ground along ${S.line === "to_peak" ? "the line to the summit" : "the star's azimuth"}; a ring marks what hid the star under the globe, a cross under the plane.` : ` The mark is the aircraft; no ground is drawn.`);
+    (T ? ` Ground along ${S.line === "to_peak" ? "the line to the summit" : "the star's azimuth"}; a ring marks what hid the star under the globe, a cross under the plane.` : ` The mark is the aircraft; no ground is drawn.`) +
+    ` In green, the star as the globe observer sees it: the dotted line is its true direction, the solid line its apparent direction by the Ciddor ray trace, and the shaded wedge the refraction between them.`;
   return `<figure>${svg(F, s)}<figcaption>${cap}</figcaption></figure>`;
 }
 
@@ -297,6 +334,7 @@ function figObserver(e, S) {
   let s = axes(F, "distance from the summit, metres", "elevation, metres", 3, 4) + `<g clip-path="url(#${F.id})">`;
   if (T) { s += ground(F, pts(T, "gx", "gz", F.xlo - 2000, F.xhi + 2000).filter(p => p[0] >= F.xlo - 500 && p[0] <= F.xhi + 500), INK, true);
     s += ground(F, pts(T, "u", "h", F.xlo - 500, F.xhi + 500), PL, false, "5 3"); }
+  s += starWedge(F, e, S, false);
   s += `<path d="${P(F, through(F, op, pk))}" stroke="${PL}" stroke-width="1.1" stroke-dasharray="7 4" fill="none"/>`;
   if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
   else s += `<path d="${P(F, through(F, og, pk))}" stroke="${G}" stroke-width="1.2" fill="none"/>`;
@@ -304,7 +342,7 @@ function figObserver(e, S) {
   s += `<rect x="${F.X(op[0]) - 4}" y="${F.Z(op[1]) - 4}" width="8" height="8" fill="${PL}"/><circle cx="${F.X(og[0])}" cy="${F.Z(og[1])}" r="4.5" fill="${G}"/></g>`;
   const mx = F.X((op[0] + og[0]) / 2) + 9, my = F.Z((op[1] + og[1]) / 2) + 4;
   s += `<text x="${mx}" y="${my}" font-size="12.5" class="cap">Drop ${num(drop, 1)} m</text>`;
-  return `<figure>${svg(F, s)}<figcaption><b>Fig. 2.</b> At the observer, true scale. The square is the planar observer; the disc is the globe observer, ${num(drop, 1)} m lower.</figcaption></figure>`;
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 2.</b> At the observer, true scale. The square is the planar observer; the disc is the globe observer, ${num(drop, 1)} m lower. The green wedge leaves the globe observer between the star's true and apparent directions.</figcaption></figure>`;
 }
 
 // ---------- Fig. 3: on the celestial sphere (altitudes at the observer) ----------
@@ -312,7 +350,7 @@ function figSphere(e, S) {
   const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, O = obst(e, "star_azimuth"), tc = (e.terrain || {}).comparison || {};
   const L = [], R = [];
   if (ok(a.true_alt_obs_deg)) L.push([a.true_alt_obs_deg, "★ true place", INK]);
-  if (S.ho && ok(a.erfa_apparent_alt_obs_deg)) L.push([a.erfa_apparent_alt_obs_deg, "★ apparent, by the tables", INK]);
+  if (S.ho && ok(r.star_apparent_ciddor_obs_deg)) L.push([r.star_apparent_ciddor_obs_deg, "★ apparent, Ciddor (AstronomyLive)", RF]);
   if (ok(c.true_obs)) L.push([c.true_obs, "spreadsheet, true", "#5d4f3f"]);
   if (S.ho && ok(c.app_obs)) L.push([c.app_obs, "spreadsheet, apparent", "#5d4f3f"]);
   const gTrue = ok(tc.globe_skyline_star_true_deg) ? tc.globe_skyline_star_true_deg : r.star_geometric_deg;
@@ -324,7 +362,10 @@ function figSphere(e, S) {
   const all = L.concat(R).map(x => x[0]); if (!all.length) return "";
   let lo = Math.min(...all), hi = Math.max(...all); const pad = Math.max((hi - lo) * .12, 0.01); lo -= pad; hi += pad;
   const W = 380, H = 330, t = 26, b = 14, cx = W / 2, Y = v => t + (H - t - b) * (1 - (v - lo) / (hi - lo));
-  let s = `<line x1="${cx}" x2="${cx}" y1="${t - 6}" y2="${H - b + 4}" stroke="${INK}" stroke-width="1"/>`;
+  let s = "";
+  if (S.ho && ok(a.true_alt_obs_deg) && ok(r.star_apparent_ciddor_obs_deg)) { const y1 = Y(r.star_apparent_ciddor_obs_deg), y2 = Y(a.true_alt_obs_deg);
+    s += `<path d="M${cx} ${y2}L${cx - 70} ${y2 - 4}L${cx - 70} ${y1 + 4}L${cx} ${y1}Z" fill="${RF}" fill-opacity=".17" stroke="${RF}" stroke-width=".6"/>`; }
+  s += `<line x1="${cx}" x2="${cx}" y1="${t - 6}" y2="${H - b + 4}" stroke="${INK}" stroke-width="1"/>`;
   for (const v of nice(lo, hi, 6)) s += `<line x1="${cx - 3}" x2="${cx + 3}" y1="${Y(v)}" y2="${Y(v)}" stroke="${INK}" stroke-width=".7"/>`;
   s += `<text x="${cx - 12}" y="14" font-size="11.5" text-anchor="end" class="cap">The star</text><text x="${cx + 12}" y="14" font-size="11.5" class="cap">The hypotheses</text>`;
   function side(items, dir) { items.sort((p, q) => q[0] - p[0]); const ys = items.map(i => Y(i[0])); const ly = ys.slice();
@@ -336,7 +377,7 @@ function figSphere(e, S) {
       s += `<text x="${tx}" y="${ly[i] - 1}" font-size="11.5" text-anchor="${an}" fill="${it[2]}" class="it">${it[1]}</text><text x="${tx}" y="${ly[i] + 11}" font-size="11.5" text-anchor="${an}">${dms(it[0])}</text>`; }); }
   side(L, -1); side(R, 1);
   const F = { W, H, clip: "" };
-  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere: altitudes at the observer at the recorded instant. Globe residual ${asec(pref(e, "globe_ciddor_arcsec"))}; plane ${asec(pref(e, "planar_geometric_arcsec"))}; plane with refraction ${asec(pref(e, "planar_refracted_arcsec"))}.</figcaption></figure>`;
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere: altitudes at the observer at the recorded instant. The green wedge is the refraction of the star by the Ciddor ray trace, ${num(r.star_refraction_ciddor_obs_arcmin, 2)}′; Bennett gives ${num(r.star_refraction_bennett_obs_arcmin, 2)}′ and astropy ${num(r.star_refraction_erfa_obs_arcmin, 2)}′. Globe residual ${asec(pref(e, "globe_ciddor_arcsec"))}; plane ${asec(pref(e, "planar_geometric_arcsec"))}; plane with refraction ${asec(pref(e, "planar_refracted_arcsec"))}.</figcaption></figure>`;
 }
 
 // ---------- Fig. 4: topographical side view ----------
@@ -351,7 +392,7 @@ function figTopo(e, S) {
   const ve = [1, 2, 3, 5, 10, 15, 20, 30, 50, 100, 200].filter(v => v <= fit).pop() || 1;
   const F = frame(W, H, m, [xlo, xhi], [zlo, zhi], ve);
   let s = axes(F, "distance from the summit, metres", "elevation, metres", 8, 4) + `<g clip-path="url(#${F.id})">`;
-  s += ground(F, tpG, INK, true) + ground(F, tpP, PL, false, "5 3");
+  s += ground(F, tpG, INK, true) + ground(F, tpP, PL, false, "5 3") + starWedge(F, e, S, true, [.32, .42, .52], .8);
   s += `<path d="${P(F, [op, [xhi, pk[1] + (pk[1] - op[1]) / (pk[0] - op[0]) * (xhi - pk[0])]])}" stroke="${PL}" stroke-width="1.1" stroke-dasharray="7 4" fill="none"/>`;
   if (S.ho && e.profiles && e.profiles.ray_to_peak) s += `<path d="${P(F, e.profiles.ray_to_peak)}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
   else s += `<path d="${P(F, [og, pk])}" stroke="${G}" stroke-width="1.3" fill="none"/>`;
@@ -443,7 +484,8 @@ function description(e) {
 }
 function anglesTable(e) {
   const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, g = e.geometry || {}, O = obst(e, "star_azimuth") || {}, tc = (e.terrain || {}).comparison || {};
-  const rows = [["Star, true, at the observer", a.true_alt_obs_deg], ["Star, apparent, by the tables", a.erfa_apparent_alt_obs_deg], ["Star, true, at the summit", a.true_alt_peak_deg],
+  const rows = [["Star, true, at the observer", a.true_alt_obs_deg], ["Star, apparent, Ciddor (AstronomyLive)", r.star_apparent_ciddor_obs_deg], ["Star, apparent, astropy (ERFA)", a.erfa_apparent_alt_obs_deg],
+    ["Star, true, at the summit", a.true_alt_peak_deg], ["Star, apparent at the summit, Ciddor", r.star_apparent_ciddor_peak_deg],
     ["Spreadsheet: true, apparent at observer", c.true_obs, c.app_obs], ["Spreadsheet: true, apparent at summit", c.true_peak, c.app_peak],
     ["Plane: summit by rise over run", g.planar_angle_deg], ["Plane: skyline on the star's azimuth", (O.planar || {}).angle_deg],
     ["Globe: summit, geometric", r.peak_geometric_deg], ["Globe: summit, as seen (refracted)", r.peak_apparent_deg], ["Globe: skyline, as seen", (O.globe_refracted || {}).angle_deg],
@@ -451,7 +493,7 @@ function anglesTable(e) {
   let h = `<table><thead><tr><th class="l">Angle</th><th>° ′ ″</th><th></th></tr></thead><tbody>`;
   for (const r2 of rows) h += `<tr><td class="l">${r2[0]}</td><td>${dms(r2[1])}</td><td>${r2.length > 2 ? dms(r2[2]) : ""}</td></tr>`;
   h += `</tbody></table><div class="tw" style="margin-top:.8rem"><table><thead><tr><th class="l">Residual, obs. − comp.</th><th>arc <span class="unit">″</span></th><th>time <span class="unit">s</span></th></tr></thead><tbody>`;
-  const cm = e.comparison || {}, res = [["Globe, skyline", tc.globe_ciddor_arcsec, tc.globe_ciddor_seconds], ["Globe, summit only", cm.globe_ciddor_arcsec, cm.globe_ciddor_seconds],
+  const cm = e.comparison || {}, res = [["Globe, skyline", tc.globe_ciddor_arcsec, tc.globe_ciddor_seconds], ["Globe, apparent star − apparent skyline", tc.globe_ciddor_apparent_arcsec, null], ["Globe, summit only", cm.globe_ciddor_arcsec, cm.globe_ciddor_seconds],
     ["Plane, skyline", tc.planar_geometric_arcsec, tc.planar_geometric_seconds], ["Plane, summit only", cm.planar_geometric_arcsec, cm.planar_geometric_seconds],
     ["Plane with refraction, skyline", tc.planar_refracted_arcsec, tc.planar_refracted_seconds], ["Plane with refraction, summit only", cm.planar_refracted_arcsec, cm.planar_refracted_seconds],
     ["Globe, skyline with forest", tc.globe_ciddor_dsm_arcsec, tc.globe_ciddor_dsm_seconds]];
@@ -462,7 +504,8 @@ function provenance(e) {
   const r = e.refraction || {}, sd = r.sounding, t = e.terrain || {}, ch = t.checks, L = t.star_azimuth || t.to_peak, cn = t.canopy || {}; let h = `<dl>`;
   h += `<div class="h">The air</div>`;
   if (sd) h += `<dt>Sounding</dt><dd>${esc(sd.station)} (${esc(sd.wmo)})</dd><dt>Launched</dt><dd>${esc(sd.valid_utc)}</dd><dt>From the observer</dt><dd>${num(sd.distance_km, 1)} km</dd><dt>Source</dt><dd>${esc(sd.source)}, ${num(sd.levels)} levels</dd>`;
-  h += `<dt>Refraction, traced</dt><dd>${num(r.star_uplift_arcmin, 2)}′</dd><dt>Refraction, Bennett</dt><dd>${num(r.bennett_arcmin, 2)}′</dd><dt>Pressure, temperature</dt><dd>${num(r.pressure_hpa_obs, 1)} hPa, ${num(r.temp_c_obs, 1)} °C</dd>`;
+  h += `<div class="h">Refraction of the star</div><dt>Ciddor, traced (AstronomyLive)</dt><dd>${num(r.star_refraction_ciddor_obs_arcmin, 2)}′</dd><dt>Bennett (1982)</dt><dd>${num(r.star_refraction_bennett_obs_arcmin, 2)}′</dd><dt>Ciddor − Bennett</dt><dd>${num(r.star_ciddor_minus_bennett_obs_arcmin, 2, true)}′</dd><dt>astropy (ERFA)</dt><dd>${num(r.star_refraction_erfa_obs_arcmin, 2)}′</dd><dt>At the summit, Ciddor</dt><dd>${num(r.star_refraction_ciddor_peak_arcmin, 2)}′</dd>`;
+  h += `<dt>Uplift for a star on the summit</dt><dd>${num(r.star_uplift_arcmin, 2)}′</dd><dt>Pressure, temperature</dt><dd>${num(r.pressure_hpa_obs, 1)} hPa, ${num(r.temp_c_obs, 1)} °C</dd>`;
   h += `<div class="h">The ground</div>`;
   if (t.skipped) h += `<dt>Not examined</dt><dd>${esc(t.skipped)}</dd>`;
   if (L && L.sources) h += `<dt>Bare earth</dt><dd>${esc((L.sources.dtm || []).join("; ") || DASH)}</dd><dt>With forest</dt><dd>${esc((L.sources.dsm || []).join("; ") || DASH)}</dd>`;
@@ -494,7 +537,7 @@ function renderPlate() {
     <div class="g-peak">${figPeak(e, S)}</div>
     <div class="g-side">${figObserver(e, S)}${figSphere(e, S)}</div>
     <div class="g-topo">${figTopo(e, S)}
-      <div class="keyline"><span><svg viewBox="0 0 30 10"><line x1="0" x2="30" y1="5" y2="5" stroke="${G}" stroke-width="1.6"/></svg> globe ray</span><span><svg viewBox="0 0 30 10"><line x1="0" x2="30" y1="5" y2="5" stroke="${PL}" stroke-width="1.4" stroke-dasharray="7 4"/></svg> planar sight line</span><span><svg viewBox="0 0 30 10"><circle cx="15" cy="5" r="4" fill="${G}"/></svg> globe observer</span><span><svg viewBox="0 0 30 10"><rect x="11" y="1" width="8" height="8" fill="${PL}"/></svg> planar observer</span></div></div>
+      <div class="keyline"><span><svg viewBox="0 0 30 10"><line x1="0" x2="30" y1="5" y2="5" stroke="${G}" stroke-width="1.6"/></svg> globe ray</span><span><svg viewBox="0 0 30 10"><line x1="0" x2="30" y1="5" y2="5" stroke="${PL}" stroke-width="1.4" stroke-dasharray="7 4"/></svg> planar sight line</span><span><svg viewBox="0 0 30 10"><circle cx="15" cy="5" r="4" fill="${G}"/></svg> globe observer</span><span><svg viewBox="0 0 30 10"><rect x="11" y="1" width="8" height="8" fill="${PL}"/></svg> planar observer</span><span><svg viewBox="0 0 30 10"><path d="M0 9L30 1L30 7Z" fill="${RF}" fill-opacity=".25"/><line x1="0" y1="9" x2="30" y2="1" stroke="${RF}" stroke-width="1.3"/></svg> star, true to apparent (Ciddor)</span></div></div>
     <div class="g-desc panel desc"><h4>Description</h4>${description(e)}</div>
     <div class="g-nav">${figNav(e, false)}${figNav(e, true)}</div>
   </div>

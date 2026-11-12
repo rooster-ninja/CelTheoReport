@@ -62,3 +62,14 @@ def test_offline_pipeline_with_gp_fixture(tmp_path, monkeypatch):
     assert ev["refraction"]["sounding"]["station"].startswith("Grand Junction")
     assert set(ev["comparison"]) >= {"globe_ciddor_arcsec", "planar_geometric_arcsec"}
     assert (tmp_path / "results.json").exists() and (tmp_path / "results.csv").exists()
+
+
+def test_apparent_from_true_is_inverse(solved):
+    """True -> apparent (star) inverts apparent -> true, and matches the published 13.33' at Pikes Peak."""
+    from celtheo.refraction import apparent_from_geometric_infinite
+    atm, sol = solved
+    true = geometric_from_apparent_infinite(atm, sol.apparent_deg, OBS[2], wgs84_gauss_radius(OBS[0]))
+    app = apparent_from_geometric_infinite(atm, true, OBS[2], wgs84_gauss_radius(OBS[0]))
+    assert abs(app - sol.apparent_deg) * 3600 < 0.05
+    assert abs((app - true) * 60 - 13.33) < 0.005
+    assert math.isnan(apparent_from_geometric_infinite(atm, -18.7, OBS[2], wgs84_gauss_radius(OBS[0])))

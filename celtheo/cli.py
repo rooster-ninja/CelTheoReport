@@ -17,6 +17,8 @@ def main(argv=None):
     r.add_argument("--no-profiles", action="store_true", help="omit ray path / atmosphere profiles from JSON")
     fz = sub.add_parser("finalize", help="re-apply warnings/flags to an existing out/results.json without recomputing")
     fz.add_argument("--out", default="out")
+    sr = sub.add_parser("star-refraction", help="add the Ciddor refraction of the actual star to an existing out/ (offline)")
+    sr.add_argument("--out", default="out")
     ls = sub.add_parser("list", help="list event ids and warnings from the CSV")
     ls.add_argument("--csv", default="data/occultations.csv")
     a = p.parse_args(argv)
@@ -26,6 +28,10 @@ def main(argv=None):
         doc = refinalize(a.out)
         n = sum(1 for e in doc["events"] if e["flags"].get("in_summary"))
         print(f"{a.out}/results.json refinalized: {n} events in summary")
+        return
+    if a.cmd == "star-refraction":
+        from .api import add_star_refraction
+        add_star_refraction(a.out)
         return
     if a.cmd == "list":
         from .data import load_events

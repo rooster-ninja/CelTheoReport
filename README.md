@@ -46,6 +46,7 @@ python -m celtheo run --only burke        # recompute matching events and merge 
 python -m celtheo run --offline           # cached stars/soundings only (no terrain unless DEMs are local)
 python -m celtheo run --no-terrain        # skip the elevation-data profiles
 python -m celtheo finalize                # re-apply warnings and in_summary to out/ without recomputing
+python -m celtheo star-refraction         # add the Ciddor refraction of the actual star to out/ (offline, cached soundings)
 pytest -q                                 # regression tests (offline)
 ```
 

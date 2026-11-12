@@ -46,6 +46,13 @@ taken from bare-earth elevation data (3DEP 10 m or HRDEM 2 m). Prefer these unsu
 use the canopy surface, and `terrain.canopy.*.flag` marks the events where trees could change
 the answer.
 
+**Refraction of the star.** `refraction.star_apparent_ciddor_obs_deg` is the star's apparent
+altitude by the AstronomyLive Ciddor ray trace, worked from its astropy true altitude.
+`star_refraction_ciddor_obs_arcmin` is the lift between them; draw it as the star's apparent place
+and the wedge from true to apparent. Bennett (`star_refraction_bennett_obs_arcmin`) and astropy's
+own value (`star_refraction_erfa_obs_arcmin`) are side values only. The astropy one runs low near
+the horizon.
+
 Residuals are **observed − model**. The `_seconds` form converts each residual into the clock
 error that would close it, which is the most intuitive unit for readers. The spreadsheet's own
 values (`csv.*`) and Bennett's formula (`refraction.bennett_arcmin`) are there for cross-checks.
