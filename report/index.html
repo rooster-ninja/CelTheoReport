@@ -165,7 +165,7 @@ svg .it { font-style: italic; }
     <h2>Appendix. Of the Method</h2>
     <p><span class="sc">The place of the star.</span> Each star's catalogue position, with its proper motion, is carried to the instant of the observation, and its altitude and azimuth are found for the observer and for the summit. The altitude called <em>true</em> is geometric, as it would be seen through a vacuum, reckoned above the observer's horizon on the ellipsoid.</p>
     <p><span class="sc">The ray.</span> For a spherically layered atmosphere the ray obeys Bouguer's law, <em>b = n · r · cos α</em>, in which <em>n</em> is the index of the air, <em>r</em> the distance from the Earth's centre, and <em>α</em> the inclination of the ray to the local level. The quantity <em>b</em> is constant along the ray. The index is Ciddor's of 1996, computed from the temperature, pressure and moisture of each layer. The ray is stepped in segments of <span id="segm"></span> metres, at a wavelength of <span id="wl"></span> nanometres, to a height of <span id="toa"></span> metres, above which the air is taken as void.</p>
-    <p><span class="sc">The refraction of the star.</span> The star's apparent place is found by the same AstronomyLive ray trace run backward from its true altitude, by repeating the trace until the ray leaves the air at the star's true direction. That is done at the observer and again at the summit. Bennett's formula of 1982 and the simpler model inside astropy are given beside it for comparison only. The astropy model is not meant for altitudes this low and runs well short.</p>
+    <p><span class="sc">The refraction of the star.</span> The star's apparent place is found by the same AstronomyLive ray trace run backward from its true altitude, by repeating the trace until the ray leaves the air at the star's true direction. That is done at the observer and again at the summit. Bennett's formula of 1982 and the simpler model inside astropy are given beside it for comparison only. The astropy model runs well short. It uses the two-term formula <em>A</em> tan <em>z</em> + <em>B</em> tan³ <em>z</em>, which fails near the horizon, so below about 2.9° of altitude it holds the refraction at its 2.9° value. Every star in these pages lower than that receives the same eight to eleven minutes whatever its true height. Seven Colorado observations from about 0.6° to 2.6° all receive 8.42′ from astropy against 15.8′ to 23.3′ by the trace. Above that limit the two agree: at Hounds Tooth, 10.5° high, astropy gives 3.98′ and the trace 3.92′.</p>
     <p><span class="sc">The figure of the Earth.</span> The radius used for each line is the radius of curvature of the WGS-84 ellipsoid in the normal section along the azimuth from observer to summit. Distances are geodesics upon the same ellipsoid.</p>
     <p><span class="sc">The frame of the drawings.</span> Every profile is drawn from the foot of the summit, upon the plane tangent there. Both hypotheses place the summit alike. Under the globe the ground and the observer fall away below that plane; under the plane they do not. The fall of the observer is written on each plate.</p>
     <p><span class="sc">The ground.</span> Heights along each line are taken from bare-earth surveys: the 3DEP of the United States at one-third of an arc-second, and the HRDEM of Canada at two metres, with coarser models where these fail. A second surface, which includes the forest, serves only to warn where trees might alter the skyline.</p>
@@ -359,12 +359,10 @@ function figObserver(e, S) {
 function figSphere(e, S) {
   const a = e.astropy || {}, r = e.refraction || {}, c = e.csv || {}, O = obst(e, "star_azimuth"), tc = (e.terrain || {}).comparison || {};
   const L = [], R = [];
-  if (ok(a.true_alt_obs_deg)) L.push([a.true_alt_obs_deg, "★ true place", INK]);
-  if (S.ho && ok(r.star_apparent_ciddor_obs_deg)) L.push([r.star_apparent_ciddor_obs_deg, "★ apparent (Ciddor)", RF]);
-  const gTrue = ok(tc.globe_skyline_star_true_deg) ? tc.globe_skyline_star_true_deg : r.star_geometric_deg;
-  if (ok(gTrue)) R.push([gTrue, "globe: star vanishes", G]);
+  if (ok(r.star_apparent_ciddor_obs_deg)) L.push([r.star_apparent_ciddor_obs_deg, "★ apparent (Ciddor)", RF]);
+  if (ok(a.true_alt_peak_deg)) L.push([a.true_alt_peak_deg, "★ true at summit", INK]);
   const gApp = O && O.globe_refracted && ok(O.globe_refracted.angle_deg) ? O.globe_refracted.angle_deg : r.peak_apparent_deg;
-  if (S.ho && ok(gApp)) R.push([gApp, "globe: skyline as seen", G]);
+  if (ok(gApp)) R.push([gApp, "globe: skyline as seen", G]);
   const pA = O && O.planar && ok(O.planar.angle_deg) ? O.planar.angle_deg : (e.geometry || {}).planar_angle_deg;
   if (ok(pA)) R.push([pA, "plane: skyline", PL]);
   const all = L.concat(R).map(x => x[0]); if (!all.length) return "";
@@ -383,7 +381,7 @@ function figSphere(e, S) {
       s += `<text x="${tx}" y="${ly[i] - 1}" font-size="11.5" text-anchor="${an}" fill="${it[2]}" class="it">${it[1]}</text><text x="${tx}" y="${ly[i] + 11}" font-size="11.5" text-anchor="${an}">${dms(it[0])}</text>`; }); }
   side(L, -1); side(R, 1);
   const F = { W, H, clip: "" };
-  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere: altitudes at the observer at the recorded instant. On the left, the star's true place and its apparent place by the Ciddor ray trace, ${num(r.star_refraction_ciddor_obs_arcmin, 2)}′ higher; Bennett gives ${num(r.star_refraction_bennett_obs_arcmin, 2)}′ and astropy ${num(r.star_refraction_erfa_obs_arcmin, 2)}′. Globe residual ${asec(pref(e, "globe_ciddor_arcsec"))}; plane ${asec(pref(e, "planar_geometric_arcsec"))}; plane with refraction ${asec(pref(e, "planar_refracted_arcsec"))}.</figcaption></figure>`;
+  return `<figure>${svg(F, s)}<figcaption><b>Fig. 3.</b> On the celestial sphere at the recorded instant. On the left, the star's apparent altitude at the observer by the Ciddor ray trace, and its true altitude at the summit. On the right, the skyline as the globe and the plane give it. Refraction of the star at the observer: Ciddor ${num(r.star_refraction_ciddor_obs_arcmin, 2)}′, Bennett ${num(r.star_refraction_bennett_obs_arcmin, 2)}′, astropy ${num(r.star_refraction_erfa_obs_arcmin, 2)}′.</figcaption></figure>`;
 }
 
 // ---------- Fig. 4: topographical side view ----------
